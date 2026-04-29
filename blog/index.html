@@ -1,1 +1,134 @@
+---
+layout: default
+title: Writing
+description: Essays and notes on AI-native brand strategy, citation engineering, and the changing shape of brand discovery.
+---
 
+<style>
+  .blog-wrapper {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 100px 48px 60px;
+  }
+
+  .blog-eyebrow {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    color: var(--teal);
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+
+  .blog-headline {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: clamp(48px, 7vw, 96px);
+    line-height: 1;
+    color: var(--ink);
+    margin-bottom: 32px;
+    letter-spacing: -0.015em;
+  }
+
+  .blog-headline em { font-style: italic; color: var(--teal); }
+
+  .blog-intro {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 17px;
+    font-weight: 300;
+    color: var(--ink-mid);
+    line-height: 1.7;
+    max-width: 600px;
+    margin-bottom: 80px;
+    padding-bottom: 48px;
+    border-bottom: 1px solid rgba(20,28,28,0.12);
+  }
+
+  .post-list {
+    list-style: none;
+  }
+
+  .post-item {
+    padding: 36px 0;
+    border-bottom: 1px solid rgba(20,28,28,0.08);
+  }
+
+  .post-item:last-child { border-bottom: none; }
+
+  .post-item-link {
+    text-decoration: none;
+    display: block;
+    transition: transform 0.2s;
+  }
+
+  .post-item-link:hover .post-item-title { color: var(--teal); }
+  .post-item-link:hover { transform: translateX(4px); }
+
+  .post-item-meta {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    color: var(--ink-light);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .post-item-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+    font-size: clamp(26px, 3vw, 36px);
+    line-height: 1.15;
+    color: var(--ink);
+    margin-bottom: 12px;
+    transition: color 0.2s;
+    letter-spacing: -0.005em;
+  }
+
+  .post-item-title em { font-style: italic; }
+
+  .post-item-excerpt {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 300;
+    color: var(--ink-mid);
+    line-height: 1.7;
+    max-width: 640px;
+  }
+
+  .empty-state {
+    padding: 60px 0;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 22px;
+    color: var(--ink-light);
+    text-align: center;
+  }
+
+  @media (max-width: 700px) {
+    .blog-wrapper { padding: 60px 24px 40px; }
+  }
+</style>
+
+<div class="blog-wrapper">
+  <p class="blog-eyebrow">Writing</p>
+  <h1 class="blog-headline">Notes on building<br>brands that <em>AI cites</em>.</h1>
+  <p class="blog-intro">Essays and field notes on AI-native brand strategy, citation engineering, and the changing shape of discovery in a post-search era.</p>
+
+  {% if site.posts.size > 0 %}
+  <ul class="post-list">
+    {% for post in site.posts %}
+    <li class="post-item">
+      <a class="post-item-link" href="{{ post.url }}">
+        <div class="post-item-meta">{{ post.date | date: "%B %-d, %Y" }}{% if post.author %} · {{ post.author }}{% endif %}</div>
+        <h2 class="post-item-title">{{ post.title }}</h2>
+        {% if post.excerpt %}
+        <p class="post-item-excerpt">{{ post.excerpt | strip_html | truncatewords: 40 }}</p>
+        {% endif %}
+      </a>
+    </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+  <div class="empty-state">First essay coming soon.</div>
+  {% endif %}
+</div>
