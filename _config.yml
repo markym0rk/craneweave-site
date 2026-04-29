@@ -1,0 +1,29 @@
+title: Craneweave
+description: AI-native brand strategy for the post-search era. Writing on AI discovery, founder-led video, and the changing shape of brand authority.
+url: "https://craneweave.com"
+author: Craneweave
+
+# Build settings
+markdown: kramdown
+permalink: /blog/:slug/
+
+# Plugins (enabled by default on GitHub Pages)
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+
+# Default frontmatter for posts
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+
+# Exclude from build
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor
