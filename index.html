@@ -3,20 +3,24 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Craneweave — Build the brand AI cites</title>
+  <title>Craneweave — AI authority for buyer discovery</title>
   <link rel="icon" type="image/png" href="Favicon.png" />
-  <meta name="description" content="Craneweave is the AI-native brand strategy partner for the post-search era. We build founder-led video, community presence, and editorial authority that AI assistants cite when buyers ask." />
-
-  <!-- Open Graph -->
-  <meta property="og:title" content="Craneweave — Build the brand AI cites" />
-  <meta property="og:description" content="AI-native brand strategy for the post-search era. Video-first, multi-surface, built to be cited." />
+  <meta
+    name="description"
+    content="Craneweave helps brands become the names AI systems surface and recommend by building authority across the public signals those systems retrieve, trust, and cite."
+  />
+  <meta property="og:title" content="Craneweave — AI authority for buyer discovery" />
+  <meta
+    property="og:description"
+    content="Craneweave helps brands become the names AI systems surface and recommend."
+  />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://craneweave.com" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
-    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;700&display=swap"
     rel="stylesheet"
   />
 
@@ -24,7 +28,7 @@
     :root {
       --teal: #107c82;
       --teal-light: #5ba8a8;
-      --teal-pale: #d6eaea;
+      --teal-pale: #dceeee;
       --teal-dark: #0a5559;
       --teal-deepest: #053236;
       --cream: #f7f5f0;
@@ -33,9 +37,16 @@
       --ink-mid: #3a4a4a;
       --ink-light: #6b7e7e;
       --white: #ffffff;
+      --border-light: rgba(20, 28, 28, 0.1);
+      --border-dark: rgba(255, 255, 255, 0.08);
     }
 
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
     html { scroll-behavior: smooth; }
 
     body {
@@ -45,9 +56,6 @@
       overflow-x: hidden;
     }
 
-    .nav-logo-img { height: 50px; width: auto; display: block; }
-    .footer-logo-img { height: 50px; width: auto; display: block; }
-
     body::before {
       content: '';
       position: fixed;
@@ -55,39 +63,56 @@
       background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
       pointer-events: none;
       z-index: 1000;
-      opacity: 0.4;
+      opacity: 0.35;
     }
 
+    .nav-logo-img,
+    .footer-logo-img {
+      height: 50px;
+      width: auto;
+      display: block;
+    }
+
+    /* NAV */
     nav {
       position: fixed;
-      top: 0; left: 0; right: 0;
+      inset: 0 0 auto 0;
       z-index: 100;
       padding: 24px 48px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      transition: background 0.3s, backdrop-filter 0.3s;
+      transition: background 0.3s, backdrop-filter 0.3s, border-color 0.3s;
+      border-bottom: 1px solid transparent;
     }
 
-    .nav-logo { display: flex; align-items: center; text-decoration: none; }
-    .nav-right { display: flex; align-items: center; gap: 36px; }
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 36px;
+    }
 
     .nav-link {
-      font-family: 'DM Sans', sans-serif;
       font-size: 13px;
       font-weight: 400;
-      color: rgba(255,255,255,0.75);
+      color: rgba(255,255,255,0.78);
       text-decoration: none;
       letter-spacing: 0.06em;
       text-transform: uppercase;
       transition: color 0.2s;
     }
+
     .nav-link:hover { color: var(--white); }
 
     .nav-cta {
-      font-family: 'DM Sans', sans-serif;
       font-size: 13px;
-      font-weight: 400;
+      font-weight: 500;
       color: var(--white);
       text-decoration: none;
       letter-spacing: 0.08em;
@@ -96,31 +121,56 @@
       padding-bottom: 2px;
       transition: border-color 0.2s;
     }
+
     .nav-cta:hover { border-color: rgba(255,255,255,1); }
 
+    /* HERO */
     .hero {
       min-height: 100vh;
-      background: var(--teal-dark);
+      background: linear-gradient(135deg, var(--teal-deepest) 0%, var(--teal-dark) 58%, #0d666b 100%);
       position: relative;
       display: flex;
       flex-direction: column;
       justify-content: center;
-      padding: 0 48px;
+      padding: 120px 48px 72px;
       overflow: hidden;
     }
 
-    .hero-geo { position: absolute; inset: 0; pointer-events: none; }
-    .hero-geo svg { width: 100%; height: 100%; }
-    .hero-content { position: relative; z-index: 2; max-width: 1000px; }
+    .hero-geo {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.95;
+    }
+
+    .hero-geo svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 1120px;
+      width: 100%;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(320px, 420px);
+      gap: 72px;
+      align-items: center;
+    }
+
+    .hero-left {
+      max-width: 760px;
+    }
 
     .hero-eyebrow {
-      font-family: 'DM Sans', sans-serif;
       font-size: 11px;
-      font-weight: 400;
+      font-weight: 500;
       letter-spacing: 0.22em;
       text-transform: uppercase;
       color: var(--teal-light);
-      margin-bottom: 32px;
+      margin-bottom: 26px;
       opacity: 0;
       animation: fadeUp 0.8s ease 0.2s forwards;
     }
@@ -128,87 +178,200 @@
     .hero-headline {
       font-family: 'Cormorant Garamond', serif;
       font-weight: 300;
-      font-size: clamp(54px, 8vw, 120px);
-      line-height: 0.96;
+      font-size: clamp(46px, 7vw, 94px);
+      line-height: 0.98;
       color: var(--white);
-      margin-bottom: 40px;
+      margin-bottom: 28px;
+      letter-spacing: -0.015em;
       opacity: 0;
-      animation: fadeUp 0.8s ease 0.4s forwards;
-      letter-spacing: -0.01em;
+      animation: fadeUp 0.8s ease 0.35s forwards;
     }
-    .hero-headline em { font-style: italic; color: var(--teal-light); }
 
     .hero-sub {
-      font-family: 'DM Sans', sans-serif;
-      font-size: clamp(15px, 1.6vw, 18px);
+      font-size: clamp(17px, 1.75vw, 20px);
       font-weight: 300;
-      line-height: 1.7;
-      color: rgba(255,255,255,0.7);
-      max-width: 580px;
-      margin-bottom: 56px;
+      line-height: 1.75;
+      color: rgba(255,255,255,0.72);
+      max-width: 610px;
+      margin-bottom: 44px;
       opacity: 0;
-      animation: fadeUp 0.8s ease 0.6s forwards;
+      animation: fadeUp 0.8s ease 0.5s forwards;
     }
 
     .hero-actions {
       display: flex;
       align-items: center;
-      gap: 40px;
+      gap: 36px;
       flex-wrap: wrap;
       opacity: 0;
-      animation: fadeUp 0.8s ease 0.8s forwards;
+      animation: fadeUp 0.8s ease 0.65s forwards;
+      margin-bottom: 42px;
     }
 
-    .btn-primary {
+    .btn-primary,
+    .btn-primary-dark,
+    .cta-email {
       display: inline-flex;
       align-items: center;
       gap: 10px;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.2s, color 0.2s;
+    }
+
+    .btn-primary {
       background: var(--white);
       color: var(--teal-dark);
-      font-family: 'DM Sans', sans-serif;
       font-size: 14px;
       font-weight: 500;
       letter-spacing: 0.04em;
       padding: 16px 32px;
-      text-decoration: none;
-      transition: background 0.2s, transform 0.2s;
     }
-    .btn-primary:hover { background: var(--teal-pale); transform: translateY(-1px); }
-    .btn-primary svg { transition: transform 0.2s; }
-    .btn-primary:hover svg { transform: translateX(3px); }
+
+    .btn-primary:hover {
+      background: var(--teal-pale);
+      transform: translateY(-1px);
+    }
+
+    .btn-primary svg,
+    .btn-primary-dark svg,
+    .cta-email svg {
+      transition: transform 0.2s;
+    }
+
+    .btn-primary:hover svg,
+    .btn-primary-dark:hover svg,
+    .cta-email:hover svg {
+      transform: translateX(3px);
+    }
 
     .btn-secondary {
-      font-family: 'DM Sans', sans-serif;
       font-size: 13px;
       font-weight: 400;
-      color: rgba(255,255,255,0.7);
+      color: rgba(255,255,255,0.74);
       text-decoration: none;
       letter-spacing: 0.06em;
       text-transform: uppercase;
-      border-bottom: 1px solid rgba(255,255,255,0.3);
+      border-bottom: 1px solid rgba(255,255,255,0.28);
       padding-bottom: 4px;
       transition: color 0.2s, border-color 0.2s;
     }
-    .btn-secondary:hover { color: var(--white); border-color: var(--white); }
+
+    .btn-secondary:hover {
+      color: var(--white);
+      border-color: var(--white);
+    }
+
+    .hero-proof {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px 28px;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.8s forwards;
+    }
+
+    .hero-proof-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: rgba(255,255,255,0.62);
+      font-size: 12px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .hero-proof-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--teal-light);
+      opacity: 0.7;
+      flex-shrink: 0;
+    }
+
+    .hero-panel {
+      background: rgba(8, 38, 42, 0.58);
+      border: 1px solid rgba(255,255,255,0.08);
+      backdrop-filter: blur(10px);
+      padding: 26px 24px;
+      border-radius: 14px;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.75s forwards;
+    }
+
+    .hero-panel-label {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: rgba(91,168,168,0.78);
+      margin-bottom: 16px;
+    }
+
+    .hero-panel-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 30px;
+      font-weight: 400;
+      line-height: 1.1;
+      color: var(--white);
+      margin-bottom: 14px;
+    }
+
+    .hero-panel-copy {
+      font-size: 14px;
+      line-height: 1.8;
+      font-weight: 300;
+      color: rgba(255,255,255,0.64);
+      margin-bottom: 20px;
+    }
+
+    .hero-panel-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .hero-panel-item {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      padding-top: 10px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      color: rgba(255,255,255,0.66);
+      font-size: 13px;
+      line-height: 1.6;
+      font-weight: 300;
+    }
+
+    .hero-panel-icon {
+      width: 22px;
+      height: 22px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      background: rgba(16,124,130,0.22);
+      border: 1px solid rgba(91,168,168,0.22);
+      margin-top: 1px;
+    }
 
     .hero-scroll-indicator {
       position: absolute;
-      bottom: 40px;
       left: 48px;
+      bottom: 36px;
       display: flex;
       align-items: center;
       gap: 16px;
       opacity: 0;
-      animation: fadeUp 0.8s ease 1.2s forwards;
+      animation: fadeUp 0.8s ease 1.1s forwards;
     }
 
     .scroll-line {
-      width: 40px;
+      width: 42px;
       height: 1px;
       background: rgba(255,255,255,0.25);
       position: relative;
       overflow: hidden;
     }
+
     .scroll-line::after {
       content: '';
       position: absolute;
@@ -217,283 +380,899 @@
       width: 100%;
       height: 100%;
       background: var(--teal-light);
-      animation: scrollSlide 2s ease-in-out 1.5s infinite;
-    }
-    @keyframes scrollSlide {
-      0% { left: -100%; }
-      50% { left: 0%; }
-      100% { left: 100%; }
+      animation: scrollSlide 2s ease-in-out 1.4s infinite;
     }
 
     .hero-scroll {
-      font-family: 'DM Sans', sans-serif;
       font-size: 12px;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.35);
+      color: rgba(255,255,255,0.36);
     }
 
-    .shift { background: var(--cream); padding: 140px 48px; position: relative; }
-    .shift-inner {
-      max-width: 1100px;
+    /* SHARED */
+    section {
+      position: relative;
+    }
+
+    .section-label {
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--teal-light);
+      opacity: 0.7;
+      margin-bottom: 22px;
+    }
+
+    .container {
+      max-width: 1120px;
       margin: 0 auto;
+      padding: 0 48px;
+    }
+
+    /* PROBLEM */
+    .problem {
+      background: var(--teal-deepest);
+      overflow: hidden;
+    }
+
+    .problem-one {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 136px 48px 80px;
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 80px;
       align-items: center;
-    }
-
-    .section-label {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 11px;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--teal);
-      margin-bottom: 24px;
-    }
-
-    .shift-headline {
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 300;
-      font-size: clamp(36px, 4.2vw, 60px);
-      line-height: 1.08;
-      color: var(--ink);
-      letter-spacing: -0.005em;
-    }
-    .shift-headline em { font-style: italic; color: var(--teal); }
-
-    .shift-body {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 16px;
-      font-weight: 300;
-      line-height: 1.8;
-      color: var(--ink-mid);
-    }
-    .shift-body p + p { margin-top: 20px; }
-
-    .shift-stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin-top: 40px; }
-
-    .stat-card {
-      background: var(--cream-dark);
-      padding: 32px 28px;
-      position: relative;
-      overflow: hidden;
-      transition: background 0.25s;
-    }
-    .stat-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0;
-      width: 3px; height: 100%;
-      background: var(--teal);
-      transform: scaleY(0);
-      transform-origin: bottom;
-      transition: transform 0.3s ease;
-    }
-    .stat-card:hover::before { transform: scaleY(1); }
-    .stat-card:hover { background: #e8e4db; }
-
-    .stat-number {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 48px;
-      font-weight: 300;
-      color: var(--teal);
-      line-height: 1;
-      margin-bottom: 8px;
-      letter-spacing: -0.01em;
-    }
-    .stat-label { font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 300; color: var(--ink-mid); line-height: 1.5; }
-    .stat-source { font-family: 'DM Sans', sans-serif; font-size: 11px; color: var(--ink-light); margin-top: 12px; letter-spacing: 0.04em; }
-
-    .video-lead { background: var(--teal-deepest); padding: 140px 48px; position: relative; overflow: hidden; }
-    .video-lead::before {
-      content: '';
-      position: absolute;
-      top: -200px; left: -200px;
-      width: 700px; height: 700px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(91,168,168,0.15) 0%, transparent 70%);
-      pointer-events: none;
-    }
-
-    .video-lead-inner {
-      max-width: 1200px;
-      margin: 0 auto;
       position: relative;
       z-index: 2;
-      display: grid;
-      grid-template-columns: 1.1fr 1fr;
-      gap: 100px;
-      align-items: center;
     }
 
-    .video-lead-label { font-family: 'DM Sans', sans-serif; font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--teal-light); margin-bottom: 28px; }
-
-    .video-lead-headline {
+    .problem-headline {
       font-family: 'Cormorant Garamond', serif;
       font-weight: 300;
-      font-size: clamp(40px, 5vw, 76px);
-      line-height: 1.02;
+      font-size: clamp(36px, 4.3vw, 60px);
+      line-height: 1.04;
       color: var(--white);
-      margin-bottom: 32px;
+      margin-bottom: 24px;
       letter-spacing: -0.01em;
     }
-    .video-lead-headline em { font-style: italic; color: var(--teal-light); }
 
-    .video-lead-body { font-family: 'DM Sans', sans-serif; font-size: 16px; font-weight: 300; line-height: 1.8; color: rgba(255,255,255,0.7); max-width: 540px; }
-    .video-lead-body p + p { margin-top: 20px; }
+    .problem-headline em,
+    .evolve-headline em,
+    .playbook-headline em,
+    .cred-headline em,
+    .cta-headline em {
+      font-style: italic;
+      color: var(--teal-light);
+    }
 
-    .video-lead-points { list-style: none; margin-top: 36px; display: flex; flex-direction: column; gap: 18px; }
-    .video-lead-points li { font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 300; color: rgba(255,255,255,0.8); padding-left: 28px; position: relative; line-height: 1.65; }
-    .video-lead-points li::before { content: ''; position: absolute; left: 0; top: 9px; width: 14px; height: 1px; background: var(--teal-light); }
+    .problem-body,
+    .evolve-body,
+    .cred-body {
+      font-size: 15px;
+      font-weight: 300;
+      line-height: 1.85;
+      color: rgba(255,255,255,0.54);
+    }
 
-    .video-visual { position: relative; aspect-ratio: 4/5; width: 100%; }
-    .video-frame {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, rgba(91,168,168,0.18) 0%, rgba(16,124,130,0.05) 100%);
-      border: 1px solid rgba(91,168,168,0.2);
+    .problem-body p + p,
+    .evolve-body p + p,
+    .cred-body p + p {
+      margin-top: 18px;
+    }
+
+    /* Chatbot */
+    .chatbot-window {
+      background: rgba(8,38,42,0.9);
+      border: 1px solid rgba(91,168,168,0.12);
+      border-radius: 12px;
       overflow: hidden;
     }
-    .video-frame::before {
-      content: '';
+
+    .window-chrome {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 14px;
+      background: rgba(255,255,255,0.02);
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+
+    .chrome-dots { display: flex; gap: 5px; }
+    .chrome-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+    .chrome-dot:nth-child(1) { background: rgba(255,255,255,0.1); }
+    .chrome-dot:nth-child(2) { background: rgba(255,255,255,0.06); }
+    .chrome-dot:nth-child(3) { background: rgba(255,255,255,0.04); }
+
+    .chrome-title {
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.18);
+    }
+
+    .chrome-right {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 9px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.15);
+    }
+
+    .live-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--teal-light);
+      opacity: 0.5;
+      animation: livePulse 2s ease-in-out infinite;
+    }
+
+    @keyframes livePulse {
+      0%,100% { opacity: 0.5; }
+      50% { opacity: 0.15; }
+    }
+
+    .chat-messages {
+      padding: 18px 14px 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      min-height: 170px;
+    }
+
+    .user-message {
+      align-self: flex-end;
+      background: rgba(16,124,130,0.2);
+      border: 1px solid rgba(91,168,168,0.18);
+      border-radius: 14px 14px 3px 14px;
+      padding: 9px 13px;
+      max-width: 88%;
+      font-size: 13px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.8);
+      line-height: 1.5;
+      opacity: 0;
+      transform: translateY(6px);
+      transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+
+    .user-message.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .ai-message {
+      align-self: flex-start;
+      display: flex;
+      gap: 8px;
+      align-items: flex-start;
+      max-width: 95%;
+      opacity: 0;
+      transform: translateY(6px);
+      transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+
+    .ai-message.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .ai-avatar {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: rgba(16,124,130,0.25);
+      border: 1px solid rgba(91,168,168,0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .ai-avatar svg { width: 10px; height: 10px; }
+
+    .ai-bubble {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 3px 14px 14px 14px;
+      padding: 9px 13px;
+      font-size: 13px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.65);
+      line-height: 1.7;
+    }
+
+    .typing-indicator {
+      display: flex;
+      gap: 4px;
+      align-items: center;
+      padding: 2px 0;
+    }
+
+    .typing-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: rgba(91,168,168,0.4);
+      animation: typingBounce 1.2s ease-in-out infinite;
+    }
+
+    .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+    .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+    @keyframes typingBounce {
+      0%,60%,100% { transform: translateY(0); opacity: 0.4; }
+      30% { transform: translateY(-4px); opacity: 1; }
+    }
+
+    .blank-slot {
+      display: inline-block;
+      position: relative;
+      min-width: 108px;
+      height: 17px;
+      vertical-align: middle;
+      margin: 0 3px;
+      border-radius: 4px;
+      background: rgba(91,168,168,0.1);
+      border: 1px solid rgba(91,168,168,0.3);
+      box-shadow: 0 0 12px rgba(91,168,168,0.12), inset 0 0 6px rgba(91,168,168,0.05);
+      animation: blankBreath 2.8s ease-in-out infinite;
+      overflow: hidden;
+    }
+
+    @keyframes blankBreath {
+      0%,100% {
+        box-shadow: 0 0 12px rgba(91,168,168,0.12), inset 0 0 6px rgba(91,168,168,0.05);
+        border-color: rgba(91,168,168,0.3);
+      }
+      50% {
+        box-shadow: 0 0 20px rgba(91,168,168,0.22), inset 0 0 10px rgba(91,168,168,0.08);
+        border-color: rgba(91,168,168,0.5);
+      }
+    }
+
+    .blank-cursor {
+      position: absolute;
+      left: 8px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 1.5px;
+      height: 10px;
+      background: var(--teal-light);
+      opacity: 0.6;
+      animation: blankBlink 1s step-end infinite;
+    }
+
+    @keyframes blankBlink {
+      0%,100% { opacity: 0.6; }
+      50% { opacity: 0; }
+    }
+
+    .blank-shimmer {
       position: absolute;
       inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3Cpattern id='grid' width='10' height='10' patternUnits='userSpaceOnUse'%3E%3Cpath d='M 10 0 L 0 0 0 10' fill='none' stroke='rgba(91,168,168,0.06)' stroke-width='0.5'/%3E%3C/pattern%3E%3C/defs%3E%3Crect width='100' height='100' fill='url(%23grid)'/%3E%3C/svg%3E");
+      background: linear-gradient(90deg, transparent 0%, rgba(91,168,168,0.09) 50%, transparent 100%);
+      animation: shimmerMove 3.5s ease-in-out infinite;
     }
 
-    .video-overlay-text {
-      position: absolute;
-      top: 24px; left: 24px; right: 24px;
+    @keyframes shimmerMove {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(200%); }
+    }
+
+    .chat-input-area {
+      padding: 9px 12px;
+      border-top: 1px solid rgba(255,255,255,0.04);
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      font-family: 'DM Sans', sans-serif;
-      font-size: 10px;
+      gap: 10px;
+    }
+
+    .chat-input-field {
+      flex: 1;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 8px;
+      padding: 7px 12px;
+      font-size: 12px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.4);
+      min-height: 32px;
+      display: flex;
+      align-items: center;
+    }
+
+    .input-cursor {
+      display: inline-block;
+      width: 1.5px;
+      height: 12px;
+      background: rgba(91,168,168,0.5);
+      vertical-align: middle;
+      margin-left: 1px;
+      animation: blink 0.9s step-end infinite;
+    }
+
+    @keyframes blink {
+      0%,100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
+    .chat-send {
+      width: 28px;
+      height: 28px;
+      border-radius: 7px;
+      background: rgba(16,124,130,0.25);
+      border: 1px solid rgba(91,168,168,0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: background 0.2s, border-color 0.2s;
+    }
+
+    .chat-send.active {
+      background: rgba(16,124,130,0.5);
+      border-color: rgba(91,168,168,0.4);
+    }
+
+    .chat-send svg { width: 11px; height: 11px; opacity: 0.5; }
+    .chat-send.active svg { opacity: 1; }
+
+    .phase-dots {
+      display: flex;
+      justify-content: center;
+      gap: 6px;
+      padding: 10px 0 4px;
+    }
+
+    .phase-dot {
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.1);
+      transition: background 0.4s ease, transform 0.4s ease;
+    }
+
+    .phase-dot.active {
+      background: var(--teal-light);
+      transform: scale(1.3);
+    }
+
+    .problem-divider {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 48px;
+    }
+
+    .problem-two {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 80px 48px 140px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+      position: relative;
+      z-index: 2;
+    }
+
+    .evolve-headline {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(30px, 3.4vw, 48px);
+      line-height: 1.08;
+      color: var(--white);
+      margin-bottom: 22px;
+      letter-spacing: -0.01em;
+    }
+
+    /* Retrieval */
+    .retrieval-diagram {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .retrieval-diagram.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .diagram-query {
+      font-size: 12px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.32);
+      padding: 10px 14px;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 8px;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .diagram-query-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--teal-light);
+      opacity: 0.4;
+      flex-shrink: 0;
+    }
+
+    .diagram-label {
+      font-size: 9px;
       letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.4);
+      color: rgba(91,168,168,0.45);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
     }
 
-    .video-rec-dot { display: inline-flex; align-items: center; gap: 8px; }
-    .video-rec-dot::before {
-      content: '';
-      width: 8px; height: 8px;
-      border-radius: 50%;
-      background: #e85a5a;
-      animation: pulse 2s ease-in-out infinite;
-    }
-    @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.3; }
-    }
-
-    .video-transcript {
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      background: linear-gradient(transparent, rgba(5,50,54,0.95) 40%);
-      padding: 60px 32px 28px;
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 18px;
-      font-style: italic;
-      font-weight: 400;
-      line-height: 1.5;
-      color: rgba(255,255,255,0.92);
-    }
-
-    .video-transcript-meta {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 10px;
-      font-style: normal;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: rgba(91,168,168,0.7);
+    .source-list {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
       margin-bottom: 12px;
     }
 
-    .video-citation-tag {
-      position: absolute;
-      bottom: -16px; right: -16px;
-      background: var(--teal-light);
-      color: var(--teal-deepest);
-      font-family: 'DM Sans', sans-serif;
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      padding: 12px 18px;
-      transform: rotate(-2deg);
-      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+    .source-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 12px;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.04);
+      border-radius: 6px;
+      opacity: 0;
+      transform: translateX(-10px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
     }
 
-    .playbook { background: var(--ink); padding: 140px 48px; position: relative; overflow: hidden; }
-    .playbook::before {
-      content: '';
-      position: absolute;
-      bottom: -300px; right: -200px;
-      width: 700px; height: 700px;
+    .source-row.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .source-row-icon {
+      width: 20px;
+      height: 20px;
+      border-radius: 4px;
+      background: rgba(16,124,130,0.2);
+      border: 1px solid rgba(91,168,168,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .source-row-icon svg { width: 10px; height: 10px; }
+
+    .source-row-name {
+      font-size: 12px;
+      font-weight: 400;
+      color: rgba(255,255,255,0.54);
+      flex: 1;
+    }
+
+    .source-row-signal {
+      font-size: 10px;
+      font-weight: 300;
+      color: rgba(91,168,168,0.42);
+      white-space: nowrap;
+    }
+
+    .source-bar {
+      width: 44px;
+      height: 2px;
+      border-radius: 1px;
+      background: rgba(255,255,255,0.06);
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .source-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--teal), var(--teal-light));
+      width: 0%;
+      transition: width 1s ease;
+    }
+
+    .source-bar-fill.filled { width: var(--fill-pct); }
+
+    .diagram-response {
+      background: rgba(5,50,54,0.6);
+      border: 1px solid rgba(91,168,168,0.15);
+      border-radius: 8px;
+      padding: 12px 14px;
+      display: flex;
+      gap: 8px;
+      align-items: flex-start;
+      opacity: 0;
+      transition: opacity 0.6s ease;
+    }
+
+    .diagram-response.visible { opacity: 1; }
+
+    .diagram-ai-dot {
+      width: 6px;
+      height: 6px;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(16,124,130,0.1) 0%, transparent 70%);
-      pointer-events: none;
+      background: var(--teal-light);
+      flex-shrink: 0;
+      margin-top: 5px;
+      animation: livePulse 2s ease-in-out infinite;
     }
 
-    .playbook-header { max-width: 1100px; margin: 0 auto 80px; display: flex; align-items: flex-end; justify-content: space-between; gap: 40px; }
+    .diagram-response-text {
+      font-size: 12px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.62);
+      line-height: 1.65;
+    }
+
+    .diagram-cited {
+      color: var(--teal-light);
+      font-weight: 500;
+      background: rgba(91,168,168,0.12);
+      border: 1px solid rgba(91,168,168,0.25);
+      border-radius: 3px;
+      padding: 0 5px;
+      font-size: 11px;
+    }
+
+    /* CREDIBILITY STRIP */
+    .cred-strip {
+      background: var(--cream);
+      padding: 28px 48px;
+      border-top: 1px solid var(--border-light);
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .cred-strip-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 32px;
+      align-items: start;
+    }
+
+    .cred-strip-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--teal);
+      padding-top: 4px;
+    }
+
+    .cred-strip-items {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .cred-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      padding: 10px 14px;
+      border: 1px solid rgba(20,28,28,0.08);
+      border-radius: 999px;
+      background: rgba(255,255,255,0.72);
+      color: var(--ink-mid);
+      font-size: 12px;
+      line-height: 1.4;
+    }
+
+    .cred-pill-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--teal);
+      opacity: 0.7;
+      flex-shrink: 0;
+    }
+
+    /* PLAYBOOK */
+    .playbook {
+      background: var(--cream);
+      padding: 136px 48px;
+    }
+
+    .playbook-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+    }
+
+    .playbook-header {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+      margin-bottom: 62px;
+    }
 
     .playbook-headline {
       font-family: 'Cormorant Garamond', serif;
       font-weight: 300;
-      font-size: clamp(36px, 4.2vw, 60px);
-      line-height: 1.08;
-      color: var(--white);
-      letter-spacing: -0.005em;
-    }
-    .playbook-headline em { font-style: italic; color: var(--teal-light); }
-
-    .playbook-sub { font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 300; color: rgba(255,255,255,0.45); max-width: 280px; text-align: right; line-height: 1.65; }
-
-    .playbook-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(4,1fr); gap: 2px; }
-
-    .play-card {
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.06);
-      padding: 40px 28px;
-      position: relative;
-      overflow: hidden;
-      transition: background 0.3s, border-color 0.3s;
-      cursor: default;
-    }
-    .play-card:hover { background: rgba(16,124,130,0.12); border-color: rgba(16,124,130,0.3); }
-    .play-card:hover .play-number { color: var(--teal-light); }
-    .play-card:hover .play-bar { width: 100%; }
-
-    .play-number { font-family: 'Cormorant Garamond', serif; font-size: 13px; color: rgba(255,255,255,0.2); margin-bottom: 40px; transition: color 0.3s; }
-    .play-icon { width: 36px; height: 36px; margin-bottom: 24px; opacity: 0.7; }
-    .play-title { font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 500; color: var(--white); margin-bottom: 12px; line-height: 1.3; letter-spacing: 0.005em; }
-    .play-desc { font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 300; color: rgba(255,255,255,0.5); line-height: 1.7; }
-    .play-bar { position: absolute; bottom: 0; left: 0; height: 2px; width: 0; background: var(--teal); transition: width 0.4s ease; }
-
-    .approach { background: var(--cream); padding: 140px 48px; position: relative; }
-    .approach-inner { max-width: 1100px; margin: 0 auto; }
-
-    .approach-headline {
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 300;
-      font-size: clamp(36px, 4.2vw, 60px);
+      font-size: clamp(36px, 4.2vw, 58px);
       line-height: 1.08;
       color: var(--ink);
-      max-width: 900px;
-      margin-bottom: 80px;
-      letter-spacing: -0.005em;
+      letter-spacing: -0.01em;
     }
-    .approach-headline em { font-style: italic; color: var(--teal); }
 
-    .approach-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 60px; }
-    .approach-item { position: relative; padding-top: 32px; border-top: 1px solid rgba(20,28,28,0.12); }
-    .approach-num { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 14px; color: var(--teal); margin-bottom: 14px; letter-spacing: 0.04em; }
-    .approach-title { font-family: 'Cormorant Garamond', serif; font-weight: 400; font-size: 26px; color: var(--ink); margin-bottom: 16px; line-height: 1.2; }
-    .approach-desc { font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 300; color: var(--ink-mid); line-height: 1.75; }
+    .playbook-intro {
+      font-size: 16px;
+      font-weight: 300;
+      line-height: 1.85;
+      color: var(--ink-mid);
+      padding-top: 8px;
+    }
 
-    .cta-section { background: var(--teal); padding: 160px 48px; position: relative; overflow: hidden; text-align: center; }
+    .playbook-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-bottom: 26px;
+    }
+
+    .playbook-card {
+      position: relative;
+      min-height: 258px;
+      background: linear-gradient(180deg, #dceeee 0%, #e8e4f0 100%);
+      border: 1px solid rgba(20,28,28,0.08);
+      border-radius: 14px;
+      padding: 26px 24px 22px;
+      transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+      overflow: hidden;
+    }
+
+    .playbook-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 18px 34px rgba(20,28,28,0.08);
+      border-color: rgba(16,124,130,0.22);
+    }
+
+    .playbook-card-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #1f6f78;
+      color: var(--white);
+      margin-bottom: 18px;
+    }
+
+    .playbook-card-icon svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    .playbook-card-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28px;
+      font-weight: 500;
+      color: var(--ink);
+      line-height: 1.05;
+      margin-bottom: 10px;
+    }
+
+    .playbook-card-copy {
+      font-size: 14px;
+      line-height: 1.72;
+      color: var(--ink-mid);
+      margin-bottom: 16px;
+      max-width: 30ch;
+    }
+
+    .playbook-keywords {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .playbook-tag {
+      display: inline-flex;
+      align-items: center;
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.6);
+      border: 1px solid rgba(20,28,28,0.08);
+      color: var(--ink-mid);
+      font-size: 11px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .playbook-note {
+      max-width: 760px;
+      font-size: 14px;
+      line-height: 1.8;
+      color: var(--ink-light);
+      margin-bottom: 48px;
+    }
+
+    .playbook-cta {
+      display: flex;
+      align-items: center;
+      gap: 36px;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary-dark {
+      background: var(--ink);
+      color: var(--white);
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      padding: 16px 32px;
+    }
+
+    .btn-primary-dark:hover {
+      background: var(--teal-dark);
+      transform: translateY(-1px);
+    }
+
+    .btn-text-link {
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--ink-mid);
+      text-decoration: none;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      border-bottom: 1px solid rgba(20,28,28,0.25);
+      padding-bottom: 3px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .btn-text-link:hover {
+      color: var(--ink);
+      border-color: var(--ink);
+    }
+
+    /* CREDIBILITY / WHO WE ARE */
+    .cred-section {
+      background: var(--teal-deepest);
+      padding: 136px 48px;
+    }
+
+    .cred-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .cred-headline {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(36px, 4vw, 54px);
+      line-height: 1.08;
+      color: var(--white);
+      margin-bottom: 24px;
+      letter-spacing: -0.01em;
+    }
+
+    .cred-points {
+      display: grid;
+      gap: 14px;
+      margin-top: 34px;
+    }
+
+    .cred-point {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding-top: 14px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .cred-point-icon {
+      width: 24px;
+      height: 24px;
+      border-radius: 7px;
+      flex-shrink: 0;
+      background: rgba(16,124,130,0.22);
+      border: 1px solid rgba(91,168,168,0.22);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 1px;
+    }
+
+    .cred-point-copy {
+      font-size: 14px;
+      line-height: 1.75;
+      font-weight: 300;
+      color: rgba(255,255,255,0.58);
+    }
+
+    .cred-anchors {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .cred-anchor {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.05);
+      padding: 22px 20px;
+      border-radius: 12px;
+      transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .cred-anchor:hover {
+      background: rgba(255,255,255,0.05);
+      border-color: rgba(91,168,168,0.2);
+      transform: translateY(-2px);
+    }
+
+    .cred-anchor-label {
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(91,168,168,0.7);
+      margin-bottom: 10px;
+    }
+
+    .cred-anchor-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 24px;
+      font-weight: 500;
+      color: var(--white);
+      margin-bottom: 8px;
+      line-height: 1.05;
+    }
+
+    .cred-anchor-copy {
+      font-size: 13px;
+      font-weight: 300;
+      line-height: 1.7;
+      color: rgba(255,255,255,0.46);
+    }
+
+    .cred-footer {
+      margin-top: 22px;
+      font-size: 12px;
+      line-height: 1.75;
+      color: rgba(255,255,255,0.3);
+      font-style: italic;
+    }
+
+    .who-cta {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      flex-wrap: wrap;
+      margin-top: 40px;
+    }
+
+    /* CTA */
+    .cta-section {
+      background: var(--teal);
+      padding: 160px 48px;
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+    }
+
     .cta-section::before {
       content: '';
       position: absolute;
@@ -514,14 +1293,19 @@
       font-size: clamp(100px, 18vw, 240px);
       font-weight: 300;
       font-style: italic;
-      color: rgba(255,255,255,0.04);
+      color: rgba(255,255,255,0.045);
       white-space: nowrap;
       pointer-events: none;
       user-select: none;
       letter-spacing: -0.02em;
     }
 
-    .cta-inner { position: relative; z-index: 2; max-width: 760px; margin: 0 auto; }
+    .cta-inner {
+      position: relative;
+      z-index: 2;
+      max-width: 760px;
+      margin: 0 auto;
+    }
 
     .cta-headline {
       font-family: 'Cormorant Garamond', serif;
@@ -529,45 +1313,56 @@
       font-size: clamp(40px, 5.5vw, 76px);
       line-height: 1.05;
       color: var(--white);
-      margin-bottom: 28px;
+      margin-bottom: 26px;
       letter-spacing: -0.01em;
     }
-    .cta-headline em { font-style: italic; }
 
     .cta-sub {
-      font-family: 'DM Sans', sans-serif;
       font-size: 16px;
       font-weight: 300;
-      color: rgba(255,255,255,0.7);
-      margin-bottom: 56px;
-      line-height: 1.7;
+      color: rgba(255,255,255,0.72);
+      margin-bottom: 54px;
+      line-height: 1.75;
       max-width: 560px;
       margin-left: auto;
       margin-right: auto;
     }
 
     .cta-email {
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
       background: var(--white);
       color: var(--teal-dark);
-      font-family: 'DM Sans', sans-serif;
       font-size: 15px;
       font-weight: 500;
       padding: 18px 40px;
-      text-decoration: none;
       letter-spacing: 0.02em;
-      transition: background 0.2s, transform 0.2s;
     }
-    .cta-email:hover { background: var(--cream); transform: translateY(-2px); }
 
-    footer { background: var(--ink); padding: 40px 48px; display: flex; align-items: center; justify-content: space-between; }
-    .footer-logo { display: flex; align-items: center; }
-    .footer-right { display: flex; align-items: center; gap: 32px; }
+    .cta-email:hover {
+      background: var(--cream);
+      transform: translateY(-2px);
+    }
+
+    /* FOOTER */
+    footer {
+      background: var(--ink);
+      padding: 40px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .footer-logo {
+      display: flex;
+      align-items: center;
+    }
+
+    .footer-right {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
 
     .footer-link {
-      font-family: 'DM Sans', sans-serif;
       font-size: 12px;
       color: rgba(255,255,255,0.45);
       text-decoration: none;
@@ -575,62 +1370,140 @@
       text-transform: uppercase;
       transition: color 0.2s;
     }
-    .footer-link:hover { color: rgba(255,255,255,0.9); }
-    .footer-copy { font-family: 'DM Sans', sans-serif; font-size: 12px; color: rgba(255,255,255,0.25); letter-spacing: 0.05em; }
 
+    .footer-link:hover { color: rgba(255,255,255,0.9); }
+
+    .footer-copy {
+      font-size: 12px;
+      color: rgba(255,255,255,0.25);
+      letter-spacing: 0.05em;
+    }
+
+    /* REVEALS */
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
-    .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
-    .reveal.visible { opacity: 1; transform: translateY(0); }
+    @keyframes scrollSlide {
+      0% { left: -100%; }
+      50% { left: 0%; }
+      100% { left: 100%; }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
     .reveal-delay-1 { transition-delay: 0.1s; }
     .reveal-delay-2 { transition-delay: 0.2s; }
     .reveal-delay-3 { transition-delay: 0.3s; }
-    .reveal-delay-4 { transition-delay: 0.4s; }
 
-    @media (max-width: 1000px) {
-      .video-lead-inner { grid-template-columns: 1fr; gap: 60px; }
-      .video-visual { max-width: 480px; }
-      .playbook-grid { grid-template-columns: repeat(2,1fr); }
-      .approach-grid { grid-template-columns: 1fr; gap: 40px; }
+    /* RESPONSIVE */
+    @media (max-width: 1100px) {
+      .hero-content,
+      .problem-one,
+      .problem-two,
+      .playbook-header,
+      .cred-inner {
+        grid-template-columns: 1fr;
+        gap: 48px;
+      }
+
+      .playbook-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .cred-strip-inner {
+        grid-template-columns: 1fr;
+        gap: 18px;
+      }
     }
 
     @media (max-width: 900px) {
       nav { padding: 20px 24px; }
       .nav-right { gap: 20px; }
-      .hero { padding: 0 24px; }
+
+      .hero,
+      .playbook,
+      .cred-section,
+      .cta-section {
+        padding-left: 24px;
+        padding-right: 24px;
+      }
+
+      .problem-one { padding: 100px 24px 60px; }
+      .problem-two { padding: 60px 24px 100px; }
+      .problem-divider { padding: 0 24px; }
+      .cred-strip { padding: 24px; }
+
       .hero-scroll-indicator { left: 24px; }
-      .shift { padding: 100px 24px; }
-      .shift-inner { grid-template-columns: 1fr; gap: 60px; }
-      .video-lead { padding: 100px 24px; }
-      .playbook { padding: 100px 24px; }
-      .playbook-header { flex-direction: column; align-items: flex-start; gap: 20px; }
-      .playbook-sub { text-align: left; }
-      .approach { padding: 100px 24px; }
-      .cta-section { padding: 120px 24px; }
-      footer { flex-direction: column; gap: 20px; text-align: center; padding: 32px 24px; }
-      .footer-right { flex-direction: column; gap: 16px; }
+
+      .cred-anchors {
+        grid-template-columns: 1fr;
+      }
+
+      footer {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+        padding: 32px 24px;
+      }
+
+      .footer-right {
+        flex-direction: column;
+        gap: 16px;
+      }
     }
 
-    @media (max-width: 600px) {
-      .playbook-grid { grid-template-columns: 1fr; }
-      .shift-stat-grid { grid-template-columns: 1fr; }
+    @media (max-width: 700px) {
       .nav-link { display: none; }
+
+      .playbook-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        min-height: auto;
+        padding-top: 110px;
+      }
+
+      .hero-headline {
+        font-size: clamp(42px, 13vw, 66px);
+      }
+
+      .hero-panel {
+        padding: 22px 18px;
+      }
+
+      .playbook-card {
+        min-height: auto;
+      }
+
+      .hero-proof {
+        flex-direction: column;
+        gap: 12px;
+        align-items: flex-start;
+      }
     }
   </style>
 </head>
 <body>
 
   <!-- NAV -->
-  <nav>
-    <a class="nav-logo" href="/">
-      <img src="Craneweave_Logo_White.png" alt="Craneweave" class="nav-logo-img" />
-    </a>
+  <nav id="mainNav">
+    <a class="nav-logo" href="/"><img src="Craneweave_Logo_White.png" alt="Craneweave" class="nav-logo-img" /></a>
     <div class="nav-right">
+      <a class="nav-link" href="/services/">Services</a>
       <a class="nav-link" href="/about/">About</a>
-      <a class="nav-link" href="/blog/">Writing</a>
+      <a class="nav-link" href="/blog/">Insights</a>
       <a class="nav-cta" href="mailto:hello@craneweave.com">Get in touch</a>
     </div>
   </nav>
@@ -639,12 +1512,12 @@
   <section class="hero">
     <div class="hero-geo" aria-hidden="true">
       <svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
-        <polygon points="1100,50 1350,200 1350,500 1100,650 850,500 850,200" fill="none" stroke="rgba(91,168,168,0.12)" stroke-width="1.5"/>
-        <polygon points="1180,120 1360,225 1360,435 1180,540 1000,435 1000,225" fill="none" stroke="rgba(91,168,168,0.07)" stroke-width="1"/>
-        <polygon points="0,700 180,800 180,900 0,900" fill="rgba(16,124,130,0.15)"/>
-        <line x1="600" y1="0" x2="1440" y2="900" stroke="rgba(91,168,168,0.05)" stroke-width="1"/>
-        <line x1="500" y1="0" x2="1340" y2="900" stroke="rgba(91,168,168,0.05)" stroke-width="1"/>
-        <g fill="rgba(91,168,168,0.15)">
+        <polygon points="1100,50 1350,200 1350,500 1100,650 850,500 850,200" fill="none" stroke="rgba(91,168,168,0.1)" stroke-width="1.5"/>
+        <polygon points="1180,120 1360,225 1360,435 1180,540 1000,435 1000,225" fill="none" stroke="rgba(91,168,168,0.06)" stroke-width="1"/>
+        <polygon points="0,700 220,820 220,900 0,900" fill="rgba(16,124,130,0.12)"/>
+        <line x1="600" y1="0" x2="1440" y2="900" stroke="rgba(91,168,168,0.04)" stroke-width="1"/>
+        <line x1="500" y1="0" x2="1340" y2="900" stroke="rgba(91,168,168,0.04)" stroke-width="1"/>
+        <g fill="rgba(91,168,168,0.12)">
           <circle cx="60" cy="700" r="1.5"/><circle cx="100" cy="700" r="1.5"/><circle cx="140" cy="700" r="1.5"/>
           <circle cx="60" cy="740" r="1.5"/><circle cx="100" cy="740" r="1.5"/><circle cx="140" cy="740" r="1.5"/>
           <circle cx="60" cy="780" r="1.5"/><circle cx="100" cy="780" r="1.5"/><circle cx="140" cy="780" r="1.5"/>
@@ -653,22 +1526,55 @@
     </div>
 
     <div class="hero-content">
-      <p class="hero-eyebrow">AI-Native Brand Strategy</p>
-      <h1 class="hero-headline">
-        Build the brand<br />that <em>AI cites</em>.
-      </h1>
-      <p class="hero-sub">
-        Discovery is moving inside AI assistants. The brands that get cited when buyers ask are the ones with structured authority across video, community, and earned media. Craneweave builds that authority — anchored in founder-led video, designed to compound across every surface AI retrieves from.
-      </p>
-      <div class="hero-actions">
-        <a class="btn-primary" href="mailto:hello@craneweave.com">
-          Work with us
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-            <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </a>
-        <a class="btn-secondary" href="/blog/">Read our thinking</a>
+      <div class="hero-left">
+        <p class="hero-eyebrow">AI-native brand authority</p>
+        <h1 class="hero-headline">AI assistants are becoming the first place buyers look.</h1>
+        <p class="hero-sub">
+          Craneweave helps brands become the names those systems surface and recommend — by building authority across the public signals AI retrieves, trusts, and cites.
+        </p>
+
+        <div class="hero-actions">
+          <a class="btn-primary" href="mailto:hello@craneweave.com">
+            Work with us
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <a class="btn-secondary" href="#playbook">See our playbook</a>
+        </div>
+
+        <div class="hero-proof" aria-label="Credibility highlights">
+          <div class="hero-proof-item"><span class="hero-proof-dot"></span>Former Google & Amazon operators</div>
+          <div class="hero-proof-item"><span class="hero-proof-dot"></span>Media brands scaled to 25M+ monthly readers</div>
+          <div class="hero-proof-item"><span class="hero-proof-dot"></span>Direct founder involvement on every engagement</div>
+        </div>
       </div>
+
+      <aside class="hero-panel" aria-label="How Craneweave works">
+        <div class="hero-panel-label">What we build</div>
+        <div class="hero-panel-title">Authority before recommendation.</div>
+        <div class="hero-panel-copy">
+          We strengthen the public signals AI systems use to decide who gets cited, surfaced, and trusted in your category.
+        </div>
+        <div class="hero-panel-list">
+          <div class="hero-panel-item">
+            <div class="hero-panel-icon">
+              <svg viewBox="0 0 12 12" fill="none"><rect x="2" y="2" width="8" height="8" rx="1" stroke="#5ba8a8" stroke-width="1"/><path d="M4 6h4" stroke="#5ba8a8" stroke-width="1" stroke-linecap="round"/></svg>
+            </div>
+            <div>Owned content and founder presence built for retrieval</div>
+          </div>
+          <div class="hero-panel-item">
+            <div class="hero-panel-icon">
+              <svg viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="4" stroke="#5ba8a8" stroke-width="1"/><path d="M6 2v8M2 6h8" stroke="#5ba8a8" stroke-width="1"/></svg>
+            </div>
+            <div>Off-site credibility across communities, editorial, and third-party surfaces</div>
+          </div>
+          <div class="hero-panel-item">
+            <div class="hero-panel-icon">
+              <svg viewBox="0 0 12 12" fill="none"><path d="M2 9V3m4 6V1m4 8V5" stroke="#5ba8a8" stroke-width="1.2" stroke-linecap="round"/></svg>
+            </div>
+            <div>Measurement and iteration as AI citation patterns evolve</div>
+          </div>
+        </div>
+      </aside>
     </div>
 
     <div class="hero-scroll-indicator" aria-hidden="true">
@@ -677,174 +1583,308 @@
     </div>
   </section>
 
-  <!-- THE SHIFT -->
-  <section class="shift">
-    <div class="shift-inner">
+  <!-- PROBLEM -->
+  <section class="problem">
+
+    <div class="problem-one">
       <div class="reveal">
-        <p class="section-label">The Shift</p>
-        <h2 class="shift-headline">
-          AI doesn't surface brands<br />because they <em>paid</em>.<br />It surfaces brands it <em>trusts</em>.
-        </h2>
-      </div>
-      <div class="reveal reveal-delay-2">
-        <div class="shift-body">
-          <p>For decades, brands built reach through repetition — display, search, retargeting. That model is eroding as more buyers skip search entirely and ask AI assistants instead.</p>
-          <p>Authority in this layer isn't bought. It's earned through the credibility signals AI systems are trained to weight: video transcripts they can parse, community presence they can verify, editorial sources they recognize as legitimate. Craneweave builds that infrastructure — surface by surface, signal by signal.</p>
+        <p class="section-label">The problem</p>
+        <h2 class="problem-headline">Your buyers are asking AI. Your brand isn't in the <em>answer</em>.</h2>
+        <div class="problem-body">
+          <p>Search taught brands to compete for visibility. AI changes that. It surfaces the brands it already has reason to trust — based on signals built over time across content, communities, editorial coverage, and structured entities.</p>
+          <p>If your brand is weak, fragmented, or absent across those surfaces, AI has fewer reasons to mention you when buyer consideration is being shaped.</p>
         </div>
-        <div class="shift-stat-grid">
-          <div class="stat-card">
-            <div class="stat-number">94%</div>
-            <div class="stat-label">of YouTube content cited by AI assistants is long-form video, not Shorts</div>
-            <div class="stat-source">Profound, 2026</div>
+      </div>
+
+      <div class="reveal reveal-delay-2">
+        <div class="chatbot-window">
+          <div class="window-chrome">
+            <div class="chrome-dots"><div class="chrome-dot"></div><div class="chrome-dot"></div><div class="chrome-dot"></div></div>
+            <span class="chrome-title">AI Assistant</span>
+            <div class="chrome-right"><div class="live-dot"></div>Live</div>
           </div>
-          <div class="stat-card">
-            <div class="stat-number">11%</div>
-            <div class="stat-label">of all AI assistant responses now cite a LinkedIn URL — second only to Reddit</div>
-            <div class="stat-source">SEMrush, 2026</div>
+          <div class="chat-messages" id="chatMessages"></div>
+          <div class="chat-input-area">
+            <div class="chat-input-field"><span id="inputText"></span><span class="input-cursor"></span></div>
+            <div class="chat-send" id="chatSend">
+              <svg viewBox="0 0 12 12" fill="none"><path d="M1.5 6h9M7 2.5l3.5 3.5L7 9.5" stroke="white" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
           </div>
+        </div>
+        <div class="phase-dots">
+          <div class="phase-dot active" id="dot0"></div>
+          <div class="phase-dot" id="dot1"></div>
+          <div class="phase-dot" id="dot2"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="problem-divider">
+      <div style="height:1px;background:rgba(255,255,255,0.06);"></div>
+    </div>
+
+    <div class="problem-two">
+      <div class="reveal">
+        <p class="section-label">Why this is happening</p>
+        <h2 class="evolve-headline">AI visibility is earned across many surfaces — and the landscape <em>keeps evolving</em>.</h2>
+        <div class="evolve-body">
+          <p>AI systems do not discover brands the way search did. They synthesize across the open web: videos, founder content, editorial mentions, structured data, community discussion, and third-party validation.</p>
+          <p>The brands that win are not just optimized once. They compound authority over time, then keep adapting as retrieval patterns change. Most brands have no one building for that reality.</p>
+        </div>
+      </div>
+
+      <div class="retrieval-diagram reveal reveal-delay-2" id="retrievalDiagram">
+        <div class="diagram-query">
+          <div class="diagram-query-dot"></div>
+          Which brand should I trust for this?
+        </div>
+        <div class="diagram-label">
+          <svg width="8" height="8" viewBox="0 0 8 8" fill="none"><circle cx="4" cy="4" r="3" stroke="#5ba8a8" stroke-width="1"/><path d="M4 2v2l1 1" stroke="#5ba8a8" stroke-width="1" stroke-linecap="round"/></svg>
+          Retrieving across sources
+        </div>
+        <div class="source-list">
+          <div class="source-row" data-fill="88">
+            <div class="source-row-icon"><svg viewBox="0 0 12 12" fill="none"><rect x="1" y="2" width="10" height="7" rx="1" stroke="#5ba8a8" stroke-width="1"/><path d="M4 9v2M8 9v2M2 11h8" stroke="#5ba8a8" stroke-width="1" stroke-linecap="round"/></svg></div>
+            <span class="source-row-name">YouTube</span>
+            <span class="source-row-signal">video transcript</span>
+            <div class="source-bar"><div class="source-bar-fill" style="--fill-pct:88%"></div></div>
+          </div>
+          <div class="source-row" data-fill="75">
+            <div class="source-row-icon"><svg viewBox="0 0 12 12" fill="none"><rect x="1" y="1" width="10" height="10" rx="1" stroke="#5ba8a8" stroke-width="1"/><path d="M4 5h4M4 7.5h2.5" stroke="#5ba8a8" stroke-width="1" stroke-linecap="round"/></svg></div>
+            <span class="source-row-name">LinkedIn</span>
+            <span class="source-row-signal">founder content</span>
+            <div class="source-bar"><div class="source-bar-fill" style="--fill-pct:75%"></div></div>
+          </div>
+          <div class="source-row" data-fill="92">
+            <div class="source-row-icon"><svg viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="4.5" stroke="#5ba8a8" stroke-width="1"/><path d="M6 1.5c-1.5 1.5-2.5 3-2.5 4.5s1 3 2.5 4.5M6 1.5c1.5 1.5 2.5 3 2.5 4.5s-1 3-2.5 4.5M1.5 6h9" stroke="#5ba8a8" stroke-width="1"/></svg></div>
+            <span class="source-row-name">Entity infrastructure</span>
+            <span class="source-row-signal">verified identity</span>
+            <div class="source-bar"><div class="source-bar-fill" style="--fill-pct:92%"></div></div>
+          </div>
+          <div class="source-row" data-fill="63">
+            <div class="source-row-icon"><svg viewBox="0 0 12 12" fill="none"><path d="M2 9c0-2.8 1.8-4 4-4s4 1.2 4 4" stroke="#5ba8a8" stroke-width="1" stroke-linecap="round"/><circle cx="6" cy="3.5" r="1.8" stroke="#5ba8a8" stroke-width="1"/></svg></div>
+            <span class="source-row-name">Community discussion</span>
+            <span class="source-row-signal">genuine mention</span>
+            <div class="source-bar"><div class="source-bar-fill" style="--fill-pct:63%"></div></div>
+          </div>
+          <div class="source-row" data-fill="80">
+            <div class="source-row-icon"><svg viewBox="0 0 12 12" fill="none"><path d="M1 10l3-4 2 2 2-3 3 5" stroke="#5ba8a8" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <span class="source-row-name">Editorial</span>
+            <span class="source-row-signal">high-authority citations</span>
+            <div class="source-bar"><div class="source-bar-fill" style="--fill-pct:80%"></div></div>
+          </div>
+        </div>
+        <div class="diagram-response" id="diagramResponse">
+          <div class="diagram-ai-dot"></div>
+          <div class="diagram-response-text">Based on consistent signals across sources, <span class="diagram-cited">████████</span> is the most reliably cited option in this category.</div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- VIDEO LEAD SECTION -->
-  <section class="video-lead">
-    <div class="video-lead-inner">
-      <div class="reveal">
-        <p class="video-lead-label">The Anchor — Founder-Led Video</p>
-        <h2 class="video-lead-headline">
-          The brands AI cites<br />are the ones <em>on camera</em>.
-        </h2>
-        <div class="video-lead-body">
-          <p>AI assistants don't watch video. They read transcripts. A 12-minute founder conversation produces 2,000+ words of parseable substance — direct claims, named entities, real expertise — that AI systems can extract and cite. A static brand page produces almost none.</p>
-          <p>Founder-led video is the highest-leverage asset in the AI discovery stack. It's also the one most brands are still treating as a marketing afterthought. We make it the anchor.</p>
-        </div>
-        <ul class="video-lead-points">
-          <li>Strategy, scripting, and direction for long-form founder content built around the questions your buyers ask AI</li>
-          <li>Production and editing through Craneweave's editorial team</li>
-          <li>Transcript optimization, chapter structure, and schema designed for citation — not just views</li>
-          <li>Each shoot recut into LinkedIn long-form, Shorts, and source material for community presence</li>
-        </ul>
-      </div>
-
-      <div class="video-visual reveal reveal-delay-2">
-        <div class="video-frame">
-          <div class="video-overlay-text">
-            <span class="video-rec-dot">REC</span>
-            <span>00:08:14 / 12:42</span>
-          </div>
-          <div class="video-transcript">
-            <div class="video-transcript-meta">— Transcript / cited by Perplexity</div>
-            "The reason most skincare brands fail in sensitive markets is they've optimized for shelf appeal, not formulation tolerance…"
-          </div>
-        </div>
-        <div class="video-citation-tag">Cited by AI</div>
+  <!-- CREDIBILITY STRIP -->
+  <section class="cred-strip">
+    <div class="cred-strip-inner reveal">
+      <div class="cred-strip-label">Credibility anchors</div>
+      <div class="cred-strip-items">
+        <div class="cred-pill"><span class="cred-pill-dot"></span>Google search & advertising operator experience</div>
+        <div class="cred-pill"><span class="cred-pill-dot"></span>Amazon enterprise brand and retail experience</div>
+        <div class="cred-pill"><span class="cred-pill-dot"></span>Media ecosystem relationships across major studios and platforms</div>
+        <div class="cred-pill"><span class="cred-pill-dot"></span>Brands and audiences scaled to 25M+ monthly readers</div>
+        <div class="cred-pill"><span class="cred-pill-dot"></span>Direct senior involvement from strategy through execution</div>
       </div>
     </div>
   </section>
 
   <!-- PLAYBOOK -->
-  <section class="playbook">
-    <div class="playbook-header">
-      <div class="reveal">
-        <p class="section-label" style="color: var(--teal-light);">The Surrounding System</p>
-        <h2 class="playbook-headline">Video is the anchor.<br />Four other levers <em>compound it</em>.</h2>
-      </div>
-      <p class="playbook-sub reveal reveal-delay-2">Each surface reinforces the others. Citation lift compounds when AI systems see your brand show up consistently across every layer it retrieves from.</p>
-    </div>
-
-    <div class="playbook-grid">
-      <div class="play-card reveal reveal-delay-1">
-        <div class="play-number">01</div>
-        <svg class="play-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect x="4" y="4" width="28" height="28" rx="2" stroke="#5ba8a8" stroke-width="1.5"/>
-          <path d="M11 15v10M11 12v.5M16 25v-7c0-2 1-3 3-3s3 1 3 3v7M16 18v7" stroke="#5ba8a8" stroke-width="1.5" stroke-linecap="round"/>
-        </svg>
-        <div class="play-title">LinkedIn Authority</div>
-        <div class="play-desc">Long-form Pulse articles and founder posts engineered for the citation surface that's grown faster than any other in 2026. Ghostwritten in voice, brand-embedded, reviewed before publish.</div>
-        <div class="play-bar"></div>
+  <section class="playbook" id="playbook">
+    <div class="playbook-inner">
+      <div class="playbook-header reveal">
+        <div>
+          <p class="section-label" style="color:var(--teal);">Our playbook</p>
+          <h2 class="playbook-headline">We build the authority layer <em>behind AI discovery</em>.</h2>
+        </div>
+        <p class="playbook-intro">
+          Every engagement is bespoke. We assess where your brand is weak today and prioritize the public signals AI systems are most likely to retrieve, weigh, and cite in your category.
+        </p>
       </div>
 
-      <div class="play-card reveal reveal-delay-2">
-        <div class="play-number">02</div>
-        <svg class="play-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="12" cy="12" r="5" stroke="#5ba8a8" stroke-width="1.5"/>
-          <circle cx="26" cy="10" r="4" stroke="#5ba8a8" stroke-width="1.5"/>
-          <path d="M2 28c0-5.5 4.5-9 10-9s10 3.5 10 9" stroke="#5ba8a8" stroke-width="1.5" stroke-linecap="round"/>
-          <path d="M26 20c3.5 0 8 2 8 8" stroke="#5ba8a8" stroke-width="1.5" stroke-linecap="round"/>
-        </svg>
-        <div class="play-title">Community Presence</div>
-        <div class="play-desc">Disclosed brand and founder presence in the high-signal communities AI systems trust most. Reddit is the top-cited domain on Perplexity. We build genuine authority where the conversations already are.</div>
-        <div class="play-bar"></div>
+      <div class="playbook-grid reveal reveal-delay-1">
+        <article class="playbook-card">
+          <div class="playbook-card-icon">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M8 7l8 5-8 5V7z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><rect x="3" y="4" width="18" height="16" rx="3" stroke="currentColor" stroke-width="1.8"/></svg>
+          </div>
+          <h3 class="playbook-card-title">Video</h3>
+          <p class="playbook-card-copy">Founder-led video, metadata, and transcript systems built so AI can find, parse, and cite your voice directly.</p>
+          <div class="playbook-keywords">
+            <span class="playbook-tag">Scripting</span>
+            <span class="playbook-tag">Metadata</span>
+            <span class="playbook-tag">Transcripts</span>
+          </div>
+        </article>
+
+        <article class="playbook-card">
+          <div class="playbook-card-icon">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M6 17l-2 3V6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v11H6z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M8 9h8M8 13h5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+          </div>
+          <h3 class="playbook-card-title">Community Presence</h3>
+          <p class="playbook-card-copy">Real participation in the communities and forums where trust compounds into durable authority signals over time.</p>
+          <div class="playbook-keywords">
+            <span class="playbook-tag">Platform mapping</span>
+            <span class="playbook-tag">Participation</span>
+            <span class="playbook-tag">Signal building</span>
+          </div>
+        </article>
+
+        <article class="playbook-card">
+          <div class="playbook-card-icon">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M7 3h7l5 5v13H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M14 3v5h5" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+          </div>
+          <h3 class="playbook-card-title">Owned Media</h3>
+          <p class="playbook-card-copy">Answer-first site and blog architecture structured for both AI retrieval and traditional search authority.</p>
+          <div class="playbook-keywords">
+            <span class="playbook-tag">Architecture</span>
+            <span class="playbook-tag">Markup</span>
+            <span class="playbook-tag">Dual-channel authority</span>
+          </div>
+        </article>
+
+        <article class="playbook-card">
+          <div class="playbook-card-icon">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M12 17h.01M8 7h8M8 11h8M5 4h14a2 2 0 0 1 2 2v12l-3-2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <h3 class="playbook-card-title">Earned Media</h3>
+          <p class="playbook-card-copy">High-authority editorial coverage, placements, and brand mentions that strengthen how AI systems assess credibility.</p>
+          <div class="playbook-keywords">
+            <span class="playbook-tag">Targeting</span>
+            <span class="playbook-tag">Placement</span>
+            <span class="playbook-tag">Brand mention</span>
+          </div>
+        </article>
+
+        <article class="playbook-card">
+          <div class="playbook-card-icon">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M6 7h12M6 12h7M6 17h10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><rect x="3" y="4" width="18" height="16" rx="3" stroke="currentColor" stroke-width="1.8"/></svg>
+          </div>
+          <h3 class="playbook-card-title">Third-Party Presence</h3>
+          <p class="playbook-card-copy">Listings, reviews, profiles, and off-site authority signals built where models actually look for validation.</p>
+          <div class="playbook-keywords">
+            <span class="playbook-tag">Listings</span>
+            <span class="playbook-tag">Reviews</span>
+            <span class="playbook-tag">Authority signals</span>
+          </div>
+        </article>
+
+        <article class="playbook-card">
+          <div class="playbook-card-icon">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M12 3l7 3v5c0 5-3 8-7 10-4-2-7-5-7-10V6l7-3z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M9.5 12l1.5 1.5 3.5-3.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <h3 class="playbook-card-title">Entity Infrastructure</h3>
+          <p class="playbook-card-copy">Structured identity systems that help AI classify, verify, and consistently associate your brand with the right topics.</p>
+          <div class="playbook-keywords">
+            <span class="playbook-tag">Knowledge graph</span>
+            <span class="playbook-tag">Schema</span>
+            <span class="playbook-tag">Consistency</span>
+          </div>
+        </article>
       </div>
 
-      <div class="play-card reveal reveal-delay-3">
-        <div class="play-number">03</div>
-        <svg class="play-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect x="4" y="4" width="28" height="28" rx="2" stroke="#5ba8a8" stroke-width="1.5"/>
-          <path d="M10 13h16M10 18h12M10 23h8" stroke="#5ba8a8" stroke-width="1.5" stroke-linecap="round"/>
-        </svg>
-        <div class="play-title">Owned Media</div>
-        <div class="play-desc">Site architecture rebuilt around answer-first structure, semantically correct markup, and question-shaped headers. Feeds traditional search and AI retrieval simultaneously without compromise to either.</div>
-        <div class="play-bar"></div>
-      </div>
+      <p class="playbook-note reveal reveal-delay-2">
+        We do not treat AI visibility like a checklist. The mix depends on your category, your current authority footprint, and where recommendation behavior is already happening.
+      </p>
 
-      <div class="play-card reveal reveal-delay-4">
-        <div class="play-number">04</div>
-        <svg class="play-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M18 4C10.3 4 4 10.3 4 18s6.3 14 14 14 14-6.3 14-14S25.7 4 18 4z" stroke="#5ba8a8" stroke-width="1.5"/>
-          <path d="M18 4c-4 4-6 9-6 14s2 10 6 14M18 4c4 4 6 9 6 14s-2 10-6 14M4 18h28" stroke="#5ba8a8" stroke-width="1.5"/>
-        </svg>
-        <div class="play-title">Entity Infrastructure</div>
-        <div class="play-desc">Wikipedia and Wikidata presence, knowledge panel verification, and structured schema that signals to AI models that your brand is a legitimate, well-defined entity with clear category authority.</div>
-        <div class="play-bar"></div>
+      <div class="playbook-cta reveal reveal-delay-2">
+        <a class="btn-primary-dark" href="/services/">
+          Explore our services
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a class="btn-text-link" href="mailto:hello@craneweave.com">Discuss your category</a>
       </div>
     </div>
   </section>
 
-  <!-- APPROACH -->
-  <section class="approach">
-    <div class="approach-inner">
-      <p class="section-label reveal">How we work</p>
-      <h2 class="approach-headline reveal reveal-delay-1">
-        Every engagement is bespoke.<br />The <em>system underneath</em> isn't.
-      </h2>
-
-      <div class="approach-grid">
-        <div class="approach-item reveal reveal-delay-1">
-          <div class="approach-num">i.</div>
-          <div class="approach-title">Diagnose</div>
-          <div class="approach-desc">We baseline your category — what AI assistants currently say, who they cite, where the citation gaps live, and which surfaces you're absent from. Measurement designed for how AI retrieval actually works, not borrowed from an SEO playbook.</div>
+  <!-- CREDIBILITY -->
+  <section class="cred-section">
+    <div class="cred-inner">
+      <div class="reveal">
+        <p class="section-label">Who we are</p>
+        <h2 class="cred-headline">Senior operators. Direct involvement. Not a <em>junior handoff</em>.</h2>
+        <div class="cred-body">
+          <p>Craneweave is built by founders with operating experience inside one of the largest search advertising ecosystems in the world and inside media ecosystems built on distribution, authority, and audience trust.</p>
+          <p>We stay involved from strategy through execution because the judgment does not stop once the plan is written. That is where most of the value lives.</p>
         </div>
 
-        <div class="approach-item reveal reveal-delay-2">
-          <div class="approach-num">ii.</div>
-          <div class="approach-title">Build</div>
-          <div class="approach-desc">We anchor the system in founder-led video, then layer the surrounding levers in the order that produces lift fastest for your category. Real production, real editorial, real authority — not stealth accounts or manipulation tactics.</div>
+        <div class="cred-points">
+          <div class="cred-point">
+            <div class="cred-point-icon">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l2.2 2.2L10 2.5" stroke="#5ba8a8" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="cred-point-copy">Search and advertising experience from Google, including work with major enterprise advertisers and buyer acquisition systems at scale.</div>
+          </div>
+          <div class="cred-point">
+            <div class="cred-point-icon">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l2.2 2.2L10 2.5" stroke="#5ba8a8" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="cred-point-copy">Operating and commercial experience from Amazon, where brand performance, merchandising, and marketplace visibility were managed in practice.</div>
+          </div>
+          <div class="cred-point">
+            <div class="cred-point-icon">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l2.2 2.2L10 2.5" stroke="#5ba8a8" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="cred-point-copy">Media brand-building experience with editorial credibility, audience growth, and relationships across companies such as Netflix, Disney, HBO Max, TikTok, and Sony Pictures.</div>
+          </div>
         </div>
 
-        <div class="approach-item reveal reveal-delay-3">
-          <div class="approach-num">iii.</div>
-          <div class="approach-title">Compound</div>
-          <div class="approach-desc">We measure citation lift at the cluster level across ChatGPT, Claude, Perplexity, Gemini, and Google AI Overviews. Each quarter's content feeds the next quarter's authority. The system gets stronger as the data accumulates.</div>
+        <div class="who-cta">
+          <a class="btn-primary" href="mailto:hello@craneweave.com">
+            Work with us
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <a class="btn-secondary" href="/about/">About us</a>
         </div>
+      </div>
+
+      <div class="reveal reveal-delay-2">
+        <div class="cred-anchors">
+          <div class="cred-anchor">
+            <div class="cred-anchor-label">Operator lens</div>
+            <div class="cred-anchor-title">Google</div>
+            <div class="cred-anchor-copy">Experience inside the systems that trained brands to compete for digital visibility at scale.</div>
+          </div>
+          <div class="cred-anchor">
+            <div class="cred-anchor-label">Operator lens</div>
+            <div class="cred-anchor-title">Amazon</div>
+            <div class="cred-anchor-copy">Hands-on experience with enterprise brands, performance, and commercial execution in a high-signal environment.</div>
+          </div>
+          <div class="cred-anchor">
+            <div class="cred-anchor-label">Media lens</div>
+            <div class="cred-anchor-title">25M+</div>
+            <div class="cred-anchor-copy">Monthly readers reached through scaled media properties built on distribution and editorial relevance.</div>
+          </div>
+          <div class="cred-anchor">
+            <div class="cred-anchor-label">Network lens</div>
+            <div class="cred-anchor-title">Major platforms</div>
+            <div class="cred-anchor-copy">Relationships and work alongside leading entertainment, media, and digital distribution organizations.</div>
+          </div>
+        </div>
+        <p class="cred-footer">
+          Every engagement is led by the founders directly. No junior team takes over once the strategy is set.
+        </p>
       </div>
     </div>
   </section>
 
   <!-- CTA -->
   <section class="cta-section">
-    <div class="cta-bg-text" aria-hidden="true">cited</div>
+    <div class="cta-bg-text" aria-hidden="true">recommended</div>
     <div class="cta-inner reveal">
-      <h2 class="cta-headline">
-        The most cited brand<br />in your category wins.<br /><em>Let's make sure it's yours.</em>
-      </h2>
-      <p class="cta-sub">We work with a small number of clients at a time, with deep involvement at every stage. If you're thinking seriously about AI visibility, start the conversation now.</p>
+      <h2 class="cta-headline">Be the brand AI <em>reaches for</em>.</h2>
+      <p class="cta-sub">
+        We work with a small number of clients at a time, with deep involvement at every stage. If AI is shaping who buyers consider in your category, now is the time to build authority intentionally.
+      </p>
       <a class="cta-email" href="mailto:hello@craneweave.com">
         hello@craneweave.com
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-          <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </a>
     </div>
   </section>
@@ -856,7 +1896,8 @@
     </div>
     <div class="footer-right">
       <a class="footer-link" href="/about/">About</a>
-      <a class="footer-link" href="/blog/">Writing</a>
+      <a class="footer-link" href="/services/">Services</a>
+      <a class="footer-link" href="/blog/">Insights</a>
       <a class="footer-link" href="https://www.linkedin.com/company/craneweave/">LinkedIn</a>
       <a class="footer-link" href="mailto:hello@craneweave.com">Contact</a>
       <span class="footer-copy">© 2026 Craneweave</span>
@@ -864,24 +1905,165 @@
   </footer>
 
   <script>
-    const reveals = document.querySelectorAll('.reveal');
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) entry.target.classList.add('visible');
-      });
-    }, { threshold: 0.12 });
-    reveals.forEach((el) => observer.observe(el));
-
-    const nav = document.querySelector('nav');
+    /* NAV SCROLL */
+    const nav = document.getElementById('mainNav');
     window.addEventListener('scroll', () => {
       if (window.scrollY > 80) {
-        nav.style.background = 'rgba(10,85,89,0.95)';
+        nav.style.background = 'rgba(10,85,89,0.94)';
         nav.style.backdropFilter = 'blur(12px)';
+        nav.style.borderBottomColor = 'rgba(255,255,255,0.06)';
       } else {
         nav.style.background = 'transparent';
         nav.style.backdropFilter = 'none';
+        nav.style.borderBottomColor = 'transparent';
       }
     });
+
+    /* SCROLL REVEAL */
+    const revealEls = document.querySelectorAll('.reveal');
+    const revealObs = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) e.target.classList.add('visible');
+      });
+    }, { threshold: 0.1 });
+    revealEls.forEach((el) => revealObs.observe(el));
+
+    /* RETRIEVAL DIAGRAM */
+    const diagramEl = document.getElementById('retrievalDiagram');
+    const sourceRows = document.querySelectorAll('.source-row');
+    const diagramResponse = document.getElementById('diagramResponse');
+    let diagramDone = false;
+
+    const diagObs = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting && !diagramDone) {
+          diagramDone = true;
+          sourceRows.forEach((row, i) => {
+            setTimeout(() => {
+              row.classList.add('visible');
+              setTimeout(() => {
+                const fill = row.querySelector('.source-bar-fill');
+                if (fill) fill.classList.add('filled');
+              }, 200);
+            }, i * 200);
+          });
+          setTimeout(() => {
+            diagramResponse.classList.add('visible');
+          }, sourceRows.length * 200 + 500);
+        }
+      });
+    }, { threshold: 0.2 });
+
+    if (diagramEl) diagObs.observe(diagramEl);
+
+    /* CHATBOT */
+    const phases = [
+      {
+        query: "Which brand should I trust for this?",
+        pre: "Based on what is consistently cited across trusted sources, ",
+        post: " tends to appear most reliably in this category."
+      },
+      {
+        query: "What do most people recommend here?",
+        pre: "Across communities, reviews, and expert sources, ",
+        post: " keeps surfacing as the strongest recommendation."
+      },
+      {
+        query: "Who's the go-to in this space?",
+        pre: "The brand with the most durable authority signals here is ",
+        post: " — they show up consistently across the surfaces these systems retrieve from."
+      }
+    ];
+
+    let phase = 0;
+    const chatMessages = document.getElementById('chatMessages');
+    const inputTextEl = document.getElementById('inputText');
+    const chatSend = document.getElementById('chatSend');
+
+    function clearChat() {
+      chatMessages.innerHTML = '';
+    }
+
+    function typeInput(text, speed, cb) {
+      let i = 0;
+      inputTextEl.textContent = '';
+
+      function tick() {
+        if (i < text.length) {
+          inputTextEl.textContent = text.substring(0, i + 1);
+          i++;
+          setTimeout(tick, speed);
+        } else if (cb) {
+          cb();
+        }
+      }
+
+      tick();
+    }
+
+    function addUser(text, cb) {
+      const el = document.createElement('div');
+      el.className = 'user-message';
+      el.textContent = text;
+      chatMessages.appendChild(el);
+      requestAnimationFrame(() => requestAnimationFrame(() => el.classList.add('visible')));
+      if (cb) setTimeout(cb, 500);
+    }
+
+    function addTyping(cb) {
+      const wrap = document.createElement('div');
+      wrap.className = 'ai-message';
+      wrap.id = 'tWrap';
+
+      const av = document.createElement('div');
+      av.className = 'ai-avatar';
+      av.innerHTML = `<svg viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="4.5" stroke="#5ba8a8" stroke-width="1"/><path d="M4 6h4M6 4v4" stroke="#5ba8a8" stroke-width="1" stroke-linecap="round"/></svg>`;
+
+      const bub = document.createElement('div');
+      bub.className = 'ai-bubble';
+      bub.innerHTML = `<div class="typing-indicator"><div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div></div>`;
+
+      wrap.appendChild(av);
+      wrap.appendChild(bub);
+      chatMessages.appendChild(wrap);
+      requestAnimationFrame(() => requestAnimationFrame(() => wrap.classList.add('visible')));
+      if (cb) setTimeout(cb, 1300);
+    }
+
+    function resolveBlank(pre, post, cb) {
+      const wrap = document.getElementById('tWrap');
+      if (!wrap) return;
+      const bub = wrap.querySelector('.ai-bubble');
+      bub.innerHTML = pre + `<span class="blank-slot"><span class="blank-cursor"></span><span class="blank-shimmer"></span></span>` + post;
+      wrap.id = '';
+      if (cb) setTimeout(cb, 4200);
+    }
+
+    function runPhase(idx) {
+      document.querySelectorAll('.phase-dot').forEach((d, i) => d.classList.toggle('active', i === idx));
+      clearChat();
+      const p = phases[idx];
+
+      setTimeout(() => {
+        typeInput(p.query, 36, () => {
+          chatSend.classList.add('active');
+          setTimeout(() => {
+            chatSend.classList.remove('active');
+            inputTextEl.textContent = '';
+            addUser(p.query, () => {
+              addTyping(() => {
+                resolveBlank(p.pre, p.post, () => {
+                  phase = (phase + 1) % phases.length;
+                  runPhase(phase);
+                });
+              });
+            });
+          }, 280);
+        });
+      }, 300);
+    }
+
+    setTimeout(() => runPhase(0), 700);
   </script>
 
 </body>
