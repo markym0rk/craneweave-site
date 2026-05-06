@@ -18,6 +18,7 @@
     :root {
       --teal: #107c82;
       --teal-light: #5ba8a8;
+      --teal-pale: #d6eaea;
       --teal-dark: #0a5559;
       --teal-deepest: #053236;
       --cream: #f7f5f0;
@@ -35,6 +36,7 @@
       background: var(--cream);
       color: var(--ink);
       line-height: 1.6;
+      overflow-x: hidden;
     }
 
     body::before {
@@ -56,21 +58,20 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      background: var(--teal-dark);
+      background: rgba(10,85,89,0.97);
+      backdrop-filter: blur(12px);
     }
 
     .nav-logo {
       display: flex;
       align-items: center;
-      gap: 10px;
       text-decoration: none;
     }
 
-    .logo-text {
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 500;
-      font-size: 20px;
-      color: var(--white);
+    .nav-logo-img {
+      height: 36px;
+      width: auto;
+      display: block;
     }
 
     .nav-right { display: flex; align-items: center; gap: 36px; }
@@ -78,18 +79,20 @@
     .nav-link {
       font-family: 'DM Sans', sans-serif;
       font-size: 13px;
+      font-weight: 400;
       color: rgba(255,255,255,0.75);
       text-decoration: none;
       letter-spacing: 0.06em;
       text-transform: uppercase;
       transition: color 0.2s;
     }
-
     .nav-link:hover { color: var(--white); }
+    .nav-link.active { color: var(--white); }
 
     .nav-cta {
       font-family: 'DM Sans', sans-serif;
       font-size: 13px;
+      font-weight: 400;
       color: var(--white);
       text-decoration: none;
       letter-spacing: 0.08em;
@@ -98,7 +101,6 @@
       padding-bottom: 2px;
       transition: border-color 0.2s;
     }
-
     .nav-cta:hover { border-color: rgba(255,255,255,1); }
 
     /* MAIN */
@@ -114,16 +116,12 @@
       margin-top: 80px;
     }
 
-    .footer-logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
+    .footer-logo { display: flex; align-items: center; }
 
-    .footer-logo-text {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 16px;
-      color: rgba(255,255,255,0.5);
+    .footer-logo-img {
+      height: 36px;
+      width: auto;
+      display: block;
     }
 
     .footer-right { display: flex; align-items: center; gap: 32px; }
@@ -137,7 +135,6 @@
       text-transform: uppercase;
       transition: color 0.2s;
     }
-
     .footer-link:hover { color: rgba(255,255,255,0.9); }
 
     .footer-copy {
@@ -150,8 +147,18 @@
     @media (max-width: 900px) {
       nav { padding: 20px 24px; }
       .nav-right { gap: 20px; }
-      footer { flex-direction: column; gap: 20px; text-align: center; padding: 32px 24px; }
+      footer {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+        padding: 32px 24px;
+        margin-top: 48px;
+      }
       .footer-right { flex-direction: column; gap: 16px; }
+    }
+
+    @media (max-width: 600px) {
+      .nav-link { display: none; }
     }
   </style>
 </head>
@@ -159,15 +166,11 @@
 
   <nav>
     <a class="nav-logo" href="/">
-      <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-        <polygon points="16,2 30,26 2,26" fill="none" stroke="white" stroke-width="2"/>
-        <polygon points="16,10 24,24 8,24" fill="rgba(255,255,255,0.25)"/>
-      </svg>
-      <span class="logo-text">Craneweave</span>
+      <img src="{{ '/Craneweave_Logo_White.svg' | relative_url }}" alt="Craneweave" class="nav-logo-img" />
     </a>
     <div class="nav-right">
-      <a class="nav-link" href="/">Home</a>
-      <a class="nav-link" href="/blog/">Writing</a>
+      <a class="nav-link{% if page.url contains '/about' %} active{% endif %}" href="/about/">About</a>
+      <a class="nav-link{% if page.url contains '/blog' %} active{% endif %}" href="/blog/">Insights</a>
       <a class="nav-cta" href="mailto:hello@craneweave.com">Get in touch</a>
     </div>
   </nav>
@@ -178,14 +181,11 @@
 
   <footer>
     <div class="footer-logo">
-      <svg width="24" height="24" viewBox="0 0 32 32" fill="none">
-        <polygon points="16,2 30,26 2,26" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="2"/>
-        <polygon points="16,10 24,24 8,24" fill="rgba(255,255,255,0.1)"/>
-      </svg>
-      <span class="footer-logo-text">Craneweave</span>
+      <img src="{{ '/Craneweave_Logo_White.svg' | relative_url }}" alt="Craneweave" class="footer-logo-img" />
     </div>
     <div class="footer-right">
-      <a class="footer-link" href="/blog/">Writing</a>
+      <a class="footer-link" href="/about/">About</a>
+      <a class="footer-link" href="/blog/">Insights</a>
       <a class="footer-link" href="https://www.linkedin.com/company/craneweave/">LinkedIn</a>
       <a class="footer-link" href="mailto:hello@craneweave.com">Contact</a>
       <span class="footer-copy">© 2026 Craneweave</span>
