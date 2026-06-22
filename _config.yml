@@ -1,6 +1,7 @@
 title: Craneweave
 description: AI-native brand strategy for the post-search era. Writing on AI discovery, founder-led video, and the changing shape of brand authority.
 url: "https://craneweave.com"
+baseurl: ""
 author: Craneweave
 
 # Build settings
@@ -11,6 +12,7 @@ permalink: /blog/:slug/
 plugins:
   - jekyll-feed
   - jekyll-seo-tag
+  - jekyll-sitemap
 
 # Default frontmatter for posts
 defaults:
