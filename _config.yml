@@ -1,26 +1,17 @@
 title: Craneweave
-description: AI-native brand strategy for the post-search era. Writing on AI discovery, founder-led video, and the changing shape of brand authority.
+description: Founder-led college admissions coaching. A 12-month program where every essay, school list, and application is reviewed by the founders — with a dedicated BS/MD track.
 url: "https://craneweave.com"
 baseurl: ""
 author: Craneweave
 
 # Build settings
 markdown: kramdown
-permalink: /blog/:slug/
 
-# Plugins (enabled by default on GitHub Pages)
+# Plugins (whitelisted on GitHub Pages)
 plugins:
-  - jekyll-feed
   - jekyll-seo-tag
   - jekyll-sitemap
-
-# Default frontmatter for posts
-defaults:
-  - scope:
-      path: ""
-      type: "posts"
-    values:
-      layout: "post"
+  - jekyll-redirect-from
 
 # Exclude from build
 exclude:

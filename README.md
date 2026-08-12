@@ -1,68 +1,38 @@
-# Craneweave site
+# craneweave.com
 
-Static site for craneweave.com. Hosted on GitHub Pages with Jekyll for the blog.
+Founder-led college admissions coaching — undergrad program with a BS/MD special track.
+Static Jekyll site on GitHub Pages (custom domain via `CNAME`).
 
-## Structure
+## Pages
 
-```
-.
-├── index.html                          # Homepage (standalone, no Jekyll dependency)
-├── _config.yml                         # Jekyll config
-├── _layouts/
-│   ├── default.html                    # Site-wide layout (nav, footer)
-│   └── post.html                       # Blog post layout
-├── _posts/
-│   └── YYYY-MM-DD-slug.md              # Blog posts (write these in Markdown)
-├── blog/
-│   └── index.html                      # Blog listing page
-└── README.md
-```
+| Path | Purpose |
+|---|---|
+| `/` | Families conversion page (price-variant tested) |
+| `/bsmd/` | BS/MD track — premium price, no variants |
+| `/coaches/` | Coach supply page + application form |
+| `/privacy/`, `/terms/` | Minors' data policy · deposit/refund terms |
 
-## Writing a new post
+Old B2B URLs (`/about/`, `/blog/…`) redirect to `/` via `jekyll-redirect-from`
+(front matter on `index.html`).
 
-1. Create a new file in `_posts/` named `YYYY-MM-DD-your-slug.md`
-2. Add frontmatter at the top:
+## How the price test works
 
-```markdown
----
-title: Your post title
-date: 2026-05-15
-author: Mark Kim
-author_role: Co-founder, Craneweave
-description: One-sentence summary for SEO and social shares.
----
+`assets/site.js` assigns each first-time visitor one of **$199 / $299 / $449**
+(uniform random), persists it in `localStorage` + cookie (`cw_px_v`), and paints it
+into every `[data-price]` element. `[data-price-bsmd]` renders variant + $100.
+`/bsmd/` is priced flat at $399 in its HTML — it is the premium, no-variant test.
+Every analytics event is stamped with `{variant, page, src}`.
 
-Your post content in Markdown.
+## Before pushing traffic — fill these in
 
-## Section headings work
+In `assets/site.js` (`CFG` at the top):
 
-**Bold** and *italic* both render. [Links work too](https://example.com).
+- `STRIPE_LINK` / `STRIPE_LINK_BSMD` — Stripe Payment Links for the $50 deposit.
+  Until set, the reserve form falls back to a mailto to `team@craneweave.com`.
+- `FORM_ENDPOINT` — endpoint (e.g. Formspree) for interest capture + coach applications.
 
-> Pull quotes get the editorial treatment.
-```
+Also add an analytics script (Plausible or GA4) to each page's `<head>` —
+`site.js` auto-forwards events to `plausible()`/`gtag()` when present.
 
-3. Commit and push. GitHub Pages rebuilds automatically.
-4. The post appears at `/blog/your-slug/` and on the blog index.
-
-## Local preview (optional)
-
-If you want to preview before pushing:
-
-```bash
-bundle install
-bundle exec jekyll serve
-```
-
-Site runs at `http://localhost:4000`.
-
-If you don't have Ruby installed, just push to GitHub — it'll build there. Local preview is convenience, not required.
-
-## Deploying to GitHub Pages
-
-1. Push this whole directory to a GitHub repo.
-2. Repo settings → Pages → Build from `main` branch, root.
-3. Add custom domain `craneweave.com` if pointed at GitHub via DNS.
-
-## Cross-posting workflow
-
-Publish on craneweave.com first. Wait 7–14 days. Then republish on LinkedIn Pulse with a "Originally published at craneweave.com" footer linking back to the canonical URL. This avoids duplicate content issues while capturing both surfaces.
+And replace the founder admissions-history lines marked `TODO(founders)` in
+`index.html` and `bsmd/index.html` with the real one-liners.
