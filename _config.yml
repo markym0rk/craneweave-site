@@ -1,5 +1,5 @@
 title: Craneweave
-description: Founder-led college admissions coaching. A 12-month program where every essay, school list, and application is reviewed by the founders — with a dedicated BS/MD track.
+description: Expert coaching made effortless. Match with a vetted coach, follow a personalized plan, and get written reviews of your real work at a published monthly price.
 url: "https://craneweave.com"
 baseurl: ""
 author: Craneweave
@@ -8,9 +8,11 @@ author: Craneweave
 markdown: kramdown
 
 # Plugins (whitelisted on GitHub Pages)
+# jekyll-sitemap removed: sitemap.xml is hand-authored at repo root (only
+# index.html has front matter, so the generated sitemap omitted 13 real pages).
+# jekyll-seo-tag removed: no page calls {% seo %}, and leaving it armed would
+# emit duplicate title/OG tags the first time a page gains front matter.
 plugins:
-  - jekyll-seo-tag
-  - jekyll-sitemap
   - jekyll-redirect-from
 
 # Exclude from build
@@ -20,3 +22,4 @@ exclude:
   - Gemfile.lock
   - node_modules
   - vendor
+  - scripts

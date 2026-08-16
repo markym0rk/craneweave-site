@@ -1,76 +1,222 @@
----
----
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Terms — Craneweave</title>
+  <title>Terms of service | Craneweave</title>
   <link rel="icon" type="image/png" href="/Favicon.png" />
-  <meta name="description" content="Craneweave program terms: the $50 refundable deposit, billing, refunds, and what we do and don't promise." />
-  <meta name="robots" content="noindex" />
+  <meta name="description" content="Craneweave terms: published plan prices, monthly billing and cancellation, how review credits work, academic integrity, and what we don't promise." />
+  <link rel="canonical" href="https://craneweave.com/terms/" />
+
+  <meta property="og:title" content="Terms of service" />
+  <meta property="og:description" content="Craneweave terms: published plan prices, monthly billing, cancellation, and what we do and don't promise." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://craneweave.com/terms/" />
+  <meta property="og:site_name" content="Craneweave" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:image" content="https://craneweave.com/og-default.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Craneweave — expert coaching made effortless" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Terms of service" />
+  <meta name="twitter:description" content="Craneweave terms: published plan prices, monthly billing, cancellation, and what we do and don't promise." />
+  <meta name="twitter:image" content="https://craneweave.com/og-default.png" />
+
+  <script>
+    /* Set before first paint so .reveal can start hidden without the page
+       flashing visible first. The timer is a failsafe: if the bundle never
+       runs, the flag is dropped and every .reveal falls back to visible
+       rather than staying permanently hidden. */
+    document.documentElement.classList.add('js');
+    setTimeout(function () {
+      if (!window.__cwReady) document.documentElement.classList.remove('js');
+    }, 2500);
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/assets/site.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500..700&family=DM+Sans:wght@400..600&family=Spline+Sans+Mono:wght@400..500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/assets/craneweave.css" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Craneweave", "item": "https://craneweave.com/" },
+          { "@type": "ListItem", "position": 2, "name": "Terms" }
+        ]
+      }
+    ]
+  }
+  </script>
 </head>
 <body data-page="terms">
 
+  <!-- NAV -->
   <nav class="nav" aria-label="Main">
     <div class="nav-inner">
       <a class="nav-logo" href="/" aria-label="Craneweave home">
-        <img src="/Craneweave_Logo_White.svg" alt="Craneweave" />
+        <img src="/Craneweave_Logo_White.svg" alt="Craneweave" width="280" height="48" />
       </a>
-      <div class="nav-links">
-        <a class="nav-link" href="/#how">How it works</a>
+      <div class="nav-links" id="nav-links">
+        <a class="nav-link" href="/students/">Students &amp; families</a>
+        <a class="nav-link" href="/coaches/">Coaches</a>
+        <a class="nav-link" href="/programs/">Programs</a>
         <a class="nav-link" href="/#pricing">Pricing</a>
-        <a class="nav-link" href="/bsmd/">BS/MD track</a>
-        <a class="nav-link" href="/coaches/">For coaches</a>
+        <a class="nav-link" href="/about/">About</a>
+        <div class="nav-actions">
+          <a class="nav-link nav-link-quiet" href="/coaches/">Become a coach</a>
+          <button class="btn btn-primary btn-nav" data-open-start="nav">Get started</button>
+        </div>
       </div>
+      <button class="nav-burger" id="nav-burger" aria-expanded="false" aria-controls="nav-links" aria-label="Menu">
+        <span></span><span></span>
+      </button>
     </div>
   </nav>
 
-  <main class="wrap legal">
-    <h1>Program <em>terms.</em></h1>
-    <p class="legal-updated">Last updated: August 2026</p>
-
-    <h2>The deposit</h2>
-    <p>Reserving a spot costs a <strong>$50 deposit</strong>. It is <strong>fully refundable</strong> any time before your onboarding begins — email <a href="mailto:team@craneweave.com">team@craneweave.com</a> and we refund it, no questions asked. When your program starts, the deposit credits in full toward your first month.</p>
-
-    <h2>The program</h2>
-    <p>Craneweave is a 12-month admissions coaching program billed monthly at the price shown when you reserved. Each month includes six expert reviews and the program entitlements listed on the pricing page. Unused reviews don’t roll over; the pace of the plan is designed so you won’t need them to.</p>
-
-    <h2>Billing and cancellation</h2>
-    <p>Billing is monthly through Stripe. You can cancel at any time, effective at the end of the current billing month — no cancellation fees, no lock-in. The program is built as a 12-month arc, and it works best run start to finish, but you are never trapped in it.</p>
-
-    <h2>What we promise — and what we don’t</h2>
-    <p>We promise that every essay, school list, and application submitted through the program is reviewed and approved by a named coach before feedback reaches your student, on the schedule shown in your plan.</p>
-    <p><strong>We do not guarantee admission to any school or program</strong>, and you should be skeptical of anyone who does. Admissions outcomes depend on factors no coach controls.</p>
-
-    <h2>Academic integrity</h2>
-    <p>We coach; we don’t ghostwrite. All submitted work must be the student’s own. The platform organizes, checks, and prompts — it does not write application essays, and our coaches will flag work that doesn’t sound like the student who submitted it. That standard protects your student: admissions offices are better at detecting outsourced essays than most families expect.</p>
-
-    <h2>Coaching relationship</h2>
-    <p>Craneweave provides educational coaching and application strategy. We are not a school, a placement agency, or agents of any university.</p>
-
-    <h2>Contact</h2>
-    <p>Questions about these terms: <a href="mailto:team@craneweave.com">team@craneweave.com</a>.</p>
-  </main>
-
-  <footer class="footer" style="margin-top: 96px;">
-    <div class="wrap footer-inner">
-      <a class="footer-logo" href="/"><img src="/Craneweave_Logo_White.svg" alt="Craneweave" /></a>
-      <div class="footer-links">
-        <a class="footer-link" href="/coaches/">For coaches</a>
-        <a class="footer-link" href="/bsmd/">BS/MD track</a>
-        <a class="footer-link" href="/privacy/">Privacy</a>
-        <a class="footer-link" href="/terms/">Terms</a>
-        <a class="footer-link" href="mailto:team@craneweave.com">Contact</a>
+  <!-- PAGE HERO -->
+  <header class="page-hero">
+    <div class="wrap">
+      <div class="hero-copy">
+        <nav class="crumb" aria-label="Breadcrumb"><a href="/">Craneweave</a> <span aria-hidden="true">/</span> <span aria-current="page">Terms</span></nav>
+        <h1>Program <span class="accent">terms.</span></h1>
+        <p class="hero-sub mono">Last updated: August 2026</p>
       </div>
-      <div class="footer-copy">© 2026 Craneweave</div>
+    </div>
+  </header>
+
+  <!-- TERMS -->
+  <section class="section" id="terms">
+    <div class="wrap">
+      <div class="prose">
+        <h2>The program</h2>
+        <p>Craneweave is a monthly coaching subscription you can cancel at any time; there is no contract and no minimum term. Each plan includes the number of review credits published for that plan, returned on the published turnaround. A review is a scoped, written expert evaluation of one piece of real work — an essay draft, a school list, a full application, or a check-in — signed by the coach by name.</p>
+
+        <h2>Plans and billing</h2>
+        <p>Every price is published at <a href="/#pricing">craneweave.com/#pricing</a> and is the price you pay.</p>
+        <ul>
+          <li><strong>Core — $299/month.</strong> 4 review credits each billing month, 72-hour review turnaround.</li>
+          <li><strong>Plus — $499/month.</strong> 8 review credits each billing month, 48-hour turnaround, priority coach matching.</li>
+          <li><strong>Season Pass — $1,999.</strong> Aug 1 – Jan 15, 24 review credits, priority access in the November crunch.</li>
+          <li><strong>BS/MD track — from $399/month.</strong></li>
+          <li><strong>À la carte reviews</strong> — essay review $99 · school list $69 · full application $249 · check-in $49 · 24-hour rush +$50.</li>
+        </ul>
+
+        <h2>Signing up</h2>
+        <p>You choose a plan at its published price and pay the first month through Stripe. There is no deposit and no reservation fee, and there is never a sales call.</p>
+
+        <h2>Review credits</h2>
+        <p>Monthly review credits are issued each billing month and expire at the end of it. Season Pass credits are issued once and may be used any time between Aug 1 and Jan 15.</p>
+
+        <h2>Billing and cancellation</h2>
+        <p>Billing is monthly through Stripe. There is no minimum term and no contract. You can cancel at any time, effective at the end of the current billing month — no cancellation fees, no lock-in. Every plan bills at <a href="/pricing/">the published plan prices</a>, and <a href="/privacy/">how student data is handled</a> is set out in the privacy policy.</p>
+
+        <h2>What we promise — and what we don't</h2>
+        <h3 class="reveal">What do you promise, and what don't you?</h3>
+        <p>We promise the work: every essay, list, and application you send gets an expert written review on the published turnaround, signed by a named coach. We do not promise admission, a scholarship, or an offer — nobody can. Plans bill monthly at the published price and you can cancel monthly.</p>
+        <p>We promise that every essay, school list, and application submitted through the program is read and signed by a named coach before feedback reaches your student, on the schedule shown in your plan.</p>
+        <p><strong>We do not guarantee admission to any school or program</strong>, and you should be skeptical of anyone who does. Admissions outcomes depend on factors no coach controls.</p>
+
+        <h2>Academic integrity</h2>
+        <p>We coach; we don’t ghostwrite. All submitted work must be the student’s own. The platform organizes, checks, and prompts — it does not write application essays, and our coaches will flag work that doesn’t sound like the student who submitted it.</p>
+
+        <h2>Coaching relationship</h2>
+        <p>Craneweave provides educational coaching and application strategy. We are not a school, a placement agency, or agents of any university.</p>
+
+        <h2>Contact</h2>
+        <p>Questions about these terms: <a href="mailto:team@craneweave.com">team@craneweave.com</a>.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="wrap">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a class="footer-logo" href="/"><img src="/Craneweave_Logo_White.svg" alt="Craneweave" width="280" height="48" /></a>
+          <p>Expert coaching made effortless.</p>
+        </div>
+        <div class="footer-col">
+          <div class="footer-head mono">Goals</div>
+          <a href="/college/">College admissions</a>
+          <a href="/bsmd/">BS/MD programs</a>
+          <a href="/mba/">MBA admissions</a>
+          <a href="/law/">Law school</a>
+          <a href="/med/">Medical school</a>
+          <a href="/recruiting/">Banking &amp; consulting</a>
+        </div>
+        <div class="footer-col">
+          <div class="footer-head mono">Craneweave</div>
+          <a href="/students/">Students &amp; families</a>
+          <a href="/coaches/">Coaches</a>
+          <a href="/coaches/#apply">Apply to coach</a>
+          <a href="/programs/">Programs</a>
+          <a href="/#pricing">Pricing</a>
+        </div>
+        <div class="footer-col">
+          <div class="footer-head mono">Company</div>
+          <a href="/about/">About</a>
+          <a href="mailto:team@craneweave.com">Contact</a>
+          <a href="/privacy/">Privacy</a>
+          <a href="/terms/">Terms</a>
+        </div>
+      </div>
+      <div class="footer-base">© 2026 Craneweave</div>
     </div>
   </footer>
 
-  <script src="/assets/site.js" defer></script>
+  <!-- GET STARTED / WAITLIST MODAL -->
+  <dialog class="start" id="start-modal">
+    <div class="start-inner">
+      <button class="start-close" data-close-start aria-label="Close">×</button>
+      <h3 id="start-title">Get started</h3>
+      <p class="start-sub" id="start-sub">Tell us where you're headed and we'll take it from there.</p>
+      <form id="start-form">
+        <div class="field">
+          <label for="s-goal">Goal</label>
+          <select id="s-goal" name="goal" required>
+            <option value="undergrad">College admissions</option>
+            <option value="bsmd">BS/MD programs</option>
+            <option value="mba">MBA admissions</option>
+            <option value="law">Law school admissions</option>
+            <option value="med">Medical school admissions</option>
+            <option value="recruiting">Banking &amp; consulting recruiting</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="s-when">Timeline</label>
+          <select id="s-when" name="timeline" required>
+            <option value="this-cycle">Applying this cycle</option>
+            <option value="next-cycle">Applying next cycle</option>
+            <option value="exploring">Still exploring</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="s-who">I am a</label>
+          <select id="s-who" name="role" required>
+            <option value="parent">Parent or guardian</option>
+            <option value="student">Student</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="s-name">Name</label>
+          <input id="s-name" name="name" type="text" autocomplete="name" required />
+        </div>
+        <div class="field">
+          <label for="s-email">Email</label>
+          <input id="s-email" name="email" type="email" autocomplete="email" required />
+        </div>
+        <button class="btn btn-primary btn-block" type="submit" id="start-submit">Continue</button>
+        <p class="start-foot" id="start-foot">Enrolling now. We'll email you to complete signup — no sales call.</p>
+      </form>
+      <p class="start-done" id="start-done" hidden>You're in. Check your email — we'll take it from there.</p>
+    </div>
+  </dialog>
+
+  <script src="/assets/craneweave.js" defer onerror="document.documentElement.classList.remove('js')"></script>
 </body>
 </html>

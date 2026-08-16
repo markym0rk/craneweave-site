@@ -1,0 +1,15 @@
+name: Head tags
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Assert title/description/canonical/og:url on every page
+        run: python3 scripts/check_head_tags.py

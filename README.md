@@ -15,6 +15,14 @@ Static Jekyll site on GitHub Pages (custom domain via `CNAME`).
 Old B2B URLs (`/about/`, `/blog/…`) redirect to `/` via `jekyll-redirect-from`
 (front matter on `index.html`).
 
+## Checks
+
+`python3 scripts/check_head_tags.py` — asserts every page has exactly one
+`<title>`, meta description, canonical, and `og:url`; that `og:url` equals the
+canonical; that the canonical is the page's own URL; and that no two pages share
+a title or a description. Run it after any content pass. CI runs it on every
+push and PR (`.github/workflows/head-tags.yml`).
+
 ## How the price test works
 
 `assets/site.js` assigns each first-time visitor one of **$199 / $299 / $449**
