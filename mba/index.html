@@ -83,7 +83,7 @@
             "name": "When does MBA admissions coaching open?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "MBA opens as a founding cohort for Round 2 — January. It launches reviews-first: written, signed reads of your essays, your resume and short answers, your school list, and one full-application read before you submit. We won't print a date here we can't be certain of, so joining the list is how you find out first: you'll get an email the moment it opens, and nothing before then. Joining is free, holds your place, and there is no sales call. College admissions and BS/MD are enrolling today."
+              "text": "MBA admissions coaching opens as a founding cohort for Round 2 — January. It launches reviews-first: written, signed reads of your essays, resume and short answers, school list, and one full-application read. Joining the free list holds your place and gets you an email the moment it opens — no sales call. College admissions and BS/MD are enrolling today."
             }
           },
           {
@@ -91,7 +91,7 @@
             "name": "What does an MBA coach review?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "A review is a scoped, written evaluation of one piece of real work, returned on a published turnaround and signed by your coach by name. MBA opens with four: your essays, your resume and short answers, your school list, and one full-application read before you submit. Resume and short answers count as one essay-review credit."
+              "text": "An MBA coach reviews four things at launch: your essays, your resume and short answers, your school list, and one read of the full application before you submit. Each is a scoped, written evaluation, returned on a published turnaround and signed by name. Resume and short answers count as one essay-review credit."
             }
           },
           {
@@ -99,7 +99,7 @@
             "name": "Who will review my work?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "A vetted coach who has been through MBA admissions, matched to your programs and your round. Coaches don't list themselves here — they apply, they're vetted against our review standards, and they keep coaching here only if their reviews hold the bar. Every review comes back with a name on it, and you can request a re-match at any time."
+              "text": "Your work is reviewed by a vetted coach who has been through MBA admissions, matched to your programs and round. Coaches don't list themselves here — they apply, are vetted against our review standards, and keep coaching only if their reviews hold the bar. Every review comes back with a name on it, and you can request a re-match anytime."
             }
           },
           {
@@ -107,7 +107,7 @@
             "name": "What will MBA admissions coaching cost?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "The same published prices as every other goal: $299 a month on Core for four review credits at a 72-hour turnaround, $499 on Plus for eight credits at 48 hours. À la carte, an essay review is $99, a school list $69, a full application $249, a check-in $49, and a 24-hour rush is $50 more. No surcharge for a harder goal. Cancel monthly, no contracts."
+              "text": "MBA admissions coaching costs the same published prices as every goal: $299 a month on Core for four review credits at a 72-hour turnaround, $499 on Plus for eight credits at 48 hours. À la carte: essay review $99, school list $69, full application $249, check-in $49, 24-hour rush +$50. No surcharge for a harder goal. Cancel monthly, no contracts."
             }
           },
           {
@@ -115,7 +115,7 @@
             "name": "Does joining cost anything?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "No. Holding your place is free — no deposit, no card, no commitment. When MBA opens you'll get an email with the same published prices as every other goal: $299 a month for four review credits, $499 for eight. If it isn't for you then, do nothing."
+              "text": "No — joining costs nothing. Holding your place is free — no deposit, no card, no commitment. When MBA opens you'll get an email with the same published prices as every other goal: $299 a month for four review credits, $499 for eight. If it isn't for you then, do nothing."
             }
           },
           {
@@ -123,7 +123,7 @@
             "name": "I'm applying in Round 1 next fall, not Round 2. Should I still join?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Yes. Round 2 is when we open, not the only round we coach. Put your timeline in the form and we'll email you when the cohort opens — starting a cycle early is the easier version of this, not the wasted one."
+              "text": "Yes — join even if you're applying in Round 1 next fall. Round 2 is when we open, not the only round we coach. Put your timeline in the form and we'll email you when the cohort opens. Starting a cycle early is the easier version of this, not the wasted one."
             }
           },
           {
@@ -131,7 +131,7 @@
             "name": "Do you guarantee I'll get in?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "No — and you should walk away from anyone who tells you they can. Admission isn't a purchasable outcome. What we promise is the work: every essay and every application read by a named coach before you submit, on a published turnaround, specific enough to act on."
+              "text": "No — we don't guarantee admission, and you should walk away from anyone who promises it. Admission isn't a purchasable outcome. What we promise is the work: every essay and every application read by a named coach before you submit, on a published turnaround, specific enough to act on."
             }
           }
         ]
@@ -149,7 +149,22 @@
         <img src="/Craneweave_Logo_White.svg" alt="Craneweave" width="280" height="48" />
       </a>
       <div class="nav-links" id="nav-links">
-        <a class="nav-link" href="/students/">Students &amp; families</a>
+        <div class="nav-drop">
+          <button class="nav-link nav-drop-btn" type="button" aria-expanded="false" aria-controls="nav-tracks">
+            Students &amp; families
+            <svg class="nav-caret" viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="nav-drop-menu" id="nav-tracks">
+            <a href="/students/">How it works for families</a>
+            <div class="nav-drop-sep" role="separator"></div>
+            <a href="/college/">College admissions</a>
+            <a href="/bsmd/">BS/MD programs</a>
+            <a href="/mba/" aria-current="page">MBA admissions</a>
+            <a href="/law/">Law school</a>
+            <a href="/med/">Medical school</a>
+            <a href="/recruiting/">Banking &amp; consulting</a>
+          </div>
+        </div>
         <a class="nav-link" href="/coaches/">Coaches</a>
         <a class="nav-link" href="/programs/">Programs</a>
         <a class="nav-link" href="#pricing">Pricing</a>
@@ -170,10 +185,8 @@
     <div class="wrap page-hero-grid">
       <div class="hero-copy">
         <nav class="crumb" aria-label="Breadcrumb"><a href="/">Craneweave</a> <span aria-hidden="true">/</span> <a href="/#goals">Goals</a> <span aria-hidden="true">/</span> <span aria-current="page">MBA</span></nav>
-        <h1>MBA admissions, coached for <span class="accent">Round 2</span>.</h1>
+        <h1>MBA admissions coaching for <span class="accent">Round 2</span>.</h1>
         <p class="hero-sub">Written reviews of your essays and your full application, each one signed by your coach.</p>
-        <p class="goal-status soon">Founding cohort — Round 2</p>
-        <p class="hero-note">Free to hold your place</p>
       </div>
 
       <!-- The match widget — Uber booking box analog, pre-scoped to MBA -->
@@ -215,7 +228,6 @@
   <section class="section" id="reviews">
     <div class="wrap split">
       <div class="split-copy">
-        <div class="eyebrow">The founding cohort</div>
         <h2>We're opening with the reviews.</h2>
         <p>Your essays, your resume and short answers, your school list, and one read of the full application before it ships. Each one signed by your coach by name.</p>
         <button class="btn btn-primary" data-open-start="mba-reviews" data-goal-open="mba">Hold my place</button>
@@ -243,8 +255,7 @@
   <section class="section section-dark" id="how">
     <div class="wrap">
       <div class="section-head">
-        <div class="eyebrow">How it works</div>
-        <h2>How Round 2 will run.</h2>
+        <h2>Your draft earns expert eyes.</h2>
       </div>
       <div class="how-grid">
         <div class="how-step reveal">
@@ -260,10 +271,10 @@
         <div class="how-step reveal">
           <div class="how-num mono">03</div>
           <h3>Review</h3>
-          <p>Send the real draft. Notes come back in 72 hours on Core, 48 on Plus, signed by name.</p>
+          <p>This is what the draft earns: your coach's written judgment, back in 72 hours on Core, 48 on Plus. Signed by name.</p>
         </div>
       </div>
-      <p class="how-close reveal">Written and asynchronous, because Round 2 gets written after work — notes you can reread at 11pm, no call to schedule. <a href="/recruiting/">Banking and consulting recruiting</a> runs the same way.</p>
+      <p class="how-close reveal">Written, because Round 2 gets drafted after work — notes you can reread at 11pm. You pay expert prices only for expert moments. That's how this costs $299, not $10,000.</p>
     </div>
   </section>
 
@@ -271,7 +282,6 @@
   <section class="section" id="round-two">
     <div class="wrap split split-flip">
       <div class="split-copy">
-        <div class="eyebrow">Round 2</div>
         <h2>Built backward from your deadline.</h2>
         <p>Round 2 lands in January, while work is at its loudest. Your coach reads the whole file, not the essay in front of them. You sign up for yourself — no parent required.</p>
         <button class="btn btn-primary" data-open-start="mba-round-two" data-goal-open="mba">Hold my place</button>
@@ -297,9 +307,8 @@
   <section class="section section-dark" id="pricing">
     <div class="wrap">
       <div class="section-head">
-        <div class="eyebrow">Pricing</div>
-        <h2>The price is already published.</h2>
-        <p class="lede">Founding cohort doesn't mean founding price. MBA opens at the same rates as every other goal.</p>
+        <h2>Simple monthly prices.</h2>
+        <p class="lede">Founding cohort doesn't mean founding price — MBA opens at the same rates as every goal.</p>
       </div>
       <div class="reveal">
         <table class="rate-table">
@@ -324,15 +333,7 @@
           </tbody>
         </table>
       </div>
-      <div class="alacarte reveal">
-        <span class="alacarte-label mono">À la carte</span>
-        <span>Essay review <strong>$99</strong></span>
-        <span>School list <strong>$69</strong></span>
-        <span>Full application <strong>$249</strong></span>
-        <span>Check-in <strong>$49</strong></span>
-        <span>24h rush <strong>+$50</strong></span>
-      </div>
-      <p class="price-foot reveal">Cancel monthly, no contracts. Nothing to pay while you're on the list, and no sales call, ever. <a href="/pricing/">See full pricing</a>.</p>
+      <p class="price-foot reveal">Cancel monthly, no contracts. <a href="/pricing/">See full pricing</a>.</p>
       <button class="btn btn-primary" data-open-start="mba-pricing" data-goal-open="mba">Hold my place</button>
     </div>
   </section>
@@ -341,37 +342,36 @@
   <section class="section" id="faq">
     <div class="wrap">
       <div class="section-head">
-        <div class="eyebrow">FAQ</div>
         <h2>Questions about the MBA cohort.</h2>
       </div>
       <div class="faq">
         <details>
           <summary>When does MBA admissions coaching open?</summary>
-          <div class="faq-a"><p>MBA opens as a founding cohort for Round 2 — January. It launches reviews-first: written, signed reads of your essays, your resume and short answers, your school list, and one full-application read before you submit. We won't print a date here we can't be certain of, so joining the list is how you find out first: you'll get an email the moment it opens, and nothing before then. Joining is free, holds your place, and there is no sales call. <a href="/college/">College admissions</a> and <a href="/bsmd/">BS/MD</a> are enrolling today.</p></div>
+          <div class="faq-a"><p>MBA admissions coaching opens as a founding cohort for Round 2 — January. It launches reviews-first: written, signed reads of your essays, resume and short answers, school list, and one full-application read. Joining the free list holds your place and gets you an email the moment it opens — no sales call. <a href="/college/">College admissions</a> and <a href="/bsmd/">BS/MD</a> are enrolling today.</p></div>
         </details>
         <details>
           <summary>What does an MBA coach review?</summary>
-          <div class="faq-a"><p>A review is a scoped, written evaluation of one piece of real work, returned on a published turnaround and signed by your coach by name. MBA opens with four: your essays, your resume and short answers, your school list, and one full-application read before you submit. Resume and short answers count as one essay-review credit.</p></div>
+          <div class="faq-a"><p>An MBA coach reviews four things at launch: your essays, your resume and short answers, your school list, and one read of the full application before you submit. Each is a scoped, written evaluation, returned on a published turnaround and signed by name. Resume and short answers count as one essay-review credit.</p></div>
         </details>
         <details>
           <summary>Who will review my work?</summary>
-          <div class="faq-a"><p>A vetted coach who has been through MBA admissions, matched to your programs and your round. Coaches don't list themselves here — they apply, they're vetted against our review standards, and they keep coaching here only if their reviews hold the bar. Every review comes back with a name on it, and you can request a re-match at any time.</p></div>
+          <div class="faq-a"><p>Your work is reviewed by a vetted coach who has been through MBA admissions, matched to your programs and round. Coaches don't list themselves here — they apply, are vetted against our review standards, and keep coaching only if their reviews hold the bar. Every review comes back with a name on it, and you can request a re-match anytime.</p></div>
         </details>
         <details>
           <summary>What will MBA admissions coaching cost?</summary>
-          <div class="faq-a"><p>The same published prices as every other goal: $299 a month on Core for four review credits at a 72-hour turnaround, $499 on Plus for eight credits at 48 hours. À la carte, an essay review is $99, a school list $69, a full application $249, a check-in $49, and a 24-hour rush is $50 more. No surcharge for a harder goal. Cancel monthly, no contracts.</p></div>
+          <div class="faq-a"><p>MBA admissions coaching costs the same published prices as every goal: $299 a month on Core for four review credits at a 72-hour turnaround, $499 on Plus for eight credits at 48 hours. À la carte: essay review $99, school list $69, full application $249, check-in $49, 24-hour rush +$50. No surcharge for a harder goal. Cancel monthly, no contracts.</p></div>
         </details>
         <details>
           <summary>Does joining cost anything?</summary>
-          <div class="faq-a"><p>No. Holding your place is free — no deposit, no card, no commitment. When MBA opens you'll get an email with the same published prices as every other goal: $299 a month for four review credits, $499 for eight. If it isn't for you then, do nothing.</p></div>
+          <div class="faq-a"><p>No — joining costs nothing. Holding your place is free — no deposit, no card, no commitment. When MBA opens you'll get an email with the same published prices as every other goal: $299 a month for four review credits, $499 for eight. If it isn't for you then, do nothing.</p></div>
         </details>
         <details>
           <summary>I'm applying in Round 1 next fall, not Round 2. Should I still join?</summary>
-          <div class="faq-a"><p>Yes. Round 2 is when we open, not the only round we coach. Put your timeline in the form and we'll email you when the cohort opens — starting a cycle early is the easier version of this, not the wasted one.</p></div>
+          <div class="faq-a"><p>Yes — join even if you're applying in Round 1 next fall. Round 2 is when we open, not the only round we coach. Put your timeline in the form and we'll email you when the cohort opens. Starting a cycle early is the easier version of this, not the wasted one.</p></div>
         </details>
         <details>
           <summary>Do you guarantee I'll get in?</summary>
-          <div class="faq-a"><p>No — and you should walk away from anyone who tells you they can. Admission isn't a purchasable outcome. What we promise is the work: every essay and every application read by a named coach before you submit, on a published turnaround, specific enough to act on.</p></div>
+          <div class="faq-a"><p>No — we don't guarantee admission, and you should walk away from anyone who promises it. Admission isn't a purchasable outcome. What we promise is the work: every essay and every application read by a named coach before you submit, on a published turnaround, specific enough to act on.</p></div>
         </details>
       </div>
       <p style="margin-top:18px"><a class="arrow-link" href="/coaches/">Been through MBA admissions? Apply to coach <span aria-hidden="true">→</span></a></p>
@@ -380,7 +380,7 @@
       <div class="cta-band cta-band-close reveal">
         <div>
           <h3>Hold your place for Round 2.</h3>
-          <p>Free to join. Nothing to cancel.</p>
+          <p>Free to join. We'll email you the moment Round 2 opens.</p>
         </div>
         <button class="btn btn-primary" data-open-start="mba-cta" data-goal-open="mba">Hold my place</button>
       </div>
@@ -391,38 +391,32 @@
   <section class="section section-dark" id="other-goals">
     <div class="wrap">
       <div class="section-head">
-        <div class="eyebrow">Other goals</div>
-        <h2>One platform. Every ambition.</h2>
+        <h2>One platform. Every goal.</h2>
       </div>
       <div class="goal-grid">
         <a class="goal-card reveal" href="/college/" data-goal="undergrad">
-          <span class="goal-status live">Enrolling now</span>
           <h3>College admissions</h3>
-          <p>School list, essays, applications — on a week-by-week plan.</p>
+          <p>School list, essays, applications — week by week.</p>
           <span class="goal-cta">See college admissions <span aria-hidden="true">→</span></span>
         </a>
         <a class="goal-card reveal" href="/bsmd/" data-goal="bsmd">
-          <span class="goal-status live">Enrolling now</span>
           <h3>BS/MD programs</h3>
-          <p>The double application — both essay tracks, interview prep.</p>
+          <p>The double application. Both essay tracks, interview prep.</p>
           <span class="goal-cta">See the track <span aria-hidden="true">→</span></span>
         </a>
         <a class="goal-card reveal" href="/law/" data-goal="law">
-          <span class="goal-status soon">Founding cohort</span>
           <h3>Law school</h3>
           <p>Personal statements, on rolling-admissions time.</p>
           <span class="goal-cta">See the cohort <span aria-hidden="true">→</span></span>
         </a>
         <a class="goal-card reveal" href="/med/" data-goal="med">
-          <span class="goal-status soon">Founding cohort</span>
           <h3>Medical school</h3>
-          <p>Primaries, secondaries, and interview prep for the 2027 cycle.</p>
+          <p>Primaries, secondaries, interviews — 2027 cycle.</p>
           <span class="goal-cta">See the cohort <span aria-hidden="true">→</span></span>
         </a>
         <a class="goal-card reveal" href="/recruiting/" data-goal="recruiting">
-          <span class="goal-status soon">Founding cohort</span>
           <h3>Banking &amp; consulting</h3>
-          <p>Resume reviews, mock interviews, and case reps.</p>
+          <p>Resume reviews, mock interviews, case reps.</p>
           <span class="goal-cta">See the cohort <span aria-hidden="true">→</span></span>
         </a>
       </div>
@@ -434,7 +428,7 @@
     <div class="wrap">
       <h2>Round 2 opens in January.</h2>
       <button class="btn btn-primary" data-open-start="mba-footer" data-goal-open="mba">Hold my place</button>
-      <p class="microcopy">Free to join · same published pricing when it opens · no sales call</p>
+      <p class="microcopy">Free to join · from $299/month when it opens</p>
     </div>
   </section>
 

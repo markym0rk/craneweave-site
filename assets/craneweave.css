@@ -278,6 +278,68 @@ h3.qa + p + p { margin-top: 0.75rem; }
 .nav-burger[aria-expanded="true"] span:first-child { transform: translateY(4px) rotate(45deg); }
 .nav-burger[aria-expanded="true"] span:last-child { transform: translateY(-4px) rotate(-45deg); }
 
+/* Tracks dropdown — Students & families discloses the six goal pages.
+   Click-open (not hover): touch-safe, and the caret is the affordance. */
+.nav-drop {
+  position: relative;
+  height: var(--nav-height);
+  display: flex; align-items: center;
+}
+.nav-drop-btn {
+  display: inline-flex; align-items: center; gap: 0.4375rem;
+  background: none; border: 0; padding: 0; cursor: pointer;
+  font-family: inherit; line-height: inherit;
+}
+.nav-caret {
+  width: 0.5625rem; height: auto; flex: none;
+  transition: transform var(--t-fast) ease-out;
+}
+.nav-drop.open .nav-caret { transform: rotate(180deg); }
+.nav-drop-menu {
+  position: absolute; top: 100%; left: -1.25rem; z-index: 1;
+  margin-top: 0.5rem;
+  min-width: 14.5rem;
+  display: flex; flex-direction: column;
+  padding: 0.5rem;
+  background: rgba(11, 18, 19, 0.92);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+  backdrop-filter: blur(18px) saturate(160%);
+  border: 1px solid var(--d-line);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--card-shadow-dark);
+  transform-origin: top left;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(-8px);
+  transition: opacity var(--t-fast) var(--ease-in),
+              transform var(--t-exit) var(--ease-in),
+              visibility 0s linear var(--t-exit);
+}
+.nav-drop.open .nav-drop-menu {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: none;
+  transition: opacity var(--t-fast) var(--ease-out),
+              transform var(--t-med) var(--ease-out),
+              visibility 0s;
+}
+.nav-drop-menu a {
+  padding: 0.5625rem 0.75rem;
+  border-radius: 6px;
+  font-size: 0.9375rem; font-weight: 500;
+  color: var(--d-dim);
+  text-decoration: none; white-space: nowrap;
+  transition: color var(--t-fast) ease-out, background var(--t-fast) ease-out;
+}
+.nav-drop-menu a:hover { color: var(--d-text); background: rgba(247, 245, 240, 0.07); }
+.nav-drop-menu a:active { color: var(--teal-light); }
+.nav-drop-menu a[aria-current="page"] { color: var(--d-text); }
+.nav-drop-sep { height: 1px; margin: 0.375rem 0.75rem; background: var(--d-line); }
+/* The trigger lights up when the page it holds is the current one */
+.nav-drop:has(a[aria-current="page"]) .nav-drop-btn { color: var(--d-text); }
+
 /* ---------- Hero ---------- */
 
 .hero {
@@ -371,18 +433,36 @@ h3.qa + p + p { margin-top: 0.75rem; }
 /* ---------- Stat strip ---------- */
 
 .strip { background: var(--cream-2); border-bottom: 1px solid var(--l-line); }
-.strip-grid {
-  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2.5rem;
-  padding: 2.875rem 2.5rem;
+.strip-line {
+  padding: 2.25rem 0;
+  font-size: 1rem; color: var(--l-dim);
+  display: flex; flex-wrap: wrap; gap: 0.375rem 0.75rem; align-items: baseline;
 }
-.stat-figure {
+/* Declarative statement band — continues the hero's gradient from the exact
+   value it ended on (--ink-2), so hero and statement read as one dark
+   composition rather than two stacked sections. Type carries the whole
+   hierarchy: same size both lines, the setup receding in dim ink, the answer
+   at full strength with the teal price as the single point of color. */
+.statement-band {
+  background: linear-gradient(180deg, var(--ink-2) 0%, var(--ink) 100%);
+  color: var(--d-text);
+  padding: 0 0 7rem;
+}
+.statement-line {
   font-family: 'Archivo', sans-serif;
-  font-weight: 700; font-size: clamp(1.75rem, 3vw, 2.5rem);
-  letter-spacing: -0.02em;
-  color: var(--l-text);
+  font-weight: 650;
+  /* Large display text: tight leading, negative tracking as it grows */
+  font-size: clamp(1.5rem, 3.2vw, 2.5rem);
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+  max-width: 56rem;
+  text-wrap: balance;
 }
-.stat:last-child .stat-figure { color: var(--teal); }
-.stat-label { font-size: 0.90625rem; color: var(--l-faint); margin-top: 0.25rem; max-width: 16.25rem; }
+.statement-line + .statement-line { margin-top: 2.5rem; }
+.statement-line.quiet { color: var(--d-dim); }
+.statement-line strong { font-weight: inherit; color: var(--teal-light); }
+/* The answer lands a beat after the setup */
+.statement-band .reveal.in:nth-child(2) { transition-delay: 90ms; }
 
 /* ---------- Goal grid ---------- */
 
@@ -1010,6 +1090,7 @@ h3.qa + p + p { margin-top: 0.75rem; }
 .split-visual .illo { max-width: 21rem; }
 .section-head .illo { margin: 0 0 2rem; max-width: 16rem; }
 .mission-band .illo { margin: 0 0 2.25rem; max-width: 11rem; }
+.page-hero-grid .illo { max-width: 11rem; }
 
 /* ---------- Reveal on scroll ---------- */
 
@@ -1025,10 +1106,10 @@ html:not(.js) .reveal { opacity: 1; transform: none; }
 
 /* Stagger siblings slightly */
 .goal-grid .reveal.in:nth-child(2), .how-grid .reveal.in:nth-child(2),
-.strip-grid .reveal.in:nth-child(2), .price-grid .reveal.in:nth-child(2),
+.price-grid .reveal.in:nth-child(2),
 .standards-grid .reveal.in:nth-child(2) { transition-delay: 70ms; }
 .goal-grid .reveal.in:nth-child(3), .how-grid .reveal.in:nth-child(3),
-.strip-grid .reveal.in:nth-child(3), .price-grid .reveal.in:nth-child(3),
+.price-grid .reveal.in:nth-child(3),
 .standards-grid .reveal.in:nth-child(3) { transition-delay: 140ms; }
 .goal-grid .reveal.in:nth-child(4), .standards-grid .reveal.in:nth-child(4) { transition-delay: 90ms; }
 .goal-grid .reveal.in:nth-child(5) { transition-delay: 160ms; }
@@ -1092,6 +1173,29 @@ html:not(.js) .reveal { opacity: 1; transform: none; }
   }
   .nav-link { padding: 0.75rem 0; font-size: 1.0625rem; width: 100%; }
 
+  /* In the panel the dropdown becomes an inline disclosure group:
+     no floating card, just the tracks indented under their toggle. */
+  .nav-drop {
+    position: static; height: auto; width: 100%;
+    flex-direction: column; align-items: stretch;
+  }
+  .nav-drop-btn { width: 100%; justify-content: space-between; }
+  .nav-drop-menu {
+    position: static; z-index: auto; margin-top: 0; min-width: 0;
+    display: none;
+    padding: 0.125rem 0 0.5rem 1rem;
+    background: none;
+    -webkit-backdrop-filter: none; backdrop-filter: none;
+    border: 0; border-left: 1px solid var(--d-line); border-radius: 0;
+    box-shadow: none;
+    opacity: 1; visibility: visible; pointer-events: auto;
+    transform: none; transition: none;
+  }
+  .nav-drop.open .nav-drop-menu { display: flex; }
+  .nav-drop-menu a { padding: 0.625rem 0; border-radius: 0; font-size: 1rem; white-space: normal; }
+  .nav-drop-menu a:hover { background: none; }
+  .nav-drop-sep { display: none; }
+
   /* The CTAs live inside the panel — they must stay reachable on phones */
   .nav-actions {
     display: flex; flex-direction: column; align-items: stretch;
@@ -1104,8 +1208,9 @@ html:not(.js) .reveal { opacity: 1; transform: none; }
   .split, .split-flip { grid-template-columns: minmax(0, 1fr); }
   .split-flip .split-copy { order: 1; }
   .split-flip .split-visual { order: 2; }
-  .how-grid, .strip-grid, .price-grid, .standards-grid { grid-template-columns: minmax(0, 1fr); }
-  .strip-grid { padding: 2.25rem 1.5rem; gap: 1.5rem; }
+  .how-grid, .price-grid, .standards-grid { grid-template-columns: minmax(0, 1fr); }
+  .statement-band { padding: 0 0 5rem; }
+  .statement-band .statement-line + .statement-line { margin-top: 1.75rem; }
   .goal-grid { grid-template-columns: minmax(0, 1fr); }
   .fragment-back { transform: none; }
   .footer-grid { grid-template-columns: minmax(0, 1fr); gap: 2rem; }
@@ -1138,6 +1243,13 @@ html:not(.js) .reveal { opacity: 1; transform: none; }
   .faq summary::after, .req-list summary::after, .arrow-link, .start-close { transition: none; }
   .goal-card:hover { transform: none; }
   .nav, .nav::after { transition: none; }
+  .nav-caret { transition: none; }
+  .nav-drop-menu,
+  .nav-drop.open .nav-drop-menu {
+    transform: none;
+    transition: opacity var(--t-fast) linear, visibility 0s linear var(--t-fast);
+  }
+  .nav-drop.open .nav-drop-menu { transition: opacity var(--t-fast) linear, visibility 0s; }
   .faq details::details-content, .req-list details::details-content { transition: none; }
 
   @media (max-width: 48rem) {
@@ -1158,6 +1270,10 @@ html:not(.js) .reveal { opacity: 1; transform: none; }
     -webkit-backdrop-filter: none; backdrop-filter: none;
   }
   .nav .nav-links {
+    background: var(--ink);
+    -webkit-backdrop-filter: none; backdrop-filter: none;
+  }
+  .nav-drop-menu {
     background: var(--ink);
     -webkit-backdrop-filter: none; backdrop-filter: none;
   }

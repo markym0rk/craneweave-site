@@ -117,7 +117,10 @@
     burger.addEventListener('click', function () { setMenu(!menuOpen()); });
 
     nav.addEventListener('click', function (e) {
-      if (e.target.closest('.nav-link, .btn-nav')) setMenu(false);
+      /* The tracks toggle is a .nav-link too, but opening it must not
+         dismiss the panel it lives in. */
+      if (e.target.closest('.nav-drop-btn')) return;
+      if (e.target.closest('.nav-link, .btn-nav, .nav-drop-menu a')) setMenu(false);
     });
 
     /* Three ways out, so the panel is never a trap: pick something, press
@@ -148,6 +151,43 @@
     }
   }
 
+  /* ---------- Nav: tracks dropdown (Students & families) ---------- */
+  var drop = document.querySelector('.nav-drop');
+  var dropBtn = drop && drop.querySelector('.nav-drop-btn');
+  if (drop && dropBtn) {
+    var dropOpen = function () { return drop.classList.contains('open'); };
+
+    function setDrop(open) {
+      drop.classList.toggle('open', open);
+      dropBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    }
+
+    dropBtn.addEventListener('click', function () { setDrop(!dropOpen()); });
+
+    drop.addEventListener('click', function (e) {
+      if (e.target.closest('.nav-drop-menu a')) setDrop(false);
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key !== 'Escape' && e.key !== 'Esc') return;
+      if (!dropOpen()) return;
+      var dlg = document.getElementById('start-modal');
+      if (dlg && dlg.hasAttribute('open')) return;
+      setDrop(false);
+      dropBtn.focus();
+    });
+    document.addEventListener('pointerdown', function (e) {
+      if (dropOpen() && !e.target.closest('.nav-drop')) setDrop(false);
+    });
+
+    /* Tabbing past the last track shouldn't leave a panel floating open. */
+    drop.addEventListener('focusout', function () {
+      requestAnimationFrame(function () {
+        if (dropOpen() && !drop.contains(document.activeElement)) setDrop(false);
+      });
+    });
+  }
+
   /* ---------- Match widget (hero booking box) ---------- */
   var mGoal = document.getElementById('m-goal');
   var mWhen = document.getElementById('m-when');
@@ -156,12 +196,13 @@
   var mNote = document.getElementById('match-note');
 
   function paintWidget() {
-    if (!mGoal || !mCta || !mNote) return;
+    if (!mGoal || !mCta) return;
     var g = GOALS[mGoal.value] || GOALS.undergrad;
     /* Two strings only: "founding cohort" is the thing (modal title),
        "Hold my place" is the act (every button that joins it). */
     mCta.textContent = g.live ? 'Get started' : 'Hold my place';
-    mNote.textContent = g.note;
+    /* The note line is optional chrome — the widget works without it. */
+    if (mNote) mNote.textContent = g.note;
   }
   if (mGoal) {
     mGoal.addEventListener('change', function () {
