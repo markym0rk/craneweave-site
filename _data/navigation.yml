@@ -1,0 +1,111 @@
+audiences:
+  - key: students
+    label: Students & applicants
+    menu_class: wide
+    overview_href: /students/
+    items:
+      - key: students
+        label: Explore student coaching
+        footer_label: Overview
+        href: /students/
+        description: Find the right admissions or early-career coaching path.
+        icon: /assets/img/path-students.webp
+      - key: college
+        label: College admissions
+        href: /college/
+        description: Build a stronger application with a coach who got in.
+        icon: /assets/img/icon-college.webp
+      - key: bsmd
+        label: BS/MD programs
+        href: /bsmd/
+        description: Keep two applications moving with firsthand guidance.
+        icon: /assets/img/icon-bsmd.webp
+      - key: mba
+        label: MBA admissions
+        href: /mba/
+        description: Turn your experience into one clear application story.
+        icon: /assets/img/icon-mba.webp
+      - key: law
+        label: Law school
+        href: /law/
+        description: Build one persuasive case across the whole file.
+        icon: /assets/img/icon-law.webp
+      - key: med
+        label: Medical school
+        href: /med/
+        description: Stay ahead of applications, secondaries, and interviews.
+        icon: /assets/img/icon-med.webp
+      - key: recruiting
+        label: Banking & consulting
+        footer_label: Banking & consulting
+        href: /recruiting/
+        description: Prepare for early-career recruiting with someone who got the offer.
+        icon: /assets/img/icon-recruiting.webp
+
+  - key: professionals
+    label: Professionals
+    menu_class: compact
+    overview_href: /professionals/
+    items:
+      - key: professionals
+        label: Explore professional coaching
+        footer_label: Overview
+        href: /professionals/
+        description: Build practical skills or prepare for a career transition.
+        icon: /assets/img/path-professionals.webp
+      - key: ai
+        label: Individual AI coaching
+        footer_label: Individual AI coaching
+        href: /ai-coaching/
+        description: Make AI part of how you work every day.
+        icon: /assets/img/icon-ai.webp
+      - key: recruiting
+        label: Banking & consulting
+        footer_label: Banking & consulting
+        href: /recruiting/
+        description: Prepare for a professional career transition.
+        icon: /assets/img/icon-recruiting.webp
+
+  - key: organizations
+    label: Organizations
+    menu_class: compact
+    overview_href: /organizations/
+    items:
+      - key: organizations
+        label: Explore organization programs
+        footer_label: Overview
+        href: /organizations/
+        description: Choose coached support for students or teams.
+        icon: /assets/img/icon-org.webp
+      - key: programs
+        label: Student coaching programs
+        footer_label: Student coaching programs
+        href: /programs/
+        description: Personalized application and recruiting support for a cohort.
+        icon: /assets/img/icon-cohort.webp
+      - key: team-ai
+        label: AI coaching for teams
+        footer_label: AI coaching for teams
+        href: /team-ai-coaching/
+        description: Build practical AI capability across an organization.
+        icon: /assets/img/icon-ai.webp
+
+primary:
+  - key: pricing
+    label: Pricing
+    href: /pricing/
+  - key: about
+    label: About
+    href: /about/
+
+company:
+  - label: Reserve a spot
+    href: /start/
+  - label: Pricing
+    href: /pricing/
+  - label: About
+    href: /about/
+  - label: Become a coach
+    href: /coaches/
+  - label: Questions
+    href: /#faq

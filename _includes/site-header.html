@@ -1,0 +1,50 @@
+{% assign help_href = '/#faq' %}{% if page.has_faq %}{% assign help_href = '#faq' %}{% endif %}
+{% assign cta_href = page.cta.href | default: '/start/' %}
+{% assign cta_label = page.cta.label | default: 'Reserve a spot' %}
+<a class="skip" href="#main">Skip to content</a>
+<nav class="nav" aria-label="Primary">
+  <div class="wrap nav-inner">
+    <div class="nav-left">
+      <a class="logo" href="/" aria-label="Craneweave home"><img src="/assets/logo-ink.svg" alt="Craneweave" width="175" height="30"></a>
+      <ul class="nav-links">
+        {% for audience in site.data.navigation.audiences %}
+        <li class="has-menu">
+          <button class="menu-btn" type="button" aria-expanded="false"{% if page.audience == audience.key %} data-current="true"{% endif %}>{{ audience.label }}<span class="vh"> — show {{ audience.label | downcase }} coaching</span> <svg class="chev" viewBox="0 0 12 12" aria-hidden="true" focusable="false"><path d="M2 4l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <div class="menu {{ audience.menu_class }}" data-open="false">
+            {% for item in audience.items %}<a href="{{ item.href }}"{% if page.audience == audience.key and page.nav_key == item.key %} aria-current="page"{% endif %}><span class="ic" aria-hidden="true"><img src="{{ item.icon }}" alt="" width="800" height="800" loading="lazy"></span>{{ item.label }}<small>{{ item.description }}</small></a>{% endfor %}
+            <p class="menu-foot"><a href="{{ audience.overview_href }}">View the overview</a> · <a href="/pricing/">Pricing</a></p>
+          </div>
+        </li>
+        {% endfor %}
+        {% for item in site.data.navigation.primary %}<li><a href="{{ item.href }}"{% if page.nav_key == item.key %} aria-current="page"{% endif %}>{{ item.label }}</a></li>{% endfor %}
+      </ul>
+    </div>
+    <div class="nav-right">
+      <a class="help" href="{{ help_href }}">Help</a>
+      <a class="btn sm{% if page.cta.pen %} pen-btn{% endif %}" href="{{ cta_href | escape }}">{{ cta_label }}</a>
+      <button class="burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="drawer">
+        <svg viewBox="0 0 22 22" aria-hidden="true" focusable="false"><path d="M2 6h18M2 11h18M2 16h18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+  </div>
+</nav>
+<div class="drawer" id="drawer" data-open="false" role="dialog" aria-modal="true" aria-label="Menu">
+  <div class="scrim"></div>
+  <div class="panel">
+    <div class="drawer-head">
+      <a class="logo" href="/" aria-label="Craneweave home"><img src="/assets/logo-ink.svg" alt="Craneweave" width="146" height="25"></a>
+      <button class="close" type="button" aria-label="Close menu"><svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M4 4l12 12M16 4L4 16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button>
+    </div>
+    {% for audience in site.data.navigation.audiences %}
+    <div class="group">
+      <a class="drawer-group-title" href="{{ audience.overview_href }}"{% if page.audience == audience.key and page.nav_key == audience.key %} aria-current="page"{% endif %}>{{ audience.label }} <span>Overview →</span></a>
+      {% for item in audience.items %}{% unless item.key == audience.key %}<a class="item" href="{{ item.href }}"{% if page.audience == audience.key and page.nav_key == item.key %} aria-current="page"{% endif %}>{{ item.label }}</a>{% endunless %}{% endfor %}
+    </div>
+    {% endfor %}
+    <div class="group">
+      <p class="label">Craneweave</p>
+      <a class="item" href="/pricing/">Pricing</a><a class="item" href="/about/">About</a><a class="item" href="/coaches/">Become a coach</a><a class="item" href="{{ help_href }}">Help <small>team@craneweave.com</small></a>
+    </div>
+    <div class="drawer-cta"><a class="btn{% if page.cta.pen %} pen-btn{% endif %}" href="{{ cta_href | escape }}">{{ cta_label }}</a></div>
+  </div>
+</div>

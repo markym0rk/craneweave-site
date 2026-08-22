@@ -1,0 +1,1 @@
+{% unless page.cta.sticky == false %}{% assign cta_href = page.cta.href | default: '/start/' %}{% assign cta_label = page.cta.label | default: 'Reserve a spot' %}<div class="sticky-bar" data-show="false"><a class="btn{% if page.cta.pen %} pen-btn{% endif %}" href="{{ cta_href | escape }}">{{ cta_label }}</a></div>{% endunless %}

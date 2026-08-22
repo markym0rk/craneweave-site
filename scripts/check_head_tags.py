@@ -30,8 +30,8 @@ SITE = "https://craneweave.com"
 
 ROOT = Path(__file__).resolve().parent.parent
 
-# The sixteen content pages plus the two legal pages (the platform sitemap). Every one of these must
-# exist; anything else matching */index.html is checked as well.
+# The complete page set, including the noindex reservation flow. Every one of these must exist;
+# anything else matching */index.html is checked as well.
 REQUIRED = [
     "index.html",
     "students/index.html",
@@ -45,6 +45,7 @@ REQUIRED = [
     "ai-coaching/index.html",
     "organizations/index.html",
     "programs/index.html",
+    "team-ai-coaching/index.html",
     "coaches/index.html",
     "pricing/index.html",
     "about/index.html",

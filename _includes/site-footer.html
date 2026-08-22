@@ -1,0 +1,25 @@
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a class="logo" href="/" aria-label="Craneweave home"><img src="/assets/logo-ink.svg" alt="Craneweave" width="163" height="28"></a>
+        <p>A coach for what comes next.</p>
+        <a class="mail" href="mailto:team@craneweave.com">team@craneweave.com</a>
+      </div>
+      {% for audience in site.data.navigation.audiences %}
+      <div class="foot-col">
+        <p class="foot-h">{{ audience.label }}</p>
+        <ul>{% for item in audience.items %}<li><a href="{{ item.href }}"{% if page.audience == audience.key and page.nav_key == item.key %} aria-current="page"{% endif %}>{{ item.footer_label | default: item.label }}</a></li>{% endfor %}</ul>
+      </div>
+      {% endfor %}
+      <div class="foot-col">
+        <p class="foot-h">Craneweave</p>
+        <ul>{% for item in site.data.navigation.company %}<li><a href="{{ item.href }}">{{ item.label }}</a></li>{% endfor %}</ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Craneweave.</span>
+      <ul><li><a href="/privacy/">Privacy</a></li><li><a href="/terms/">Terms</a></li><li><a href="mailto:team@craneweave.com">team@craneweave.com</a></li></ul>
+    </div>
+  </div>
+</footer>

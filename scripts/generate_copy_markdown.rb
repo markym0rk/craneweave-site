@@ -5,25 +5,38 @@ require "nokogiri"
 require "pathname"
 
 SITE_ROOT = Pathname.new(__dir__).parent
+RENDERED_ROOT = SITE_ROOT.join("_site")
+
+abort "Rendered site not found at #{RENDERED_ROOT}. Run `bundle exec jekyll build` first." unless RENDERED_ROOT.directory?
 
 PAGES = [
   ["Homepage", "/", "index.html"],
-  ["Sketch homepage preview", "/sketch/", "sketch/index.html"],
+  ["Students and applicants", "/students/", "students/index.html"],
   ["College admissions", "/college/", "college/index.html"],
   ["BS/MD programs", "/bsmd/", "bsmd/index.html"],
   ["MBA admissions", "/mba/", "mba/index.html"],
   ["Law school", "/law/", "law/index.html"],
   ["Medical school", "/med/", "med/index.html"],
   ["Banking & consulting recruiting", "/recruiting/", "recruiting/index.html"],
-  ["AI coaching for teams", "/organizations/", "organizations/index.html"],
-  ["Cohort programs", "/programs/", "programs/index.html"],
-  ["Coach on Craneweave", "/coaches/", "coaches/index.html"],
+  ["Professionals", "/professionals/", "professionals/index.html"],
+  ["Individual AI coaching", "/ai-coaching/", "ai-coaching/index.html"],
+  ["Organizations", "/organizations/", "organizations/index.html"],
+  ["Student coaching programs", "/programs/", "programs/index.html"],
+  ["AI coaching for teams", "/team-ai-coaching/", "team-ai-coaching/index.html"],
+  ["Become a coach", "/coaches/", "coaches/index.html"],
   ["Pricing", "/pricing/", "pricing/index.html"],
   ["About", "/about/", "about/index.html"],
   ["Get started", "/start/", "start/index.html"],
   ["Privacy policy", "/privacy/", "privacy/index.html"],
   ["Terms of service", "/terms/", "terms/index.html"]
 ].freeze
+
+def document_for(relative_path)
+  path = RENDERED_ROOT.join(relative_path)
+  abort "Rendered page not found at #{path}. Run `bundle exec jekyll build` again." unless path.file?
+
+  Nokogiri::HTML(path.read)
+end
 
 COPY_NODES = "h1,h2,h3,h4,h5,h6,p,li,dt,dd,legend,label,button,a,option," \
              "output,figcaption,blockquote,caption,th,td,span,strong,b,small,input,textarea"
@@ -142,7 +155,7 @@ end
 
 def navigation_ctas
   rows = PAGES.map do |_name, route, relative_path|
-    document = Nokogiri::HTML(SITE_ROOT.join(relative_path).read)
+    document = document_for(relative_path)
     nav = clean_text(document.at_css(".nav-right .btn"))
     drawer = clean_text(document.at_css(".drawer-cta .btn"))
     sticky = document.at_css(".sticky-bar a") ? clean_text(document.at_css(".sticky-bar a")) : "—"
@@ -155,7 +168,7 @@ end
 def form_success_copy
   rows = []
   PAGES.each do |_name, route, relative_path|
-    document = Nokogiri::HTML(SITE_ROOT.join(relative_path).read)
+    document = document_for(relative_path)
     document.css("form[data-done]").each do |form|
       rows << [route, form["id"].to_s, form["data-done"].to_s,
                form["data-done-sub"].to_s.empty? ? "Check your inbox for a reply from team@craneweave.com." : form["data-done-sub"]]
@@ -167,15 +180,16 @@ end
 puts <<~MARKDOWN
   # Craneweave website copy — live-site master
 
-  This document inventories the editable copy currently implemented in `craneweave-site/`.
+  This document inventories the editable copy currently rendered in `craneweave-site/_site/`.
   It is organized for line editing: keep replacement wording beneath the same route and label.
 
-  Scope: all 16 HTML pages, repeated navigation and footer copy, page titles and descriptions,
+  Scope: all 19 HTML pages, shared navigation and footer copy, page titles and descriptions,
   form labels/placeholders, conditional success/error/fallback states, non-empty image alt text,
   and meaningful ARIA labels. Decorative marks and empty alt text are intentionally omitted.
 
-  Source snapshot: August 22, 2026. The HTML and `assets/cw.js` remain the production source of truth;
-  edits to this Markdown file do not automatically update the website.
+  Source snapshot: August 22, 2026. The source HTML, `_data/navigation.yml`, shared includes, and
+  `assets/cw.js` remain the production source of truth; edits to this Markdown file do not
+  automatically update the website.
 
   ## Sitemap
 
@@ -191,31 +205,39 @@ puts <<~MARKDOWN
 
   ### Desktop navigation
 
-  **Students & families**
+  **Students & applicants**
 
-  - College admissions — Match with a coach who got in to your dream school.
-  - BS/MD programs — Two applications, one coach who survived both.
-  - MBA admissions — Your story, pressure-tested by someone who got in.
-  - Law school — Personal statements on rolling-admissions time.
-  - Medical school — Plan ahead of nine months of deadlines.
-  - Banking & consulting — Your answers, judged by someone who got the offer.
-  - Not sure which? See every track · Pricing
+  - Explore student coaching — Find the right admissions or early-career coaching path.
+  - College admissions — Build a stronger application with a coach who got in.
+  - BS/MD programs — Keep two applications moving with firsthand guidance.
+  - MBA admissions — Turn your experience into one clear application story.
+  - Law school — Build one persuasive case across the whole file.
+  - Medical school — Stay ahead of applications, secondaries, and interviews.
+  - Banking & consulting — Prepare for early-career recruiting with someone who got the offer.
+
+  **Professionals**
+
+  - Explore professional coaching — Build practical skills or prepare for a career transition.
+  - Individual AI coaching — Make AI part of how you work every day.
+  - Banking & consulting — Prepare for a professional career transition.
 
   **Organizations**
 
-  - AI coaching for teams — Every employee paired with a named coach.
-  - Cohort programs — Access organizations, districts, and scholarship programs.
+  - Explore organization programs — Choose coached support for students or teams.
+  - Student coaching programs — Personalized application and recruiting support for a cohort.
+  - AI coaching for teams — Build practical AI capability across an organization.
 
   **Primary links**
 
-  - Coaches
   - Pricing
+  - About
   - Help
 
   ### Mobile navigation drawer
 
-  **Students & families**
+  **Students & applicants**
 
+  - Overview
   - College admissions
   - BS/MD programs
   - MBA admissions
@@ -223,16 +245,23 @@ puts <<~MARKDOWN
   - Medical school
   - Banking & consulting
 
+  **Professionals**
+
+  - Overview
+  - Individual AI coaching
+  - Banking & consulting
+
   **Organizations**
 
+  - Overview
+  - Student coaching programs
   - AI coaching for teams
-  - Cohort programs
 
   **Craneweave**
 
-  - Coach on Craneweave
   - Pricing
   - About
+  - Become a coach
   - Help — team@craneweave.com
 
   ### Navigation and sticky CTA variants
@@ -245,12 +274,13 @@ puts <<~MARKDOWN
 
   **Brand**
 
-  Expert coaching made effortless. Admissions, recruiting, and AI coaching for teams.
+  A coach for what comes next.
 
   team@craneweave.com
 
-  **Students & families**
+  **Students & applicants**
 
+  - Overview
   - College admissions
   - BS/MD programs
   - MBA admissions
@@ -258,26 +288,27 @@ puts <<~MARKDOWN
   - Medical school
   - Banking & consulting
 
+  **Professionals**
+
+  - Overview
+  - Individual AI coaching
+  - Banking & consulting
+
   **Organizations**
 
+  - Overview
+  - Student coaching programs
   - AI coaching for teams
-  - Cohort programs
 
   **Craneweave**
 
-  - Get started
+  - Reserve a spot
   - Pricing
-  - Coach on Craneweave
   - About
-
-  **Help**
-
+  - Become a coach
   - Questions
-  - Email the team
-  - Privacy
-  - Terms
 
-  © 2026 Craneweave. No guarantees, ever — walk away from anyone who offers one.
+  © 2026 Craneweave.
 
   - Privacy
   - Terms
@@ -295,7 +326,7 @@ puts <<~MARKDOWN
 MARKDOWN
 
 PAGES.each do |name, route, relative_path|
-  document = Nokogiri::HTML(SITE_ROOT.join(relative_path).read)
+  document = document_for(relative_path)
   main = document.at_css("main")
   puts
   puts "# PAGE: #{name} `#{route}`"

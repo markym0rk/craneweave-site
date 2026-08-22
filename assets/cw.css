@@ -168,6 +168,8 @@ em{font-style:italic}
   padding:8px 12px;border-radius:var(--r-pill);transition:background-color var(--t-hover) ease,color var(--t-hover) ease;
 }
 .nav-links a:hover,.nav-links button.menu-btn:hover,.nav-links button.menu-btn[aria-expanded="true"]{background:var(--paper-shade)}
+.nav-links button.menu-btn[data-current="true"]{color:var(--pen-dark)}
+.nav-links a[aria-current="page"],.menu a[aria-current="page"]{background:var(--pen-wash);color:var(--pen-dark)}
 .nav-links .chev{width:10px;height:10px;transition:transform var(--t-menu) var(--ease-in-out)}
 .menu-btn[aria-expanded="true"] .chev{transform:rotate(180deg)}
 .nav-right{display:flex;align-items:center;gap:6px}
@@ -191,6 +193,11 @@ em{font-style:italic}
 .menu.wide a .ic{width:56px;height:56px;grid-row:1 / span 2}
 .menu.wide a .ic img{width:100%;height:100%;object-fit:contain;mix-blend-mode:multiply}
 .menu.wide a small{grid-column:2}
+.menu.compact{min-width:420px}
+.menu.compact a{display:grid;grid-template-columns:48px minmax(0,1fr);gap:0 12px;align-items:start}
+.menu.compact a .ic{width:48px;height:48px;grid-row:1 / span 2;margin-top:2px}
+.menu.compact a .ic img{width:100%;height:100%;object-fit:contain;mix-blend-mode:multiply}
+.menu.compact a small{grid-column:2}
 .menu a small{display:block;font-weight:400;color:var(--graphite);font-size:13.5px;margin-top:3px;white-space:normal}
 .menu a:hover,.menu a:focus-visible{background:var(--paper-shade)}
 .menu .menu-foot{grid-column:1 / -1;margin-top:6px;padding:12px 12px 6px;border-top:1px solid var(--hairline);font-size:13.5px;color:var(--graphite)}
@@ -220,6 +227,9 @@ em{font-style:italic}
 .drawer-head .close svg{width:20px;height:20px}
 .drawer .group{margin-top:22px}
 .drawer .group .label{color:var(--graphite);margin-bottom:6px}
+.drawer-group-title{display:flex;align-items:center;justify-content:space-between;gap:16px;color:var(--ink);font-size:12.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;padding:4px 0 7px}
+.drawer-group-title span{color:var(--graphite);font-size:12px;font-weight:500;letter-spacing:0;text-transform:none}
+.drawer-group-title[aria-current="page"],.drawer a.item[aria-current="page"]{color:var(--pen-dark)}
 .drawer a.item{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:12px 0;border-bottom:1px solid var(--hairline);text-decoration:none;color:var(--ink);font-size:17px;font-weight:500;transition:color var(--t-hover) ease}
 .drawer a.item:active{color:var(--graphite)}
 .drawer a.item small{color:var(--graphite);font-weight:400;font-size:13.5px;text-align:right}
@@ -291,20 +301,14 @@ section.rule .wrap > .band:first-child{border-top:0;padding-top:0}
 .band-copy .btn-row{margin-top:28px}
 .band + .band{margin-top:80px}
 
-/* ---------- people (coaches, founders) ---------- */
+/* ---------- people (founders on About) ---------- */
 .people{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:36px 28px}
 .people>*{min-width:0}
 .people.two{grid-template-columns:repeat(2,minmax(0,1fr));max-width:72%}
 .person .photo{aspect-ratio:4/5;background:var(--paper-shade);border-radius:var(--r-m);overflow:hidden;position:relative}
 .person .photo img{width:100%;height:100%;object-fit:cover;object-position:50% 35%;filter:grayscale(1) sepia(.22) contrast(.88) brightness(1.09)}
-.person .photo.init{display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:38px;color:var(--graphite);background:var(--paper-shade);border:1px solid var(--hairline)}
 .person h3,.person h4{font-family:var(--sans);font-size:13.5px;font-weight:600;margin-top:16px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink)}
 .person .cred{font-size:14.5px;color:var(--graphite);margin-top:5px;line-height:1.5}
-.person q{display:block;margin-top:10px;font-family:var(--serif);font-style:italic;font-size:17px;color:var(--pen-dark);quotes:"\201C" "\201D";line-height:1.45}
-.person.apply{border-top:1px solid var(--ink);padding:18px 0 0;display:flex;flex-direction:column;justify-content:flex-start}
-.person.apply h3,.person.apply h4{margin-top:0;font-family:var(--serif);font-size:24px;font-weight:500;letter-spacing:-.005em;text-transform:none;line-height:1.25}
-.person.apply p{font-size:15px;color:var(--graphite);margin-top:8px;line-height:1.5}
-.person.apply .arrowlink{margin-top:16px}
 .people-after{margin-top:36px;font-size:15.5px;color:var(--graphite);max-width:62ch}
 
 /* ---------- image in the content column ---------- */
@@ -646,6 +650,7 @@ footer{padding:64px 0 36px;border-top:1px solid var(--hairline);background:var(-
 .foot-col ul{list-style:none;display:grid;gap:9px}
 .foot-col a{color:var(--graphite);text-decoration:none;font-size:14.5px;border:0;transition:color var(--t-hover) ease}
 .foot-col a:hover{color:var(--ink)}
+.foot-col a[aria-current="page"]{color:var(--pen-dark);font-weight:600}
 .foot-bottom{margin-top:52px;padding-top:22px;border-top:1px solid var(--hairline);display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font-size:13.5px;color:var(--graphite)}
 .foot-bottom ul{display:flex;gap:20px;list-style:none;flex-wrap:wrap}
 .foot-bottom a{color:var(--graphite);text-decoration:none;border:0}
@@ -775,9 +780,7 @@ footer{padding:64px 0 36px;border-top:1px solid var(--hairline);background:var(-
   .people,.people.two{grid-template-columns:minmax(0,1fr);gap:28px}
   .person{display:grid;grid-template-columns:96px minmax(0,1fr);column-gap:18px;align-content:start}
   .person .photo{grid-row:1 / span 4}
-  .person.bio .bio-p{grid-column:1 / -1;margin-top:14px}
   .person h4{margin-top:4px}
-  .person.apply{display:flex}
   .choice-grid{grid-template-columns:1fr}
   .btn{white-space:normal;max-width:100%;text-align:center}
   .btn.lg{padding:15px 22px;font-size:16px}
@@ -832,7 +835,7 @@ footer{padding:64px 0 36px;border-top:1px solid var(--hairline);background:var(-
 }
 
 /* ============================================================
-   Platform architecture (Aug 2026): two paths, reservations,
+   Platform architecture (Aug 2026): three audiences, reservations,
    desk backdrops under the artifact sheet.
    ============================================================ */
 
@@ -846,7 +849,7 @@ footer{padding:64px 0 36px;border-top:1px solid var(--hairline);background:var(-
 /* ---------- display h3: the one step above the base scale, for a card's or panel's headline ---------- */
 .h3-display{font-size:clamp(28px,2.8vw,38px)}
 
-/* ---------- homepage: the two paths ---------- */
+/* ---------- audience and service paths ---------- */
 .hero-paths .hero-copy h1{max-width:11ch}
 .hero-promise{display:flex;align-items:center;gap:20px;flex-wrap:wrap;margin-top:30px}
 .path-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));border-top:1px solid var(--ink);border-bottom:1px solid var(--hairline)}
@@ -859,6 +862,34 @@ footer{padding:64px 0 36px;border-top:1px solid var(--hairline);background:var(-
 .path-copy{margin-top:13px;font-size:16.5px;line-height:1.55;max-width:42ch}
 .path-list{margin-top:16px;font-size:13.5px;line-height:1.6;color:var(--graphite)}
 .path-card .btn-row{margin-top:auto;padding-top:24px}
+.path-grid.three-up{grid-template-columns:repeat(3,minmax(0,1fr))}
+.path-grid.three-up .path-card{grid-template-columns:minmax(0,1fr);gap:18px;padding:36px 30px 40px}
+.path-grid.three-up .path-card:first-child{padding-left:4px}
+.path-grid.three-up .path-card:last-child{padding-right:4px}
+.path-grid.three-up .path-card .plate{width:96px}
+.path-grid.three-up .path-card h3{font-size:clamp(27px,2.4vw,34px)}
+
+/* Service links are navigation, not form controls. The whole row is the target. */
+.service-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));border-top:1px solid var(--ink);border-bottom:1px solid var(--hairline)}
+.service-grid.three-up{grid-template-columns:repeat(3,minmax(0,1fr))}
+.service-card{display:grid;grid-template-columns:64px minmax(0,1fr) auto;gap:16px;align-items:center;min-width:0;padding:24px;text-decoration:none;color:var(--ink);border-bottom:1px solid var(--hairline);transition:background-color var(--t-hover) ease,color var(--t-hover) ease}
+.service-card:not(:nth-child(3n + 1)){border-left:1px solid var(--hairline)}
+.service-card:nth-last-child(-n + 3){border-bottom:0}
+.service-card:hover,.service-card:focus-visible{background:var(--paper-shade);color:var(--pen-dark)}
+.service-card .ic{width:64px;height:64px}
+.service-card .ic img{width:100%;height:100%;object-fit:contain;mix-blend-mode:multiply}
+.service-card strong{display:block;font-family:var(--serif);font-size:23px;font-weight:500;line-height:1.2}
+.service-card small{display:block;margin-top:5px;color:var(--graphite);font-size:13.5px;line-height:1.45}
+.service-card .arr{font-size:20px;transition:transform var(--t-hover) var(--ease-out)}
+@media (hover:hover) and (pointer:fine){.service-card:hover .arr{transform:translateX(3px)}}
+
+.decision-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));border-top:1px solid var(--ink);border-bottom:1px solid var(--hairline)}
+.decision-card{display:flex;flex-direction:column;align-items:flex-start;min-width:0;padding:38px 42px 42px 4px}
+.decision-card + .decision-card{border-left:1px solid var(--hairline);padding-left:42px;padding-right:4px}
+.decision-card h3{max-width:17ch;margin-top:10px}
+.decision-card > p:not(.label){max-width:48ch;margin-top:14px;color:var(--graphite)}
+.decision-card .btn{margin-top:28px}
+.section-note{margin-top:22px;color:var(--graphite);font-size:14.5px}
 
 /* ---------- the system: four columns over one rule (the strip's cousin, without dividers) ---------- */
 .system-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:32px;border-top:1px solid var(--hairline);padding-top:28px}
@@ -868,12 +899,6 @@ footer{padding:64px 0 36px;border-top:1px solid var(--hairline);background:var(-
 .system-step .step-num{font-size:12.5px;font-weight:600;letter-spacing:.12em;color:var(--graphite)}
 .system-step h3{font-size:28px;margin-top:6px}
 .system-step p:not(.step-num){font-size:15.5px;line-height:1.55;color:var(--graphite);margin-top:8px}
-
-/* ---------- bios: the people grid with a serif name and a paragraph (homepage founders) ---------- */
-.people.bios{border-top:1px solid var(--hairline);padding-top:28px}
-.person.bio h3{font-family:var(--serif);font-size:24px;font-weight:500;letter-spacing:-.005em;text-transform:none;line-height:1.25}
-.person.bio .bio-p{margin-top:12px;font-size:15.5px;line-height:1.6;color:var(--graphite)}
-.people.bios .person.apply{padding-top:18px}
 
 /* ---------- desk: a drawn desk the artifact sheet sits on ---------- */
 /* The backdrop is an ink drawing like every other: it multiplies onto the page and the sheet sits on top of it as a real object. The drawings keep their objects in the corners, so the sheet covers only empty desk. */
@@ -893,7 +918,6 @@ footer{padding:64px 0 36px;border-top:1px solid var(--hairline);background:var(-
 .plate.desk.wide .sheet{width:min(400px,62%);position:relative;z-index:1}
 
 /* ---------- choices with descriptions; question legends ---------- */
-.choice-grid.three{grid-template-columns:repeat(3,minmax(0,1fr))}
 .choice-grid.plan-grid{grid-template-columns:minmax(0,1fr)}
 .choice.desc > span{align-items:flex-start}
 .choice > span > span:not(.ic){min-width:0}
@@ -904,29 +928,7 @@ legend.q{font-family:var(--serif);font-weight:500;font-size:24px;line-height:1.2
 .stage[data-step="2"] .options{margin-top:26px}
 .stage[data-step="2"] .form{margin-top:26px}
 .stage[data-step="3"] .options legend.q{font-size:20px}
-.form legend.q,.stage-pick legend.q{font-size:19px;margin-bottom:8px}
-.stage-block{margin-top:26px}
-.goal-picker .choice-grid{margin-top:0}
-.plans-empty{border-top:1px solid var(--ink);padding:28px 0 0;max-width:62ch}
-.plans-empty h3{font-size:24px}
-.plans-empty p{margin-top:8px;font-size:16.5px;color:var(--graphite)}
-.js [data-plans-gate].in,.js [data-stage-block].in{animation:stage-in var(--t-expand) var(--ease-out)}
-
-/* ---------- professionals: who are you building for ---------- */
-/* The two answers share one cell and cross-fade, so a change of mind retargets from wherever the fade is. */
-.audience .choice-grid{max-width:760px;margin-top:0}
-.aud-panels{display:grid;margin-top:32px}
-.aud-panel{grid-area:1 / 1;border-top:1px solid var(--hairline);padding-top:28px}
-.js .aud-panels[hidden]{display:none}
-.js .aud-panels.in{animation:stage-in var(--t-expand) var(--ease-out)}
-.js .aud-panel{opacity:0;visibility:hidden;transition:opacity var(--t-expand) var(--ease-out),visibility 0s linear var(--t-expand)}
-.js .aud-panel[data-on="true"]{opacity:1;visibility:visible;transition:opacity var(--t-expand) var(--ease-out),visibility 0s}
-.js .aud-panels.in .aud-panel[data-on="true"]{transition:none} /* on the first pick the wrapper fades up alone */
-.aud-panel h3{max-width:18ch}
-.aud-panel p{margin-top:12px;font-size:17px;max-width:56ch}
-.aud-panel .btn-row{margin-top:22px}
-:root:not(.js) .aud-panels,:root:not(.js) .aud-panels[hidden]{display:block}
-:root:not(.js) .aud-panel + .aud-panel{margin-top:32px}
+.form legend.q{font-size:19px;margin-bottom:8px}
 
 /* ---------- plan pills with a second line ---------- */
 .plan-opts .opt{width:100%}
@@ -952,9 +954,6 @@ legend.q{font-family:var(--serif);font-weight:500;font-size:24px;line-height:1.2
 .cta-band .cta-lede + .form{margin-top:28px}
 
 /* ---------- small things ---------- */
-.stage-pick{margin-top:8px}
-.stage-pick .options{margin-top:18px}
-.stage-pick .btn-row{margin-top:22px}
 .band-meta{margin-top:14px;font-size:13.5px;color:var(--graphite)}
 .est-out .o-hint{grid-column:1 / -1;font-size:13.5px;color:var(--graphite);margin-top:6px}
 .btn-row .btn-meta{max-width:44ch}
@@ -977,12 +976,18 @@ legend.q{font-family:var(--serif);font-weight:500;font-size:24px;line-height:1.2
   .path-grid{grid-template-columns:minmax(0,1fr)}
   .path-card{padding:34px 4px}
   .path-card + .path-card{border-left:0;border-top:1px solid var(--hairline);padding:34px 4px}
+  .path-grid.three-up{grid-template-columns:minmax(0,1fr)}
+  .path-grid.three-up .path-card,.path-grid.three-up .path-card:first-child,.path-grid.three-up .path-card:last-child{grid-template-columns:110px minmax(0,1fr);gap:22px;padding:34px 4px}
+  .path-grid.three-up .path-card .plate{width:110px}
+  .service-grid.three-up{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .service-card:not(:nth-child(3n + 1)){border-left:0}
+  .service-card:nth-last-child(-n + 3){border-bottom:1px solid var(--hairline)}
+  .service-card:nth-child(even){border-left:1px solid var(--hairline)}
+  .service-card:nth-last-child(-n + 2){border-bottom:0}
   .system-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:28px}
   .plate.desk.wide{aspect-ratio:auto;padding:0}
   .plate.desk.wide .sheet{width:100%}
-  .choice-grid.three{grid-template-columns:repeat(2,minmax(0,1fr))}
   .cols2{grid-template-columns:minmax(0,1fr);gap:28px}
-  .aud-panels{margin-top:26px}
 }
 @media (max-width:600px){
   .hero-promise .btn{width:100%}
@@ -990,22 +995,29 @@ legend.q{font-family:var(--serif);font-weight:500;font-size:24px;line-height:1.2
   .path-card .plate{width:78px}
   .path-card h3{font-size:28px}
   .path-card .btn{width:100%}
+  .path-grid.three-up .path-card,.path-grid.three-up .path-card:first-child,.path-grid.three-up .path-card:last-child{grid-template-columns:minmax(0,1fr);gap:14px}
+  .path-grid.three-up .path-card .plate{width:78px}
+  .service-grid.three-up{grid-template-columns:minmax(0,1fr)}
+  .service-card{grid-template-columns:52px minmax(0,1fr) auto;padding:20px 4px}
+  .service-card:nth-child(even){border-left:0}
+  .service-card:nth-last-child(-n + 2){border-bottom:1px solid var(--hairline)}
+  .service-card:last-child{border-bottom:0}
+  .service-card .ic{width:52px;height:52px}
+  .decision-grid{grid-template-columns:minmax(0,1fr)}
+  .decision-card,.decision-card + .decision-card{padding:30px 4px;border-left:0}
+  .decision-card + .decision-card{border-top:1px solid var(--hairline)}
+  .decision-card .btn{width:100%}
   .system-grid{grid-template-columns:minmax(0,1fr);gap:0;padding-top:0}
   .system-step{display:grid;grid-template-columns:96px minmax(0,1fr);gap:0 16px;border-top:1px solid var(--hairline);padding:22px 0}
   .system-step:first-child{border-top:0}
   .system-step .plate{grid-row:1 / span 3;margin:0;aspect-ratio:4/3;align-self:end}
   .system-step .step-num,.system-step h3,.system-step p{grid-column:2}
   .system-step h3{font-size:24px}
-  .aud-panel h3{font-size:28px}
-  .choice-grid.three{grid-template-columns:minmax(0,1fr)}
   .desk .desk-bg{display:none} /* below 600 the sheet fills the column; there is no desk left to draw */
   .cta-actions .btn{width:100%}
   legend.q{font-size:21px}
   .stage h2.stage-h{font-size:clamp(34px,9.5vw,44px)}
 }
 @media (prefers-reduced-motion:reduce){
-  .js [data-plans-gate].in,.js [data-stage-block].in,.js .aud-panels.in{animation:stage-fade 200ms ease}
-  .js .aud-panel{transition:opacity 120ms ease,visibility 0s linear 120ms}
-  .js .aud-panel[data-on="true"]{transition:opacity 120ms ease,visibility 0s}
   .swapping{filter:none}
 }

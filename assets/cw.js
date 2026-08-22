@@ -2,13 +2,11 @@
    for content to render.
    1. Nav: scrolled state, mega-menus, mobile drawer.
    2. Pen marks, artifact underlines, season bars, ink drawings appear once in view.
-   3. Page pickers: goal → plan on /students/, stage on the vertical heroes,
-      audience on /professionals/, plan on /ai-coaching/.
-   4. FAQ accordions.
-   5. Pricing estimator.
-   6. /start/ reservation: staged form, persisted, summarised, submitted.
-   7. Intake forms: validate, post to FORM_ENDPOINT — or hand off honestly to email.
-   8. Mobile sticky CTA.
+   3. FAQ accordions.
+   4. Pricing estimator.
+   5. /start/ reservation: staged form, persisted, summarised, submitted.
+   6. Intake forms: validate, post to FORM_ENDPOINT — or hand off honestly to email.
+   7. Mobile sticky CTA.
    Analytics: every funnel event calls track(); it is a no-op until a
    Plausible-style `window.plausible` function exists on the page. */
 (function () {
@@ -28,7 +26,7 @@
   function track(name, props) { try { if (typeof window.plausible === 'function') window.plausible(name, { props: props || {} }); } catch (e) {} }
 
   /* ---------- shared: paths, goals, plans ---------- */
-  var PATHS = { student: 'A student or applicant', professional: 'Me, as a professional', team: 'My team', program: 'A program supporting students' };
+  var PATHS = { student: 'A student or applicant', professional: 'Me, as a professional', team: 'My organization — AI team', program: 'My organization — student program' };
   var GOALS = { college: 'College admissions', bsmd: 'BS/MD programs', mba: 'MBA admissions', law: 'Law school', med: 'Medical school', recruiting: 'Banking and consulting', ai: 'Individual AI coaching' };
   var STAGES = { now: 'Applying this cycle', next: 'Applying next cycle', exploring: 'Still exploring' };
   var RSTAGES = { now: 'Recruiting this cycle', next: 'Recruiting next cycle', exploring: 'Still exploring' };
@@ -234,88 +232,7 @@
     if (!hit) cells.forEach(function (m) { m.classList.remove('now'); });
   })();
 
-  /* ---------- 3. page pickers ---------- */
-  /* /students/: choose a goal → the stage question appears → the plans unlock, carrying goal and stage into /start/. */
-  var picker = $('#goal-picker');
-  if (picker) {
-    var gate = $('[data-plans-gate]'), empty = $('[data-plans-empty]'), stageBlock = $('[data-stage-block]', picker), gStatus = $('[data-goal-status]', picker);
-    var planLinks = $$('[data-plan-link]');
-    var paintPicker = function (first) {
-      var goal = ($('input[name="goal"]:checked', picker) || {}).value || '';
-      var stage = ($('input[name="stage"]:checked', picker) || {}).value || '';
-      var labels = goal === 'recruiting' ? RSTAGES : STAGES;
-      $$('[data-stage-label]', picker).forEach(function (el) { el.textContent = labels[el.getAttribute('data-stage-label')]; });
-      var wasHidden = gate && gate.hidden;
-      reveal(stageBlock, !!goal);
-      if (gate) { if (first) gate.hidden = !goal; else reveal(gate, !!goal); }
-      if (empty) empty.hidden = !!goal;
-      if (gStatus) gStatus.textContent = goal ? GOALS[goal] + ' selected. Choose where you are in the process, then pick a plan below.' : '';
-      if (gate && wasHidden && goal && !first && gate.getBoundingClientRect().top > window.innerHeight) {
-        gate.classList.remove('in'); /* off-screen: nothing to animate — bring the unlocked plans into view instead */
-        gate.scrollIntoView({ block: 'nearest', behavior: reduce ? 'auto' : 'smooth' });
-      }
-      planLinks.forEach(function (a) {
-        var k = a.getAttribute('data-plan-link');
-        a.setAttribute('href', '/start/?path=student' + (goal ? '&goal=' + goal : '') + (stage ? '&stage=' + stage : '') + '&plan=' + k);
-      });
-    };
-    var qsG = new URLSearchParams(location.search).get('goal');
-    if (qsG && GOALS[qsG]) { var r0 = $('input[name="goal"][value="' + qsG + '"]', picker); if (r0) r0.checked = true; }
-    $$('input[name="goal"], input[name="stage"]', picker).forEach(function (r) {
-      r.addEventListener('change', function () { paintPicker(); if (r.name === 'goal') track('goal_pick', { goal: r.value }); });
-    });
-    paintPicker(true);
-  }
-
-  /* Vertical heroes: the stage chosen up top rides along on every plan button below. */
-  var stagePick = $('#stage-pick');
-  if (stagePick) {
-    var paintStage = function () {
-      var stage = ($('input[name="stage"]:checked', stagePick) || {}).value || '';
-      $$('[data-plan-link]').forEach(function (a) {
-        var href = a.getAttribute('href').replace(/&(amp;)?stage=[^&]*/, '');
-        a.setAttribute('href', stage ? href + '&stage=' + stage : href);
-      });
-    };
-    $$('input[name="stage"]', stagePick).forEach(function (r) { r.addEventListener('change', paintStage); });
-    paintStage();
-  }
-
-  /* /professionals/: for me, or for my team. */
-  var aud = $('#audience');
-  if (aud) {
-    var audStatus = $('[data-aud-status]', aud), panels = $$('.aud-panel', aud), wrap = $('.aud-panels', aud);
-    var paintAud = function (first) {
-      var v = ($('input[name="audience"]:checked', aud) || {}).value || '';
-      if (first) wrap.hidden = !v; else reveal(wrap, !!v); /* the answer area appears once, then the two answers cross-fade */
-      panels.forEach(function (p) { p.setAttribute('data-on', p.getAttribute('data-aud') === v ? 'true' : 'false'); });
-      if (audStatus) audStatus.textContent = v === 'me' ? 'Showing individual AI coaching.' : v === 'team' ? 'Showing AI coaching for teams.' : 'Choose whether you are building AI skills for yourself or for a team.';
-    };
-    var qsF = new URLSearchParams(location.search).get('for');
-    if (qsF === 'me' || qsF === 'team') { var f0 = $('input[name="audience"][value="' + qsF + '"]', aud); if (f0) f0.checked = true; }
-    $$('input[name="audience"]', aud).forEach(function (r) { r.addEventListener('change', function () { paintAud(); track('audience_pick', { audience: r.value }); }); });
-    paintAud(true);
-  }
-
-  /* /ai-coaching/: the plan chosen in the pricing rows is the plan the form reserves. */
-  var aiForm = $('#ai-intake');
-  if (aiForm) {
-    var aiBtn = $('[data-plan-submit]', aiForm);
-    var paintAi = function () { var k = ($('input[name="plan"]:checked', aiForm) || {}).value; var t = reserveLabel(k); if (aiBtn.firstChild.textContent.trim() !== t) { aiBtn.classList.add('swapping'); setLabel(aiBtn, t); void aiBtn.offsetWidth; requestAnimationFrame(function () { aiBtn.classList.remove('swapping'); }); } };
-    var qsP = new URLSearchParams(location.search).get('plan');
-    if (qsP && PLANS[qsP]) { var p0 = $('input[name="plan"][value="' + qsP + '"]', aiForm); if (p0) p0.checked = true; }
-    $$('input[name="plan"]', aiForm).forEach(function (r) { r.addEventListener('change', paintAi); });
-    $$('[data-pick-plan]').forEach(function (a) {
-      a.addEventListener('click', function () {
-        var r = $('input[name="plan"][value="' + a.getAttribute('data-pick-plan') + '"]', aiForm);
-        if (r) { r.checked = true; paintAi(); }
-        track('plan_pick', { plan: a.getAttribute('data-pick-plan'), page: location.pathname });
-      });
-    });
-    paintAi();
-  }
-
-  /* ---------- 4. FAQ ---------- */
+  /* ---------- 3. FAQ ---------- */
   $$('.faq').forEach(function (f) {
     var q = $('.faq-q', f), a = $('.faq-a', f);
     if (!q || !a) return;
@@ -327,7 +244,7 @@
     });
   });
 
-  /* ---------- 5. pricing estimator ---------- */
+  /* ---------- 4. pricing estimator ---------- */
   var estr = $('#estimator');
   if (estr) {
     var counts = { drafts: 3, strategy: 1, checks: 1 };
@@ -360,35 +277,97 @@
     paintEst();
   }
 
-  /* ---------- 6. /start/ reservation ---------- */
+  /* ---------- 5. /start/ reservation ---------- */
   var start = $('#start');
   if (start) {
     var TEXT = ['role', 'tools', 'task', 'company', 'teamsize', 'tried', 'result', 'organization', 'students', 'when', 'yourrole', 'name', 'email', 'notes'];
     var RADIO = ['path', 'goal', 'stage', 'pgoal', 'rstage', 'focus', 'plan', 'goals', 'who'];
-    var state = { step: 1 };
-    TEXT.concat(RADIO).forEach(function (k) { state[k] = ''; });
-    try { Object.assign(state, JSON.parse(localStorage.getItem('cw.start') || '{}')); } catch (e) {}
-    var q2 = new URLSearchParams(location.search), fromPricing = false;
-    var qPath = q2.get('path'), qGoal = q2.get('goal'), qStage = q2.get('stage'), qPlan = q2.get('plan');
-    if (qGoal && GOALS[qGoal] && !qPath) qPath = qGoal === 'ai' ? 'professional' : 'student';
-    if (qPath && PATHS[qPath]) {
-      if (qPath !== state.path) { RADIO.forEach(function (k) { if (k !== 'path') state[k] = ''; }); }
+    var PATH_DETAIL = ['goal', 'stage', 'pgoal', 'rstage', 'focus', 'plan', 'goals', 'who', 'role', 'tools', 'task', 'company', 'teamsize', 'tried', 'result', 'organization', 'students', 'when', 'yourrole'];
+    var freshState = function () {
+      var s = { step: 1 };
+      TEXT.concat(RADIO).forEach(function (k) { s[k] = ''; });
+      return s;
+    };
+    var state = freshState();
+    var q2 = new URLSearchParams(location.search);
+    var qPath = PATHS[q2.get('path')] ? q2.get('path') : '';
+    var qGoal = GOALS[q2.get('goal')] ? q2.get('goal') : '';
+    var qStage = STAGES[q2.get('stage')] ? q2.get('stage') : '';
+    var qPlan = PLANS[q2.get('plan')] ? q2.get('plan') : '';
+    var routeQuery = !!(qPath || qGoal || qStage || qPlan);
+    var pendingGoal = '', pendingStage = '', fromPricing = false;
+
+    /* Retire the old, persistent draft. A route deep-link is an explicit new
+       request; only a query-free visit resumes this tab's unfinished flow. */
+    try { localStorage.removeItem('cw.start'); } catch (e) {}
+    if (!routeQuery) {
+      try {
+        var restored = JSON.parse(sessionStorage.getItem('cw.start') || '{}');
+        Object.keys(state).forEach(function (k) { if (restored[k] != null) state[k] = restored[k]; });
+      } catch (e) {}
+    }
+
+    var radioAllowed = function (name, value) {
+      return !value || $$('input[name="' + name + '"]', start).some(function (r) { return r.value === value; });
+    };
+    RADIO.forEach(function (k) { if (!radioAllowed(k, state[k])) state[k] = ''; });
+    if (!PATHS[state.path]) state.path = '';
+    var allowedByPath = {
+      student: ['goal', 'stage', 'rstage', 'focus', 'plan', 'who'],
+      professional: ['pgoal', 'rstage', 'focus', 'plan', 'role', 'tools', 'task'],
+      team: ['company', 'teamsize', 'tried', 'result', 'yourrole'],
+      program: ['organization', 'students', 'goals', 'when', 'yourrole']
+    };
+    PATH_DETAIL.forEach(function (k) {
+      var allowed = state.path ? allowedByPath[state.path] : ['plan'];
+      if (allowed.indexOf(k) < 0) state[k] = '';
+    });
+    if (state.path === 'student') {
+      if (state.goal === 'recruiting') state.stage = '';
+      else { state.rstage = ''; state.focus = ''; }
+    } else if (state.path === 'professional') {
+      if (state.pgoal === 'ai') { state.rstage = ''; state.focus = ''; }
+      else if (state.pgoal === 'recruiting') { state.role = ''; state.tools = ''; state.task = ''; }
+      else { state.rstage = ''; state.focus = ''; state.role = ''; state.tools = ''; state.task = ''; }
+    }
+
+    /* A goal without a path is unambiguous except recruiting, which is shared
+       by students and professionals and is applied after the visitor chooses. */
+    if (!qPath && qGoal) {
+      if (qGoal === 'ai') qPath = 'professional';
+      else if (qGoal === 'recruiting') { pendingGoal = qGoal; pendingStage = qStage; }
+      else qPath = 'student';
+    }
+    if (qPath) {
       state.path = qPath;
-      if (qGoal && GOALS[qGoal]) { if (qPath === 'student' && qGoal !== 'ai') state.goal = qGoal; if (qPath === 'professional') state.pgoal = qGoal === 'ai' ? 'ai' : 'recruiting'; }
-      if (qStage && STAGES[qStage]) state.stage = qStage;
+      if (qPath === 'student' && qGoal && qGoal !== 'ai') state.goal = qGoal;
+      else if (qPath === 'professional' && (qGoal === 'ai' || qGoal === 'recruiting')) state.pgoal = qGoal;
     }
-    if (qPlan && PLANS[qPlan]) {
-      state.plan = qPlan;
-      if (!qPath) { fromPricing = true; if (modeOf(state.path) !== 'individual') { RADIO.forEach(function (k) { if (k !== 'plan') state[k] = ''; }); } } /* a plan from the pricing page is an individual plan */
+    var selectedGoal = state.path === 'professional' ? state.pgoal : state.goal;
+    if (qStage) {
+      if (selectedGoal === 'recruiting') state.rstage = qStage;
+      else if (state.path === 'student' && selectedGoal) state.stage = qStage;
     }
+    if (qPlan && (!state.path || modeOf(state.path) === 'individual')) state.plan = qPlan;
+    fromPricing = !!(qPlan && !state.path);
     if (q2.get('email') && EMAIL.test(q2.get('email'))) state.email = q2.get('email');
-    var needsStage = function () { return state.path === 'student' && state.goal && state.goal !== 'recruiting'; };
-    if (qPath && PATHS[qPath]) {
-      var complete = (qPath === 'student' && state.goal && state.plan && (!needsStage() || state.stage));
-      state.step = complete ? 3 : 2;
-    } else if (q2.toString()) state.step = 1;
-    state.step = Math.max(1, Math.min(3, state.step || 1));
-    if (q2.toString()) history.replaceState(null, '', '/start/'); /* keep choices out of the URL */
+
+    var isRecruiting = function () { return state.path === 'student' ? state.goal === 'recruiting' : state.path === 'professional' && state.pgoal === 'recruiting'; };
+    var needsStage = function () { return state.path === 'student' && !!state.goal && state.goal !== 'recruiting'; };
+    var stepTwoReady = function () {
+      if (state.path === 'student') return !!(state.goal && state.plan && (isRecruiting() ? state.rstage && state.focus : state.stage));
+      if (state.path === 'professional') return !!(state.pgoal && state.plan && (state.pgoal === 'ai' ? state.role && state.task : state.rstage && state.focus));
+      if (state.path === 'team') return !!(state.company && state.teamsize && state.tried && state.result);
+      if (state.path === 'program') return !!(state.organization && state.students && state.goals && state.when);
+      return false;
+    };
+    if (routeQuery) state.step = state.path ? (stepTwoReady() ? 3 : 2) : 1;
+    else {
+      state.step = Math.max(1, Math.min(3, Number(state.step) || 1));
+      if (!state.path) state.step = 1;
+      else if (state.step === 3 && !stepTwoReady()) state.step = 2;
+    }
+    if (q2.toString()) history.replaceState(null, '', location.pathname + location.hash); /* keep choices and email out of the URL */
 
     var stages = $$('.stage', start), bars = $$('.progress i', start), stepLabel = $('.progress span', start);
     var form = $('#start-form'); form.setAttribute('novalidate', '');
@@ -396,11 +375,27 @@
     var sum = { path: $('[data-sum="path"]'), goal: $('[data-sum="goal"]'), stage: $('[data-sum="stage"]'), plan: $('[data-sum="plan"]'), price: $('[data-sum="price"]'), who: $('[data-sum="who"]'), email: $('[data-sum="email"]'), note: $('.sum-note') };
     var whoRow = $$('[data-sum-row="who"], [data-sum="who"]');
     var lbl = { goal: $('[data-sum-label="goal"]'), stage: $('[data-sum-label="stage"]'), plan: $('[data-sum-label="plan"]') };
-    var save = function () { try { localStorage.setItem('cw.start', JSON.stringify(state)); } catch (e) {} };
+    var save = function () { try { sessionStorage.setItem('cw.start', JSON.stringify(state)); } catch (e) {} };
+    var clearSaved = function () { try { sessionStorage.removeItem('cw.start'); } catch (e) {} };
     var mode = function () { return modeOf(state.path); };
     var syncFromDom = function () {
       TEXT.forEach(function (k) { var el = $('[name="' + k + '"]', start); if (el) state[k] = el.value.trim(); });
       RADIO.forEach(function (k) { var r = $('input[name="' + k + '"]:checked', start); if (r) state[k] = r.value; });
+    };
+    var clearFields = function (keys) {
+      keys.forEach(function (k) {
+        state[k] = '';
+        $$('[name="' + k + '"]', start).forEach(function (input) {
+          if (input.type === 'radio' || input.type === 'checkbox') input.checked = false;
+          else input.value = '';
+          input.removeAttribute('aria-invalid');
+          (input.getAttribute('aria-describedby') || '').split(/\s+/).forEach(function (id) { var e = id && document.getElementById(id); if (e && e.classList.contains('field-error')) e.textContent = ''; });
+        });
+        var namedError = document.getElementById(k + '-error'); if (namedError) namedError.textContent = '';
+      });
+    };
+    var checkRadio = function (name, value) {
+      $$('input[name="' + name + '"]', start).forEach(function (r) { r.checked = r.value === value; });
     };
 
     /* Which questions show, given the path so far. */
@@ -412,7 +407,7 @@
         case 'student-stage': return !!needsStage();
         case 'professional': return p === 'professional';
         case 'pro-ai': return p === 'professional' && state.pgoal === 'ai';
-        case 'pro-recruiting': return p === 'professional' && state.pgoal === 'recruiting';
+        case 'recruiting': return isRecruiting();
         case 'plan': return (p === 'student' && !!state.goal) || (p === 'professional' && !!state.pgoal);
         case 'team': return p === 'team';
         case 'program': return p === 'program';
@@ -437,7 +432,7 @@
       else {
         lbl.goal.textContent = 'Goal'; lbl.stage.textContent = 'Stage or scope';
         put(sum.goal, p === 'professional' ? (state.pgoal === 'ai' ? GOALS.ai : state.pgoal === 'recruiting' ? GOALS.recruiting : '') : GOALS[state.goal]);
-        put(sum.stage, p === 'professional' ? (state.pgoal === 'ai' ? state.role : RSTAGES[state.rstage]) : (state.goal === 'recruiting' ? RSTAGES[state.stage] : STAGES[state.stage]));
+        put(sum.stage, p === 'professional' ? (state.pgoal === 'ai' ? state.role : RSTAGES[state.rstage]) : (state.goal === 'recruiting' ? RSTAGES[state.rstage] : STAGES[state.stage]));
       }
       lbl.plan.textContent = 'Plan';
       if (p === 'team') { put(sum.plan, 'Team pilot'); put(sum.price, 'In writing'); }
@@ -480,7 +475,22 @@
         r.checked = r.value === state[k];
         r.addEventListener('change', function () {
           state[k] = r.value;
-          if (k === 'path') { RADIO.forEach(function (x) { if (x !== 'path') state[x] = ''; }); $$('input[type="radio"]', start).forEach(function (x) { if (x.name !== 'path') x.checked = false; }); if (fromPricing && qPlan && modeOf(r.value) === 'individual') { state.plan = qPlan; var pr = $('input[name="plan"][value="' + qPlan + '"]', start); if (pr) pr.checked = true; } }
+          if (k === 'path') {
+            clearFields(PATH_DETAIL);
+            state.path = r.value;
+            if (pendingGoal === 'recruiting' && modeOf(r.value) === 'individual') {
+              if (r.value === 'student') { state.goal = 'recruiting'; checkRadio('goal', 'recruiting'); }
+              else { state.pgoal = 'recruiting'; checkRadio('pgoal', 'recruiting'); }
+              if (pendingStage) { state.rstage = pendingStage; checkRadio('rstage', pendingStage); }
+            }
+            if (fromPricing && qPlan && modeOf(r.value) === 'individual') { state.plan = qPlan; checkRadio('plan', qPlan); }
+          } else if (k === 'goal') {
+            pendingGoal = ''; pendingStage = '';
+            clearFields(['stage', 'rstage', 'focus']);
+          } else if (k === 'pgoal') {
+            pendingGoal = ''; pendingStage = '';
+            clearFields(['rstage', 'focus', 'role', 'tools', 'task']);
+          }
           var err = document.getElementById(k + '-error'); if (err) err.textContent = '';
           $$('input[name="' + k + '"]', start).forEach(function (x) { x.removeAttribute('aria-invalid'); });
           paintVariants(true); paintSummary(); save();
@@ -494,12 +504,13 @@
     });
     var reset = $('[data-reset]', start);
     if (reset) reset.addEventListener('click', function () {
-      try { localStorage.removeItem('cw.start'); } catch (e) {}
+      clearSaved();
       Object.keys(state).forEach(function (k) { state[k] = k === 'step' ? 1 : ''; });
-      fromPricing = false;
+      fromPricing = false; pendingGoal = ''; pendingStage = '';
       $$('input[type="radio"]', start).forEach(function (r) { r.checked = false; });
       $$('input[type="text"],input[type="email"],textarea', start).forEach(function (i) { i.value = ''; });
       $$('.field-error', start).forEach(function (e) { e.textContent = ''; });
+      $$('[aria-invalid]', start).forEach(function (i) { i.removeAttribute('aria-invalid'); });
       show(1, true);
     });
 
@@ -525,7 +536,8 @@
       else if (n === 2) {
         if (state.path === 'student') {
           bad = radioErr('goal', 'Choose what you’re working toward.');
-          if (!bad && needsStage()) bad = radioErr('stage', 'Choose the option that is closest.');
+          if (!bad && isRecruiting()) { bad = radioErr('rstage', 'Choose the option that is closest.'); if (!bad) bad = radioErr('focus', 'Pick one.'); }
+          else if (!bad && needsStage()) bad = radioErr('stage', 'Choose the option that is closest.');
           if (!bad) bad = radioErr('plan', 'Choose a plan.');
         } else if (state.path === 'professional') {
           bad = radioErr('pgoal', 'Pick one.');
@@ -554,22 +566,31 @@
       if (variantOn('org')) { var rl = $('[name="yourrole"]', form); if (!rl.value.trim()) { invalid(rl, 'Required.'); ok = false; firstBad = firstBad || rl; } else invalid(rl, ''); }
       if (!ok) { var bads = $$('[aria-invalid="true"]', form); (bads[0] || firstBad).focus(); return; }
       var m = MODES[mode()], p = state.path;
-      var goalLabel = p === 'professional' ? (state.pgoal === 'ai' ? GOALS.ai : GOALS.recruiting) : GOALS[state.goal] || '';
+      var goalKey = p === 'professional' ? state.pgoal : state.goal;
+      var goalLabel = GOALS[goalKey] || '';
+      var planLabel = state.plan && PLANS[state.plan] ? PLANS[state.plan].name + ' — ' + priceOf(state.plan) : '';
       var data = {
-        path: PATHS[p], goal: goalLabel,
-        stage: p === 'student' ? (state.goal === 'recruiting' ? RSTAGES[state.stage] : STAGES[state.stage]) || '' : p === 'professional' && state.pgoal === 'recruiting' ? RSTAGES[state.rstage] || '' : '',
-        focus: state.focus, plan: state.plan && PLANS[state.plan] ? PLANS[state.plan].name + ' — ' + priceOf(state.plan) : '',
-        role: state.role || state.yourrole, tools: state.tools, task: state.task,
-        company: state.company, teamsize: state.teamsize, tried: state.tried, result: state.result,
-        organization: state.organization, students: state.students, goals: state.goals, when: state.when,
-        who: state.who, name: state.name, email: state.email, notes: state.notes, source: '/start/'
+        path: PATHS[p], name: state.name, email: state.email, notes: state.notes, source: '/start/'
       };
+      if (p === 'student') {
+        data.goal = goalLabel; data.plan = planLabel; data.who = state.who;
+        if (isRecruiting()) { data.stage = RSTAGES[state.rstage]; data.focus = state.focus; }
+        else data.stage = STAGES[state.stage];
+      } else if (p === 'professional') {
+        data.goal = goalLabel; data.plan = planLabel;
+        if (state.pgoal === 'ai') { data.role = state.role; data.tools = state.tools; data.task = state.task; }
+        else { data.stage = RSTAGES[state.rstage]; data.focus = state.focus; }
+      } else if (p === 'team') {
+        data.company = state.company; data.teamsize = state.teamsize; data.tried = state.tried; data.result = state.result; data.role = state.yourrole;
+      } else if (p === 'program') {
+        data.organization = state.organization; data.students = state.students; data.goals = state.goals; data.when = state.when; data.role = state.yourrole;
+      }
       Object.keys(data).forEach(function (k) { if (!data[k]) delete data[k]; });
       var subject = mode() === 'individual' ? reserveLabel(state.plan) + ' — ' + goalLabel : m.submit + ' — ' + (state.company || state.organization);
       submitB.setAttribute('aria-busy', 'true'); form.setAttribute('data-sending', '');
       var map = { plan: state.plan && PLANS[state.plan] ? PLANS[state.plan].name : '', price: priceOf(state.plan), email: state.email };
       send(data, subject, function () {
-        try { localStorage.removeItem('cw.start'); } catch (e) {}
+        clearSaved();
         $('.start-flow', start).hidden = true;
         var done = $('.start-done', start); done.hidden = false;
         var h = $('h2', done), first = m.doneH1.split(' ')[0], rest = m.doneH1.slice(first.length);
@@ -580,11 +601,12 @@
         $('[data-done-p]', done).textContent = fill(m.doneP, map);
         h.setAttribute('tabindex', '-1'); settle(h);
         requestAnimationFrame(function () { requestAnimationFrame(function () { mark.classList.add('drawn'); }); }); /* the pen signs the one success moment */
-        track('start_done', { path: state.path, mode: mode() });
+        track('start_done', { path: state.path, goal: goalKey || 'none', mode: mode() });
       }, function () {
         submitB.setAttribute('aria-busy', 'false'); form.removeAttribute('data-sending');
+        clearSaved();
         fallback(form, subject, data);
-        track('start_fallback', { path: state.path, mode: mode() });
+        track('start_fallback', { path: state.path, goal: goalKey || 'none', mode: mode() });
       });
     });
 
@@ -593,7 +615,7 @@
     requestAnimationFrame(function () { requestAnimationFrame(function () { start.removeAttribute('data-restoring'); }); });
   }
 
-  /* ---------- 7. intake forms ---------- */
+  /* ---------- 6. intake forms ---------- */
   $$('form[data-intake]').forEach(function (form) {
     form.setAttribute('novalidate', '');
     form.addEventListener('submit', function (ev) {
@@ -688,7 +710,7 @@
     settle(p);
   }
 
-  /* ---------- 8. mobile sticky CTA ---------- */
+  /* ---------- 7. mobile sticky CTA ---------- */
   var bar = $('.sticky-bar'), hero = $('.hero, .hero-v, .hero-plain');
   if (bar && hero && 'IntersectionObserver' in window) {
     var heroIn = true, ctaIn = false, footIn = false;
