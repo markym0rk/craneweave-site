@@ -1,7 +1,7 @@
 /* Craneweave — the only script on the site. Nothing here is required
    for content to render.
    1. Nav: scrolled state, mega-menus, mobile drawer.
-   2. Pen marks, artifact underlines, season bars draw once in view.
+   2. Pen marks, artifact underlines, season bars, ink drawings appear once in view.
    3. Hero request widget: goal listbox → stage → live plan estimate → /start/.
    4. FAQ accordions.
    5. Pricing estimator.
@@ -172,6 +172,28 @@
           (document.fonts && document.fonts.ready) ? document.fonts.ready.then(go) : window.addEventListener('load', go);
         } else io.observe(el);
       });
+    }
+  }
+
+  /* Ink drawings fade in the first time they are seen. Gated on decode, so the
+     fade never plays on a box that is still empty. Hero drawings carry no
+     data-ink: they are there at first paint. */
+  var inked = $$('.plate[data-ink]');
+  if (inked.length) {
+    var draw = function (plate) {
+      var img = plate.querySelector('img');
+      var done = function () { plate.classList.add('drawn'); };
+      if (img && img.decode) img.decode().then(done, done); else done();
+    };
+    if (reduce || !('IntersectionObserver' in window)) {
+      inked.forEach(function (plate) { plate.classList.add('drawn'); });
+    } else {
+      var inkIo = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) { draw(e.target); inkIo.unobserve(e.target); }
+        });
+      }, { rootMargin: '0px 0px -8% 0px' });
+      inked.forEach(function (plate) { inkIo.observe(plate); });
     }
   }
 

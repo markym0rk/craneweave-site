@@ -1,14 +1,20 @@
 /* ============================================================
    Craneweave — editorial platform system
-   White ground · near-black ink · one reserved teal · paper-craft plates.
+   White ground · near-black ink · one reserved teal · dip-pen drawings.
 
    Tokens live in :root and only there. Components reference custom
    properties; no hex literals below the tokens block.
 
    Teal means "a human reviewed this": the pen marks, coach annotations,
-   signature chips, the primary CTA, coach-voice quotes. Nowhere else.
+   signature chips, the primary CTA, coach-voice quotes. Nowhere else —
+   including inside the drawings, which carry one teal accent each.
    Tracked uppercase means "a person's name or a document's label".
-   The plate tint exists only behind the paper-craft imagery.
+
+   The imagery is hand-drawn ink spot illustrations on white. There is no
+   plate: a drawing multiplies onto whatever ground it sits on, so its
+   white and the page's white are the same white. The one exception is the
+   deep CTA band — ink can't multiply onto dark — where the drawing sits
+   on an actual sheet of paper.
    ============================================================ */
 
 :root{
@@ -25,10 +31,6 @@
   --deep:#053236;      /* deep band surface */
   --pen-wash:#EEF5F5;
   --error:#B4231F;
-
-  /* The ground the paper-craft renders sit on. Material, not brand. */
-  --plate:#EFE9E0;
-  --plate-deep:#E4DDD3;
 
   --on-deep:#FFFFFF;
   --on-deep-dim:rgba(255,255,255,.74);
@@ -184,11 +186,11 @@ em{font-style:italic}
 .menu[data-open="true"]{opacity:1;visibility:visible;transform:none;transition:opacity var(--t-menu) var(--ease-out),transform var(--t-menu) var(--ease-out),visibility 0s}
 .menu.wide{min-width:640px;display:grid;grid-template-columns:1fr 1fr;gap:2px}
 .menu a{display:block;padding:11px 12px;border-radius:var(--r-s);text-decoration:none;color:var(--ink);font-size:15px;font-weight:500;line-height:1.3}
-.menu.wide{min-width:720px}
-.menu.wide a{display:grid;grid-template-columns:40px minmax(0,1fr);gap:0 12px;align-items:start}
+.menu.wide{min-width:744px}
+.menu.wide a{display:grid;grid-template-columns:56px minmax(0,1fr);gap:0 12px;align-items:start}
 .menu.wide a .ic{margin-top:2px}
-.menu.wide a .ic{width:40px;height:40px;border-radius:8px;background:var(--plate);overflow:hidden;grid-row:1 / span 2}
-.menu.wide a .ic img{width:100%;height:100%;object-fit:cover;transform:scale(1.4)}
+.menu.wide a .ic{width:56px;height:56px;grid-row:1 / span 2}
+.menu.wide a .ic img{width:100%;height:100%;object-fit:contain;mix-blend-mode:multiply}
 .menu.wide a small{grid-column:2}
 .menu a small{display:block;font-weight:400;color:var(--graphite);font-size:13.5px;margin-top:3px;white-space:normal}
 .menu a:hover,.menu a:focus-visible{background:var(--paper-shade)}
@@ -247,19 +249,21 @@ section.rule .wrap > .band:first-child{border-top:0;padding-top:0}
 .sec-head > p{max-width:42ch;color:var(--graphite);font-size:16.5px;justify-self:start}
 .sec-head .btn-row{margin-top:0}
 
-/* ---------- plates: the paper-craft imagery ---------- */
-.plate{position:relative;background:var(--plate);border-radius:var(--r-l);overflow:hidden;isolation:isolate}
-.plate img{width:100%;height:100%;object-fit:cover;display:block}
-.plate.r-m{border-radius:var(--r-m)}
+/* ---------- plates: an ink drawing sitting directly on the page ---------- */
+.plate{position:relative;background:transparent;border-radius:0;overflow:visible;isolation:auto}
+.plate img{width:100%;height:100%;object-fit:contain;mix-blend-mode:multiply;display:block} /* the drawing's white becomes the ground's white */
 .plate.sq{aspect-ratio:1}
 .plate.wide{aspect-ratio:4/3}
 .plate.tall{aspect-ratio:4/5}
+/* first view: a drawing fades in once. cw.js gates the class on decode, so it never plays on an empty box. Hero plates carry no data-ink — they must be drawn at first paint. */
+.js .plate[data-ink]{opacity:0;transition:opacity 420ms var(--ease-out)}
+.js .plate[data-ink].drawn{opacity:1}
 
-/* ---------- homepage hero: headline and widget overlap a plate that runs to the right edge ---------- */
+/* ---------- homepage hero: headline and widget overlap a drawing that runs to the right edge ---------- */
 .hero{padding:28px 0 96px;overflow:clip}
 .hero-stage{position:relative;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));align-items:center}
-.hero-plate{grid-column:5 / -1;grid-row:1;min-height:600px;aspect-ratio:auto;align-self:stretch;margin-right:var(--bleed);border-radius:var(--r-l) 0 0 var(--r-l)}
-.hero .hero-plate img{position:absolute;inset:0;object-position:right center}
+.hero-plate{grid-column:5 / -1;grid-row:1;min-height:600px;aspect-ratio:auto;align-self:stretch;margin-right:var(--bleed)}
+.hero .hero-plate img{position:absolute;inset:0;height:min(100%,50vw);margin-block:auto;object-fit:cover;object-position:right center} /* hero-wide.webp is composed with its subject in the right third; capping the height keeps the left fold-arrow off the request widget */
 .hero-copy{grid-column:1 / 8;grid-row:1;z-index:2;display:flex;flex-direction:column;justify-content:center;min-width:0;padding:32px 0}
 .hero-copy h1{max-width:12ch}
 .hero-sub{margin-top:24px;font-size:19px;line-height:1.5;max-width:380px;color:var(--ink)}
@@ -293,8 +297,8 @@ section.rule .wrap > .band:first-child{border-top:0;padding-top:0}
 .lb-list[data-open="true"]{opacity:1;visibility:visible;transform:none;transition:opacity var(--t-menu) var(--ease-out),transform var(--t-menu) var(--ease-out),visibility 0s}
 .lb-list li{display:flex;align-items:center;gap:12px;padding:10px 10px;border-radius:var(--r-s);cursor:pointer;font-size:15.5px;font-weight:500}
 .lb-list li small{display:block;font-weight:400;font-size:13px;color:var(--graphite)}
-.lb-list li .ic{width:40px;height:40px;border-radius:8px;background:var(--plate);overflow:hidden;flex:none}
-.lb-list li .ic img{width:100%;height:100%;object-fit:cover;transform:scale(1.4)}
+.lb-list li .ic{width:56px;height:56px;flex:none}
+.lb-list li .ic img{width:100%;height:100%;object-fit:contain;mix-blend-mode:multiply}
 .lb-list li:hover,.lb-list li[data-active="true"]{background:var(--paper-shade)}
 .lb-list li[aria-selected="true"]{font-weight:600}
 .lb-list li[aria-selected="true"]::after{content:"✓";margin-left:auto;color:var(--ink);font-weight:600}
@@ -322,11 +326,10 @@ section.rule .wrap > .band:first-child{border-top:0;padding-top:0}
 .estimate .est-meta{grid-column:1 / -1;font-size:13.5px;color:var(--graphite)}
 .widget .field-error{margin-top:6px}
 
-/* ---------- goal router: a ruled index with paper-craft thumbnails ---------- */
+/* ---------- goal router: a ruled index with drawn thumbnails ---------- */
 .index{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:64px;border-top:1px solid var(--hairline)}
-.ix{display:grid;grid-template-columns:76px minmax(0,1fr);gap:20px;align-items:center;padding:20px 4px;border-bottom:1px solid var(--hairline);text-decoration:none;color:inherit;transition:background-color var(--t-hover) ease}
-.ix .plate{width:76px;aspect-ratio:1;border-radius:10px}
-.ix .plate img{transform:scale(1.35)}
+.ix{display:grid;grid-template-columns:84px minmax(0,1fr);gap:20px;align-items:center;padding:20px 4px;border-bottom:1px solid var(--hairline);text-decoration:none;color:inherit;transition:background-color var(--t-hover) ease}
+.ix .plate{width:84px;aspect-ratio:1}
 .ix h3{display:flex;justify-content:space-between;align-items:baseline;gap:14px;font-size:23px}
 .ix h3 .see{font-family:var(--sans);font-size:14px;font-weight:600;color:var(--ink);flex:none;white-space:nowrap;display:inline-flex;gap:6px;align-items:center}
 .ix p{margin-top:4px;font-size:15px;color:var(--graphite);line-height:1.5}
@@ -339,7 +342,7 @@ section.rule .wrap > .band:first-child{border-top:0;padding-top:0}
 /* ---------- how it works: ruled rows with a thumbnail ---------- */
 .steps{border-top:1px solid var(--hairline)}
 .steprow{display:grid;grid-template-columns:128px 48px minmax(0,1fr);gap:26px;align-items:start;padding:26px 0;border-bottom:1px solid var(--hairline)}
-.steprow .plate{aspect-ratio:1;border-radius:var(--r-m)}
+.steprow .plate{aspect-ratio:1}
 .steprow .step-num{font-size:12.5px;letter-spacing:.12em;color:var(--graphite);font-weight:600;padding-top:6px}
 .steprow h3{font-size:28px}
 .steprow p{margin-top:8px;font-size:16.5px;max-width:46ch}
@@ -359,6 +362,7 @@ section.rule .wrap > .band:first-child{border-top:0;padding-top:0}
 .band{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,6fr);gap:72px;align-items:center;padding-top:40px;border-top:1px solid var(--hairline)}
 .band.flip .band-copy{order:-1}
 .band .plate{aspect-ratio:4/3}
+.band .plate img{padding:4%} /* the drawing floats in the column rather than filling it */
 .band-copy h2{max-width:16ch}
 .band-copy .lede{margin-top:20px;color:var(--ink);font-size:17.5px;max-width:44ch}
 .band-copy .btn-row{margin-top:28px}
@@ -368,8 +372,8 @@ section.rule .wrap > .band:first-child{border-top:0;padding-top:0}
 .people{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:36px 28px}
 .people>*{min-width:0}
 .people.two{grid-template-columns:repeat(2,minmax(0,1fr));max-width:72%}
-.person .photo{aspect-ratio:4/5;background:var(--plate);border-radius:var(--r-m);overflow:hidden;position:relative}
-.person .photo img{width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.05) sepia(.18);transform:scale(1.18);transform-origin:50% 28%}
+.person .photo{aspect-ratio:4/5;background:var(--paper-shade);border-radius:var(--r-m);overflow:hidden;position:relative}
+.person .photo img{width:100%;height:100%;object-fit:cover;filter:grayscale(1) sepia(.22) contrast(.88) brightness(1.09);transform:scale(1.18);transform-origin:50% 28%}
 .person .photo.init{display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:38px;color:var(--graphite);background:var(--paper-shade);border:1px solid var(--hairline)}
 .person h3,.person h4{font-family:var(--sans);font-size:13.5px;font-weight:600;margin-top:16px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink)}
 .person .cred{font-size:14.5px;color:var(--graphite);margin-top:5px;line-height:1.5}
@@ -437,10 +441,11 @@ section.rule .wrap > .band:first-child{border-top:0;padding-top:0}
 .byline{font-family:var(--sans);font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--ink);line-height:1.3}
 .byline-cred{font-size:14px;color:var(--graphite);margin-top:3px}
 
-/* ---------- vertical hero: headline + intake overlap a cream plate that holds the sheet ---------- */
+/* ---------- vertical hero: headline + intake overlap a block that holds the sheet ---------- */
+/* This one plate holds no drawing — it's the desk the artifact sheet sits on, so it keeps a ground. */
 .hero-v{padding:28px 0 96px;overflow:clip}
 .hero-v .hero-stage{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));align-items:center}
-.hero-v .hero-plate{grid-column:5 / -1;grid-row:1;align-self:stretch;min-height:560px;background:var(--plate);display:flex;align-items:center;justify-content:flex-end;padding:48px calc(40px - var(--bleed)) 48px 0;margin-right:var(--bleed);border-radius:var(--r-l) 0 0 var(--r-l)}
+.hero-v .hero-plate{grid-column:5 / -1;grid-row:1;align-self:stretch;min-height:560px;background:var(--paper-shade);display:flex;align-items:center;justify-content:flex-end;padding:48px calc(40px - var(--bleed)) 48px 0;margin-right:var(--bleed);border-radius:var(--r-l) 0 0 var(--r-l)}
 .hero-v .hero-plate .sheet{width:min(540px,100%);margin-left:auto;position:relative;z-index:1}
 .hero-v .hero-copy{grid-column:1 / 9;grid-row:1;z-index:2;padding:24px 0;min-width:0}
 .hero-v h1{font-size:clamp(40px,4.6vw,62px);max-width:14ch}
@@ -464,8 +469,8 @@ section.rule .wrap > .band:first-child{border-top:0;padding-top:0}
 .hero-plain.legal h1{font-size:clamp(34px,3.6vw,48px)}
 .hero-plain.with-plate{padding:28px 0 96px;overflow:clip}
 .hero-plain.with-plate .hero-stage{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));align-items:center}
-.hero-plain.with-plate .hero-plate{grid-column:5 / -1;grid-row:1;align-self:stretch;min-height:560px;aspect-ratio:auto;margin-right:var(--bleed);border-radius:var(--r-l) 0 0 var(--r-l)}
-.hero-plain.with-plate .hero-plate img{position:absolute;inset:0;object-position:right center}
+.hero-plain.with-plate .hero-plate{grid-column:5 / -1;grid-row:1;align-self:stretch;min-height:560px;aspect-ratio:auto;margin-right:var(--bleed)}
+.hero-plain.with-plate .hero-plate img{position:absolute;inset:0;object-fit:cover;object-position:right center} /* hero-coaches / hero-programs are cut flush-right at 16:9, so cover bleeds the drawing to the viewport edge */
 .hero-plain.with-plate .hero-copy{grid-column:1 / 9;grid-row:1;z-index:2;padding:40px 0;min-width:0}
 .hero-plain.with-plate h1{font-size:clamp(40px,4.6vw,62px);max-width:14ch}
 .hero-plain.with-plate .hero-sub{margin-top:22px;max-width:380px}
@@ -575,8 +580,8 @@ section.rule .wrap > .band:first-child{border-top:0;padding-top:0}
 .choice{position:relative;cursor:pointer}
 .choice input{position:absolute;opacity:0;pointer-events:none}
 .choice > span{display:flex;align-items:center;gap:14px;padding:14px 16px;border:1px solid var(--control);border-radius:var(--r-m);font-size:16px;font-weight:500;transition:border-color var(--t-hover) ease,background-color var(--t-hover) ease,box-shadow var(--t-hover) ease,transform var(--t-press) var(--ease-out)}
-.choice > span .ic{width:48px;height:48px;border-radius:8px;background:var(--plate);overflow:hidden;flex:none}
-.choice > span .ic img{width:100%;height:100%;object-fit:cover;transform:scale(1.45)}
+.choice > span .ic{width:56px;height:56px;flex:none}
+.choice > span .ic img{width:100%;height:100%;object-fit:contain;mix-blend-mode:multiply}
 .choice:hover > span{border-color:var(--ink)}
 .choice:active > span{transform:scale(.985)}
 .choice input:checked + span{border-color:var(--ink);background:var(--paper-shade);color:var(--ink);box-shadow:0 0 0 1px var(--ink) inset}
@@ -587,7 +592,7 @@ section.rule .wrap > .band:first-child{border-top:0;padding-top:0}
 .stage-nav .back{font-size:15px;font-weight:500;color:var(--graphite);display:inline-flex;align-items:center;gap:6px;padding:8px 10px;border-radius:var(--r-pill)}
 .stage-nav .back:hover{color:var(--ink);background:var(--paper-shade)}
 .summary{position:sticky;top:calc(var(--nav-h) + 28px)}
-.summary .plate{aspect-ratio:4/3;margin-bottom:20px}
+.summary .plate{aspect-ratio:1;margin-bottom:24px}
 .summary-card{border-top:1px solid var(--ink);padding:18px 0 0}
 .summary-card .label{color:var(--graphite);margin-bottom:10px}
 .summary-card dl{display:none;grid-template-columns:auto 1fr;gap:10px 18px;font-size:15px}
@@ -706,7 +711,9 @@ textarea.input{min-height:120px;resize:vertical}
 .cta-coach a{color:var(--on-deep);text-decoration:none;border-bottom:1px solid var(--on-deep-dim);padding-bottom:1px}
 .cta-coach a:hover{border-color:var(--on-deep)}
 .cta-band .form{margin-top:36px}
-.cta-band .plate{aspect-ratio:4/3;box-shadow:0 24px 60px -24px rgba(0,0,0,.5)}
+/* The one exception: ink can't multiply onto the deep band, so the drawing sits on a real sheet. */
+.cta-band .plate{aspect-ratio:4/3;background:var(--paper);border-radius:var(--r-m);overflow:hidden;isolation:isolate;box-shadow:0 8px 24px -12px rgba(0,0,0,.35)}
+.cta-band .plate img{padding:6%;mix-blend-mode:normal}
 .cta-band .plate.sq{aspect-ratio:1;max-width:440px;justify-self:end}
 .cta-band h2 .pen svg path{stroke:var(--on-deep)}
 
@@ -766,8 +773,9 @@ footer{padding:64px 0 36px;border-top:1px solid var(--hairline);background:var(-
   .burger{display:flex}
   .hero{padding:12px 0 52px}
   .hero-stage{display:block}
-  .hero-plate{min-height:0;aspect-ratio:16/10;margin-right:0;border-radius:var(--r-l);margin-top:28px}
-  .hero .hero-plate img{position:static;object-position:center}
+  .hero-plate{min-height:0;margin-right:0;margin-top:28px}
+  .hero .hero-plate{aspect-ratio:4/3;margin-top:12px}
+  .hero .hero-plate img{position:static;height:100%;object-fit:contain;object-position:center} /* below the fold-out, the tight 4:3 crop stands on its own */
   .hero-copy{padding:22px 0 0}
   .hero-copy h1{max-width:none}
   .hero-sub{margin-top:14px;font-size:17px;max-width:none}
@@ -816,8 +824,8 @@ footer{padding:64px 0 36px;border-top:1px solid var(--hairline);background:var(-
   .hero-plain .hero-grid{grid-template-columns:1fr;gap:24px}
   .hero-plain.with-plate{padding:12px 0 56px}
   .hero-plain.with-plate .hero-stage{display:block}
-  .hero-plain.with-plate .hero-plate{min-height:0;aspect-ratio:16/10;margin-right:0;border-radius:var(--r-l);margin-top:28px}
-  .hero-plain.with-plate .hero-plate img{position:static;object-position:center}
+  .hero-plain.with-plate .hero-plate{min-height:0;aspect-ratio:4/3;margin-right:0;margin-top:28px}
+  .hero-plain.with-plate .hero-plate img{position:static;object-fit:contain;object-position:center} /* below 1000 the <picture> falls back to the tight 4:3 scene — nothing to crop */
   .hero-plain.with-plate .hero-copy{padding:22px 0 0}
   .hero-plain.with-plate h1,.hero-plain.with-plate h1.h1-wide{max-width:none}
   .hero-plain.with-plate .hero-sub{max-width:none;font-size:17px}
@@ -851,9 +859,9 @@ footer{padding:64px 0 36px;border-top:1px solid var(--hairline);background:var(-
 @media (max-width:600px){
   h1{font-size:clamp(38px,11vw,48px)}
   .hero-v h1,.hero-plain h1{font-size:clamp(34px,9.5vw,44px)}
-  .ix{grid-template-columns:60px minmax(0,1fr);gap:14px}
-  .ix .plate{width:60px}
-  .ix{grid-template-columns:60px minmax(0,1fr) 20px}
+  .ix{grid-template-columns:64px minmax(0,1fr);gap:14px}
+  .ix .plate{width:64px}
+  .ix{grid-template-columns:64px minmax(0,1fr) 20px}
   .ix::after{content:"→";color:var(--graphite);font-size:18px;justify-self:end}
   .ix h3{font-size:19px}
   .ix h3 .see{display:none}
@@ -882,11 +890,12 @@ footer{padding:64px 0 36px;border-top:1px solid var(--hairline);background:var(-
   .foot-grid{grid-template-columns:1fr 1fr}
   .steprow{grid-template-columns:72px minmax(0,1fr)}
   .strip .step{grid-template-columns:88px minmax(0,1fr)}
+  .strip .step .plate{grid-row:1 / span 3}
+  .strip .step p:not(.step-num){grid-column:2;margin-top:8px}
   .estimate{grid-template-columns:1fr}
   .estimate .est-price{text-align:left}
   .form-row .btn{margin-top:0;width:100%}
   .widget{padding:16px 16px 14px}
-  .hero-v .sheet-wrap .ic-plate{display:none}
 }
 @media (prefers-reduced-motion:reduce){
   /* fewer and gentler: keep the fades that aid comprehension, drop the movement */
@@ -895,6 +904,7 @@ footer{padding:64px 0 36px;border-top:1px solid var(--hairline);background:var(-
   .js .sheet:not(.drawn) .judged,.judged{background-size:100% 8px!important;transition:none!important}
   .js .sheet:not(.drawn) .sheet-note{opacity:1;transform:none}
   .js .season .season-bar,.js .season:not(.drawn) .season-bar{transform:scaleX(1)!important;transition:none!important}
+  .js .plate[data-ink]{transition-duration:160ms} /* cw.js marks these drawn immediately; the fade only covers decode */
   .menu,.lb-list{transform:none!important;transition:opacity 120ms ease,visibility 0s linear 120ms!important}
   .menu[data-open="true"],.lb-list[data-open="true"]{transition:opacity 120ms ease,visibility 0s!important}
   .drawer{transition:visibility 0s linear 120ms!important}
@@ -921,6 +931,7 @@ footer{padding:64px 0 36px;border-top:1px solid var(--hairline);background:var(-
 }
 @media (forced-colors:active){
   .seg input:checked + span,.opt input:checked + span,.choice input:checked + span{outline:3px solid Highlight;outline-offset:-3px}
+  .plate img,.ic img{mix-blend-mode:normal} /* the forced background is not the drawing's white; multiplying onto it would erase the drawing */
 }
 @media (prefers-reduced-transparency:reduce){
   .nav,.sticky-bar{background:var(--paper);-webkit-backdrop-filter:none;backdrop-filter:none}

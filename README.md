@@ -23,8 +23,15 @@ tokens block; everything references custom properties.
 
 - **Teal means "a human reviewed this."** The pen marks (`.pen`, `.circled`), the
   artifact sheet's underline and coach note, the signature chip, the turnaround label,
-  the primary `.pen-btn`. Everything else is ink or graphite.
-- **The plate** (`--plate`, cream) exists only behind the paper-craft imagery.
+  the primary `.pen-btn`, and the one accent inside each drawing. Everything else is ink
+  or graphite.
+- **`.plate` is a frame, not a surface.** It has no fill, no radius and no clipping; the
+  drawing inside is `object-fit:contain` and `mix-blend-mode:multiply`, so its white
+  becomes whatever ground it sits on (page white, `.shade` grey, a `.ix` hover row). Two
+  exceptions: `.cta-band .plate` is a white sheet with a radius, a shadow and
+  `isolation:isolate`, because ink can't multiply onto the deep band; and
+  `.hero-v .hero-plate` is a `--paper-shade` block that holds the artifact `.sheet`
+  rather than a drawing.
 - **Compositions, mixed per page and never centered:** overlap heroes (`.hero`,
   `.hero-v`, `.hero-plain.with-plate` — the plate bleeds to the viewport's right edge via
   `--bleed`; the h1 and the widget cross it, running text stays left of it), the asym grid
@@ -40,18 +47,38 @@ tokens block; everything references custom properties.
   respects `prefers-reduced-motion` (movement dropped, opacity kept).
 
 `assets/cw.js` is the only script, and nothing depends on it to render: sticky nav +
-mega-menus + drawer, pen marks drawn once in view, the request widget (accessible
+mega-menus + drawer, pen marks and drawings revealed once in view, the request widget (accessible
 listbox → stage → live estimate), FAQ, the pricing estimator, the `/start/` flow, the
 intake forms, the mobile sticky CTA. `track()` fires funnel events into
 `window.plausible` if a Plausible script is ever added; it is a no-op otherwise.
 
 ## Imagery
 
-`assets/img/` holds the paper-craft renders (generated with Meshy, exported as WebP):
-the crane-on-manuscript hero, seven vertical thumbnails (`icon-*`), the
-Match/Prepare/Review and Baseline/Enroll/Coordinate/Report step scenes, and the band
-plates (`band-*`). `og-default.png` is a crop of the hero crane. The founders' photos are
-warm-monochrome via CSS.
+Hand-drawn dip-pen spot illustrations on white — New Yorker / Economist register, a
+living slightly uneven line, no hatching or shading, one small teal accent per drawing
+and nothing else coloured. Origami fold-arrows appear only on the hero crane (the final
+fold: wings pulled down and apart); plain objects get no creases and no arrows.
+`assets/img/` holds them as WebP (q90): three flush-right 16:9 overlap-hero crops
+(`hero-wide` 1740×979 for `/`, `hero-coaches` and `hero-programs` 1600×900), with tight
+4:3 fallbacks below 1000px via `<picture>` (`hero-crane`, `band-coaches`, `band-cohort`);
+seven square thumbnails (`icon-*`, 640×640); the Match/Prepare/Review and
+Baseline/Enroll/Coordinate/Report step scenes, the band drawings (`band-*`) and
+`pricing-reviews` / `start-envelope` at 1200×900, every one cropped to ~9–11% margins so
+the set shares one optical scale (strip scenes are bottom-anchored so baselines align);
+and square crops for the square slots — `band-cohort-sq` 640×640 (homepage goal index,
+programs CTA), `start-envelope-sq` 800×800 (CTA bands, `/start/` rail, about CTA),
+`step-review-sq` 800×800 (coaches CTA). `og-default.png` is a crop of the hero crane. The
+founders' photos are warm-graphite via CSS.
+
+Because the drawings multiply onto the page, the white in the file must be true white and
+the crops must be tight — there is no plate to hide a loose margin in. Only `.band`
+drawings get breathing room, via `padding:4%` on the image.
+
+Non-hero drawings fade in the first time they scroll into view: mark the plate
+`<div class="plate" data-ink>` and cw.js adds `.drawn` once the image has decoded. Hero
+plates deliberately carry no `data-ink` — they must be there at first paint. With no JS
+the plates are simply visible; with `prefers-reduced-motion` they are marked drawn
+immediately.
 
 ## Forms
 
