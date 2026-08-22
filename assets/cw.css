@@ -836,17 +836,12 @@ footer{padding:64px 0 36px;border-top:1px solid var(--hairline);background:var(-
    desk backdrops under the artifact sheet.
    ============================================================ */
 
-/* ---------- status eyebrow + breadcrumb ---------- */
-/* The eyebrow speaks in the kicker's voice (serif italic) with a still ink dot; tracked uppercase stays reserved for names and labels. */
-.status{display:inline-flex;align-items:flex-start;gap:10px;margin-bottom:16px;font-family:var(--serif);font-style:italic;font-weight:500;font-size:17px;color:var(--graphite)}
-.status .dot{width:7px;height:7px;border-radius:50%;background:var(--ink);flex:none;margin-top:.55em}
-.status.mt-s{margin-top:24px;margin-bottom:0}
+/* ---------- breadcrumb ---------- */
 .crumb{font-size:13.5px;color:var(--graphite);margin-bottom:12px}
 .crumb ol{list-style:none;display:flex;flex-wrap:wrap;align-items:baseline;gap:0 .5em}
 .crumb li + li::before{content:"→";margin-right:.5em;color:var(--graphite)}
 .crumb a{display:inline-block;padding-block:4px;color:var(--graphite);text-decoration:none;border-bottom:1px solid var(--hairline-strong);transition:color var(--t-hover) ease,border-color var(--t-hover) ease}
 .crumb a:hover{color:var(--pen);border-color:var(--pen)}
-.crumb + .status{margin-top:2px}
 
 /* ---------- display h3: the one step above the base scale, for a card's or panel's headline ---------- */
 .h3-display{font-size:clamp(28px,2.8vw,38px)}
