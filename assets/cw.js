@@ -42,7 +42,7 @@
   /* The three shapes a reservation can take. */
   var MODES = {
     individual: { submit: null, /* reserveLabel(plan) */
-                  hint: 'We’ll reserve your coaching spot under the plan you chose. No payment today. You’ll review your coach match and expected start date before enrolling.',
+                  hint: 'We’ll reserve your coaching spot under the plan you chose. No payment today.',
                   note: 'No payment today. You’ll review your coach match and expected start date before enrolling.',
                   doneH1: 'Your coaching spot is reserved.',
                   doneP: 'We’ve recorded {plan} at {price}. Nothing has been charged. We’ll email {email} with your coach match and expected start date before asking you to enroll.',

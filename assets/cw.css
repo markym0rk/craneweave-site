@@ -489,7 +489,6 @@ section.rule .wrap > .band:first-child{border-top:0;padding-top:0}
 :root:not(.js) .estimator{display:none}
 :root:not(.js) .burger{display:none}
 :root:not(.js) .nav-right .help{display:inline-flex}
-:root:not(.js) [data-variant="individual"] .hint{display:none}
 :root:not(.js) [data-variant] + [data-variant]{margin-top:40px;padding-top:32px;border-top:1px solid var(--hairline)}
 .nojs-note{margin-bottom:24px;font-size:15px;color:var(--graphite)}
 .js .start[data-nav="fwd"] .stage[data-active="true"]{animation:stage-in var(--t-expand) var(--ease-out)}
