@@ -44,7 +44,7 @@ and sticky buttons take `.pen-btn` only when that destination actually enters th
 
 ## Design system
 
-`assets/cw.css` (1,030 lines) — tokens first (`:root`), then components, then a "Platform architecture"
+`assets/cw.css` (1,012 lines) — tokens first (`:root`), then components, then a "Platform architecture"
 block at the end. No hex literals below the tokens block; everything references custom properties.
 
 - **Teal means "a human reviewed this."** The pen marks, the artifact sheet's underline and coach note,
@@ -63,16 +63,17 @@ block at the end. No hex literals below the tokens block; everything references 
   bottom-anchored drawings), `.strip` (three-up, drawings bottom-anchored the same way),
   `.asym` + `.plate.desk.wide` (the artifact on a drawn desk — there is no `.sample` class),
   `.cols2`, alternating `.band`s, and full-width ruled lists (`.plans`, `.doclist`,
-  `.ruled` / `.ruled-plain` / `.ruled-inline`, `.season`, `.report`, `.bios`).
-- **Newer components:** `.status` eyebrow (serif-italic "Now reserving launch spots" with a still ink
-  dot — not tracked uppercase), `.crumb` breadcrumb (`nav > ol`, CSS `→`, on every page except `/`,
-  `/start/`, `/privacy/` and `/terms/`),
+  `.ruled` / `.ruled-plain` / `.ruled-inline`, `.season`, `.report`), and the `.people` coach grid
+  (with its `.people.bios` founder variant on `/`).
+- **Newer components:** `.crumb` breadcrumb (`nav > ol`, CSS `→`, on every page except `/`,
+  `/start/`, `/privacy/` and `/terms/` — and **nothing sits between it and the `h1`**),
   `.h3-display` (the one display step above the 24/28 h3 scale), `.choice.desc` + `legend.q`,
   `.goal-picker` + `[data-plans-gate]`/`[data-plans-empty]`, `.audience` + cross-fading `.aud-panel`s,
   `.plan-opts`, `.stage-pick`, `.cta-lede` / `.cta-note` / `.btn.ghost-light`, `.plain.callout`,
-  `.label.dim`. The `.status` eyebrow is on the 14 pages that sell a coaching spot — everything but
-  `/coaches/`, `/start/`, `/privacy/` and `/terms/`; `/coaches/` is the one page with a crumb and no
-  eyebrow, because its reader is a coach applying, not a client reserving.
+  `.label.dim`. The `.status` launch eyebrow is **retired** — no page renders it and its CSS is
+  deleted. *"Now reserving launch spots"* survives only in body copy attached to the control it
+  qualifies: `/about/`'s `.cta-note`, `/students/`'s `.btn-meta` beside the plan button, `/programs/`'s
+  `.ruled-close`. Do not reintroduce an eyebrow, a badge or a status pill.
 - **Hairline rules, not boxes.** Borders and shadows are reserved for genuine controls (inputs, menus,
   choice cards, option pills, steppers) and the artifact `.sheet`, which is a document.
 - Type: Newsreader (display, sentence case) · Public Sans (body/UI) · Courier Prime (inside artifact
@@ -144,8 +145,9 @@ text to copy.
 2. Add it to `REQUIRED` in `scripts/check_head_tags.py` and to `sitemap.xml`.
 3. Add it to the two mega-menus, the drawer and the footer as appropriate — an 18-file edit — and set
    its route CTA in the nav, drawer and sticky bar.
-4. Give it a `.crumb` (every page has one but `/`, `/start/`, `/privacy/` and `/terms/`), and a
-   `.status` eyebrow if a plan or a pilot is chosen on it.
+4. Give it a `.crumb` (every page has one but `/`, `/start/`, `/privacy/` and `/terms/`) and put
+   nothing between it and the `h1`. If the page takes a reservation, the launch/"No payment today"
+   language goes in body copy beside the button or form, not above the headline.
 5. Only load `Courier+Prime` if the page has an artifact `.sheet`.
 
 ## Checks
