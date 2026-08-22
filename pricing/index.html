@@ -1,610 +1,150 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Pricing — what admissions coaching costs | Craneweave</title>
-  <link rel="icon" type="image/png" href="/Favicon.png" />
-  <meta name="description" content="Every Craneweave price, published: Core $299/mo, Plus $499/mo, Season Pass $1,999, BS/MD $399/mo, single reviews from $49. Cancel monthly. No sales call." />
-  <link rel="canonical" href="https://craneweave.com/pricing/" />
-
-  <meta property="og:title" content="Pricing — what admissions coaching costs" />
-  <meta property="og:description" content="Core $299/month for four review credits, Plus $499 for eight, Season Pass $1,999 for the senior season, single reviews from $49. Cancel monthly. No sales call." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://craneweave.com/pricing/" />
-  <meta property="og:site_name" content="Craneweave" />
-  <meta property="og:locale" content="en_US" />
-  <meta property="og:image" content="https://craneweave.com/og-default.png" />
-  <meta property="og:image:width" content="1200" />
-  <meta property="og:image:height" content="630" />
-  <meta property="og:image:alt" content="Craneweave — expert coaching made effortless" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Pricing — what admissions coaching costs" />
-  <meta name="twitter:description" content="Core $299/month for four review credits, Plus $499 for eight, Season Pass $1,999 for the senior season, single reviews from $49. Cancel monthly. No sales call." />
-  <meta name="twitter:image" content="https://craneweave.com/og-default.png" />
-
-  <script>
-    /* Set before first paint so .reveal can start hidden without the page
-       flashing visible first. The timer is a failsafe: if the bundle never
-       runs, the flag is dropped and every .reveal falls back to visible
-       rather than staying permanently hidden. */
-    document.documentElement.classList.add('js');
-    setTimeout(function () {
-      if (!window.__cwReady) document.documentElement.classList.remove('js');
-    }, 2500);
-  </script>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500..700&family=DM+Sans:wght@400..600&family=Spline+Sans+Mono:wght@400..500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/assets/craneweave.css" />
-
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-          { "@type": "ListItem", "position": 1, "name": "Craneweave", "item": "https://craneweave.com/" },
-          { "@type": "ListItem", "position": 2, "name": "Pricing" }
-        ]
-      },
-      {
-        "@type": "Service",
-        "name": "Admissions coaching",
-        "serviceType": "Admissions coaching",
-        "url": "https://craneweave.com/pricing/",
-        "provider": { "@type": "Organization", "name": "Craneweave", "url": "https://craneweave.com/" },
-        "offers": [
-          {
-            "@type": "Offer",
-            "name": "Core",
-            "price": "299.00",
-            "priceCurrency": "USD",
-            "description": "4 review credits every month, vetted coach match and personalized plan, 72-hour review turnaround",
-            "url": "https://craneweave.com/pricing/#pricing",
-            "availability": "https://schema.org/InStock"
-          },
-          {
-            "@type": "Offer",
-            "name": "Plus",
-            "price": "499.00",
-            "priceCurrency": "USD",
-            "description": "8 review credits every month, 48-hour turnaround, priority coach matching, everything in Core",
-            "url": "https://craneweave.com/pricing/#pricing",
-            "availability": "https://schema.org/InStock"
-          },
-          {
-            "@type": "Offer",
-            "name": "Season Pass",
-            "price": "1999.00",
-            "priceCurrency": "USD",
-            "description": "Senior season, August 1 to January 15, 24 review credits to use any time",
-            "url": "https://craneweave.com/pricing/#pricing",
-            "availability": "https://schema.org/InStock"
-          },
-          {
-            "@type": "Offer",
-            "name": "BS/MD track",
-            "price": "399.00",
-            "priceCurrency": "USD",
-            "description": "BS/MD track from $399 a month: both essay tracks, the combined application, and the program list",
-            "url": "https://craneweave.com/pricing/#pricing",
-            "availability": "https://schema.org/InStock"
-          },
-          {
-            "@type": "Offer",
-            "name": "Essay review",
-            "price": "99.00",
-            "priceCurrency": "USD",
-            "description": "A la carte: one essay draft read in full and returned with specific written feedback",
-            "url": "https://craneweave.com/pricing/#pricing",
-            "availability": "https://schema.org/InStock"
-          },
-          {
-            "@type": "Offer",
-            "name": "School list",
-            "price": "69.00",
-            "priceCurrency": "USD",
-            "description": "A la carte: reach, target and likely, calibrated against your record and your timing, with the reasoning written down",
-            "url": "https://craneweave.com/pricing/#pricing",
-            "availability": "https://schema.org/InStock"
-          },
-          {
-            "@type": "Offer",
-            "name": "Full application",
-            "price": "249.00",
-            "priceCurrency": "USD",
-            "description": "A la carte: every part read together in one pass and returned before you submit",
-            "url": "https://craneweave.com/pricing/#pricing",
-            "availability": "https://schema.org/InStock"
-          },
-          {
-            "@type": "Offer",
-            "name": "Check-in",
-            "price": "49.00",
-            "priceCurrency": "USD",
-            "description": "A la carte: a scoped read of where you are against your plan and what the next two weeks should hold",
-            "url": "https://craneweave.com/pricing/#pricing",
-            "availability": "https://schema.org/InStock"
-          }
-        ]
-      },
-      {
-        "@type": "FAQPage",
-        "mainEntity": [
-          {
-            "@type": "Question",
-            "name": "How much does an admissions consultant cost?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "An admissions consultant typically costs $10,000 or more for one cycle, usually quoted only after a sales call. Craneweave publishes its prices: $299 a month on Core, $499 on Plus, $1,999 for the senior Season Pass, and single reviews from $49. Cancel monthly, no contracts."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "What does one review credit buy?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "One review credit buys one review: a scoped, written expert evaluation of one piece of real work, returned on a published turnaround and signed by your coach by name. An essay draft, a school list, a full application, or a check-in each cost the same single credit, whatever the goal."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Do unused credits roll over?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Unused credits don't roll over — monthly credits reset each billing month, so pick the plan that matches the month ahead. If a month runs heavy, the à la carte prices above cover the overflow at the same rates. Season Pass differs: its 24 credits spend any time between August 1 and January 15."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Can I cancel?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Yes — cancel any month. No contracts, no minimum term, no cancellation call."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Are there hidden fees?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "No. The plan price or the à la carte price is the whole price — no consultation fee, no matching fee, nothing quoted privately."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Why is the BS/MD track $399?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "The BS/MD track starts at $399 a month because it's two applications inside one cycle — the undergraduate application and the medical-program application, each with its own essays, list, and interviews. There's more work in it, and we'd rather say so than average it into everyone else's price. The track page has the full breakdown."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "What do the founding-cohort goals cost?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Founding-cohort goals cost nothing to join, and the prices above when they open. MBA, law school, medical school, and recruiting are opening in founding cohorts; joining a list is free, holds your place, and commits you to nothing. We'll email you the day your goal opens — at the pricing already published here."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Do you quote cohort or program pricing?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Yes — we quote cohort and program pricing, in writing and before any call. Access organizations, districts, and scholarship programs are quoted off the published plans above, with completion and review-utilization reporting included for funders. The programs page covers cohort rates for districts and scholarship programs."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "What am I not buying?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "You are not buying an outcome. Admission isn't a purchasable thing, and you should walk away from anyone who prices it like one. What this money buys is the work: every essay, list, and application read by a named coach before it ships, on a schedule you can hold us to."
-            }
-          }
-        ]
-      }
-    ]
-  }
-  </script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pricing — Craneweave</title>
+<meta name="description" content="No sales calls, no quote gates. Here's what everything costs and exactly what you get.">
+<link rel="canonical" href="https://craneweave.com/pricing/">
+<meta property="og:title" content="Pricing — Craneweave">
+<meta property="og:description" content="No sales calls, no quote gates. Here's what everything costs and exactly what you get.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://craneweave.com/pricing/">
+<meta property="og:site_name" content="Craneweave">
+<meta property="og:image" content="https://craneweave.com/og-default.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" href="/Favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Courier+Prime&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/cw.css">
+<script>document.documentElement.classList.add('js')</script>
 </head>
-<body data-page="pricing">
-
-  <!-- NAV -->
-  <nav class="nav" aria-label="Main">
-    <div class="nav-inner">
-      <a class="nav-logo" href="/" aria-label="Craneweave home">
-        <img src="/Craneweave_Logo_White.svg" alt="Craneweave" width="280" height="48" />
-      </a>
-      <div class="nav-links" id="nav-links">
-        <div class="nav-drop">
-          <button class="nav-link nav-drop-btn" type="button" aria-expanded="false" aria-controls="nav-tracks">
-            Students &amp; families
-            <svg class="nav-caret" viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </button>
-          <div class="nav-drop-menu" id="nav-tracks">
-            <a href="/students/">How it works for families</a>
-            <div class="nav-drop-sep" role="separator"></div>
-            <a href="/college/">College admissions</a>
-            <a href="/bsmd/">BS/MD programs</a>
-            <a href="/mba/">MBA admissions</a>
-            <a href="/law/">Law school</a>
-            <a href="/med/">Medical school</a>
-            <a href="/recruiting/">Banking &amp; consulting</a>
-          </div>
-        </div>
-        <a class="nav-link" href="/coaches/">Coaches</a>
-        <a class="nav-link" href="/programs/">Programs</a>
-        <a class="nav-link" href="#pricing" aria-current="page">Pricing</a>
-        <a class="nav-link" href="/about/">About</a>
-        <div class="nav-actions">
-          <a class="nav-link nav-link-quiet" href="/coaches/">Become a coach</a>
-          <button class="btn btn-primary btn-nav" data-open-start="nav">Get started</button>
-        </div>
-      </div>
-      <button class="nav-burger" id="nav-burger" aria-expanded="false" aria-controls="nav-links" aria-label="Menu">
-        <span></span><span></span>
-      </button>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<nav class="nav" aria-label="Primary">
+  <div class="wrap nav-inner">
+    <a class="wordmark" href="/">Craneweave</a>
+    <ul class="nav-links">
+      <li><a href="/#router">Students &amp; families</a></li>
+      <li><a href="/organizations/">For organizations</a></li>
+      <li><a href="/coaches/">Coaches</a></li>
+      <li><a href="/pricing/">Pricing</a></li>
+      <li><a class="cta" href="/#goal">Find your coach</a></li>
+    </ul>
+    <details class="nav-menu">
+      <summary>Menu</summary>
+      <ul>
+      <li><a href="/#router">Students &amp; families</a></li>
+      <li><a href="/organizations/">For organizations</a></li>
+      <li><a href="/coaches/">Coaches</a></li>
+      <li><a href="/pricing/">Pricing</a></li>
+        <li><a class="cta" href="/#goal">Find your coach</a></li>
+      </ul>
+    </details>
+  </div>
+</nav>
+<main id="main">
+<header class="hero-plain">
+  <div class="wrap hero-grid">
+    <h1>The price is on the page.</h1>
+    <div>
+      <p class="hero-sub">No sales calls, no quote gates. Here's what everything costs and exactly what you get.</p>
+      
     </div>
-  </nav>
-
-  <!-- PAGE HERO -->
-  <header class="page-hero">
-    <div class="wrap page-hero-grid">
-      <div class="hero-copy">
-        <nav class="crumb" aria-label="Breadcrumb">
-          <a href="/">Craneweave</a> <span aria-hidden="true">/</span> <span aria-current="page">Pricing</span>
-        </nav>
-        <h1>The price is <span class="accent">on the page.</span></h1>
-        <p class="hero-sub">The monthly plans, what one review costs on its own, and what a credit buys for every goal we coach.</p>
-      </div>
-
-      <!-- The match widget — pick the goal, and every CTA on this page follows it -->
-      <div class="match-card" role="group" aria-labelledby="match-title">
-        <p class="match-title" id="match-title">Find your coach</p>
-        <div class="field">
-          <label for="m-goal">What are you working toward?</label>
-          <select id="m-goal">
-            <option value="undergrad" selected>College admissions</option>
-            <option value="bsmd">BS/MD programs</option>
-            <option value="mba">MBA admissions</option>
-            <option value="law">Law school admissions</option>
-            <option value="med">Medical school admissions</option>
-            <option value="recruiting">Banking &amp; consulting recruiting</option>
-          </select>
-        </div>
-        <div class="field">
-          <label for="m-when">When are you applying?</label>
-          <select id="m-when">
-            <option value="this-cycle" selected>This cycle</option>
-            <option value="next-cycle">Next cycle</option>
-            <option value="exploring">Still exploring</option>
-          </select>
-        </div>
-        <div class="field">
-          <label for="m-who">Who's signing up?</label>
-          <select id="m-who">
-            <option value="parent" selected>Parent or guardian</option>
-            <option value="student">Student</option>
-          </select>
-        </div>
-        <button class="btn btn-primary btn-block" id="match-cta" data-open-start="pricing-hero">Get started</button>
-      </div>
+  </div>
+</header>
+<section class="">
+  <div class="wrap asym">
+    <div class="lead">
+      <h2>Plans</h2>
     </div>
-  </header>
-
-  <section class="statement-band">
-    <div class="wrap">
-      <p class="statement-line quiet reveal">One school counselor for every 372 students (ASCA).</p>
-      <p class="statement-line reveal">One vetted coach on your application, from <strong>$299/month</strong>.</p>
+    <div class="body">
+      <div class="table-wrap">
+      <table class="broadsheet">
+        <thead><tr><th scope="col">Plan</th><th scope="col">Price</th><th scope="col">What you get</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><span class="plan">Core</span><span class="note-margin">Start here.</span></td>
+            <td><span class="price">$299<small>/month</small></span></td>
+            <td><ul><li>4 reviews a month</li><li>coach match + structured plan</li><li>guided modules for every milestone</li><li>72-hour review turnaround</li><li>cancel monthly</li></ul></td>
+          </tr>
+          <tr>
+            <td><span class="plan">Plus</span></td>
+            <td><span class="price">$499<small>/month</small></span></td>
+            <td><ul><li>8 reviews a month</li><li>48-hour turnaround</li><li>priority coach matching</li><li>everything in Core</li></ul></td>
+          </tr>
+          <tr>
+            <td><span class="plan">Season Pass</span></td>
+            <td><span class="price">$1,999<small>/season</small></span></td>
+            <td><ul><li>The whole senior push, Aug 1–Jan 15</li><li>24 reviews to use any time</li><li>priority access in the November crunch</li><li>one price</li></ul></td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+      <p class="table-after">À la carte reviews from $49 — try one before you subscribe.</p>
+      <div class="btn-row"><a class="btn" href="/#goal">Get started</a></div>
     </div>
-  </section>
-
-  <!-- PLANS -->
-  <section class="section section-dark" id="pricing">
-    <div class="wrap">
-      <div class="section-head">
-        <h2>Admissions coaching starts at $299.</h2>
-        <p class="lede">Every plan buys the same unit: expert review credits, spent on your real work.</p>
-      </div>
-      <div class="price-grid">
-        <div class="price-card reveal">
-          <div class="price-name">Core</div>
-          <div class="price-figure"><sup>$</sup>299<span class="price-per">/mo</span></div>
-          <ul class="price-list">
-            <li>4 review credits a month, reset monthly</li>
-            <li>Vetted coach match + personalized plan</li>
-            <li>Guided modules for every milestone</li>
-            <li>72-hour review turnaround</li>
-          </ul>
-          <button class="btn btn-primary btn-block" data-open-start="pricing-core">Get started</button>
-        </div>
-        <div class="price-card price-featured reveal">
-          <div class="price-name">Plus</div>
-          <div class="price-figure"><sup>$</sup>499<span class="price-per">/mo</span></div>
-          <ul class="price-list">
-            <li>8 review credits every month</li>
-            <li>48-hour turnaround</li>
-            <li>Priority coach matching</li>
-            <li>Everything in Core</li>
-          </ul>
-          <button class="btn btn-primary btn-block" data-open-start="pricing-plus">Get started</button>
-        </div>
-        <div class="price-card reveal">
-          <div class="price-name">Season Pass</div>
-          <div class="price-figure"><sup>$</sup>1,999<span class="price-per">/season</span></div>
-          <ul class="price-list">
-            <li>Senior season, Aug 1 – Jan 15</li>
-            <li>24 review credits to use any time</li>
-            <li>Priority access in the November crunch</li>
-            <li>One price, the whole push</li>
-          </ul>
-          <button class="btn btn-primary btn-block" data-open-start="pricing-season">Get started</button>
-        </div>
-      </div>
-      <p class="price-foot reveal">BS/MD track from $399/month — <a href="/bsmd/">see the track</a>. Cancel monthly, no contracts.</p>
+  </div>
+</section>
+<section class="">
+  <div class="wrap asym">
+    <div class="lead">
+      <h2>What a review buys</h2>
     </div>
-  </section>
-
-  <!-- WHAT ONE REVIEW IS -->
-  <section class="section" id="review">
-    <div class="wrap">
-      <div class="section-head">
-        <h2>One credit buys one review.</h2>
-        <p class="lede">A review is a scoped, written expert evaluation of one piece of real work, returned on a published turnaround and signed by the coach by name.</p>
-      </div>
-      <div class="alacarte reveal">
-        <span class="alacarte-label mono">À la carte</span>
-        <span>Essay review <strong>$99</strong></span>
-        <span>School list <strong>$69</strong></span>
-        <span>Full application <strong>$249</strong></span>
-        <span>Check-in <strong>$49</strong></span>
-        <span>24h rush <strong>+$50</strong></span>
-      </div>
-      <div class="req-list">
-        <details>
-          <summary>An essay draft</summary>
-          <div class="req-a"><p>One draft of one essay — personal statement, supplement, secondary, cover letter — read in full and returned with specific written feedback: what it's actually about, which paragraph should open it, what to cut. One credit, or $99 on its own.</p></div>
-        </details>
-        <details>
-          <summary>A school list</summary>
-          <div class="req-a"><p>Reach, target, and likely, calibrated against your record, your timing, and where money is plausible for you — with the reasoning written down, not just the names. One credit, or $69 on its own.</p></div>
-        </details>
-        <details>
-          <summary>A full application, before it ships</summary>
-          <div class="req-a"><p>Every part read together in one pass — essays, activities, résumé, the whole file — because that is how it gets read on the other side. Returned before you submit. One credit, or $249 on its own.</p></div>
-        </details>
-        <details>
-          <summary>A check-in</summary>
-          <div class="req-a"><p>A scoped read of where you are against your plan: what's on pace, what's slipping, and what the next two weeks should hold. One credit, or $49 on its own.</p></div>
-        </details>
-        <details>
-          <summary>A 24-hour rush</summary>
-          <div class="req-a"><p>Any review comes back in 24 hours instead of your plan's published turnaround, for $50 on top — credit or à la carte. It's the one surcharge on this page.</p></div>
-        </details>
-      </div>
+    <div class="body">
+      <p>One review = one piece of real work — an essay draft, a school list, a full application, a workflow — evaluated in writing by your coach, returned on the published turnaround, with clear direction on what to change and why.</p>
+      <p>Reviews reset monthly (Core and Plus) or pool for the season (Season Pass). Spend one on a second opinion from a different coach any time. Unused reviews don't roll over.</p>
     </div>
-  </section>
-
-  <!-- BY GOAL -->
-  <section class="section section-dark" id="goals">
-    <div class="wrap">
-      <div class="section-head">
-        <h2>One price list. Every goal.</h2>
-        <p class="lede">The one exception: BS/MD — two applications in one cycle, from $399/month.</p>
-      </div>
-      <div class="reveal">
-        <table class="rate-table">
-          <thead>
-            <tr>
-              <th scope="col">Goal</th>
-              <th scope="col">Credits go to</th>
-              <th scope="col">Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>College admissions</td>
-              <td>Essays · list · full application</td>
-              <td>Enrolling now</td>
-            </tr>
-            <tr>
-              <td>BS/MD programs</td>
-              <td>Both essay tracks · application</td>
-              <td>Enrolling now</td>
-            </tr>
-            <tr>
-              <td>MBA admissions</td>
-              <td>Essays · résumé · application</td>
-              <td>Founding cohort</td>
-            </tr>
-            <tr>
-              <td>Law school</td>
-              <td>Personal statement · list · file</td>
-              <td>Founding cohort</td>
-            </tr>
-            <tr>
-              <td>Medical school</td>
-              <td>Primary · secondaries · list</td>
-              <td>Founding cohort</td>
-            </tr>
-            <tr>
-              <td>Banking &amp; consulting</td>
-              <td>Résumé · cover letters · story bank</td>
-              <td>Founding cohort</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <p class="reveal" style="margin-top:18px"><a class="arrow-link" href="/#goals">See all six goals <span aria-hidden="true">→</span></a></p>
+  </div>
+</section>
+<section class="">
+  <div class="wrap asym">
+    <div class="lead">
+      <h2>Why this costs $299 and not $10,000</h2>
     </div>
-  </section>
-
-  <!-- MISSION -->
-  <section class="mission-band">
-    <div class="wrap">
-      <p class="mission-line reveal">Nobody should sit through a pitch to find out what coaching costs, or wonder what the number would have been for somebody else.</p>
-      <p class="mission-sign mono reveal">— Founded by coaches who ran these applications themselves</p>
+    <div class="body">
+      <p>A $10,000 consultant charges expert rates for everything — including deadline reminders and questions a module answers better. We built software to do everything that isn't expert judgment: the plan, the prep, the tracking, the logistics. What's left is the only thing worth expert prices — an expert, reviewing your real work. You pay for exactly that.</p>
     </div>
-  </section>
-
-  <!-- FAQ -->
-  <section class="section" id="faq">
-    <div class="wrap">
-      <div class="section-head">
-        <h2>Questions about the price.</h2>
-      </div>
-      <div class="faq">
-        <details>
-          <summary>How much does an admissions consultant cost?</summary>
-          <div class="faq-a"><p>An admissions consultant typically costs $10,000 or more for one cycle, usually quoted only after a sales call. Craneweave publishes its prices: $299 a month on Core, $499 on Plus, $1,999 for the senior Season Pass, and single reviews from $49. Cancel monthly, no contracts.</p></div>
-        </details>
-        <details>
-          <summary>What does one review credit buy?</summary>
-          <div class="faq-a"><p>One review credit buys one review: a scoped, written expert evaluation of one piece of real work, returned on a published turnaround and signed by your coach by name. An essay draft, a school list, a full application, or a check-in each cost the same single credit, whatever the goal.</p></div>
-        </details>
-        <details>
-          <summary>Do unused credits roll over?</summary>
-          <div class="faq-a"><p>Unused credits don't roll over — monthly credits reset each billing month, so pick the plan that matches the month ahead. If a month runs heavy, the à la carte prices above cover the overflow at the same rates. Season Pass differs: its 24 credits spend any time between August 1 and January 15.</p></div>
-        </details>
-        <details>
-          <summary>Can I cancel?</summary>
-          <div class="faq-a"><p>Yes — cancel any month. No contracts, no minimum term, no cancellation call.</p></div>
-        </details>
-        <details>
-          <summary>Are there hidden fees?</summary>
-          <div class="faq-a"><p>No. The plan price or the à la carte price is the whole price — no consultation fee, no matching fee, nothing quoted privately.</p></div>
-        </details>
-        <details>
-          <summary>Why is the BS/MD track $399?</summary>
-          <div class="faq-a"><p>The BS/MD track starts at $399 a month because it's two applications inside one cycle — the undergraduate application and the medical-program application, each with its own essays, list, and interviews. There's more work in it, and we'd rather say so than average it into everyone else's price. The track page has <a href="/bsmd/">the full breakdown</a>.</p></div>
-        </details>
-        <details>
-          <summary>What do the founding-cohort goals cost?</summary>
-          <div class="faq-a"><p>Founding-cohort goals cost nothing to join, and the prices above when they open. MBA, law school, medical school, and recruiting are opening in founding cohorts; joining a list is free, holds your place, and commits you to nothing. We'll email you the day your goal opens — at the pricing already published here.</p></div>
-        </details>
-        <details>
-          <summary>Do you quote cohort or program pricing?</summary>
-          <div class="faq-a"><p>Yes — we quote cohort and program pricing, in writing and before any call. Access organizations, districts, and scholarship programs are quoted off the published plans above, with completion and review-utilization reporting included for funders. The programs page covers <a href="/programs/">cohort rates for districts and scholarship programs</a>.</p></div>
-        </details>
-        <details>
-          <summary>What am I not buying?</summary>
-          <div class="faq-a"><p>You are not buying an outcome. Admission isn't a purchasable thing, and you should walk away from anyone who prices it like one. What this money buys is the work: every essay, list, and application read by a named coach before it ships, on a schedule you can hold us to.</p></div>
-        </details>
-      </div>
-
-      <p style="margin-top:18px"><a class="arrow-link" href="/coaches/">See what the coach is paid <span aria-hidden="true">→</span></a></p>
-
-      <div class="cta-band cta-band-close reveal">
-        <div>
-          <h3>Still have a question?</h3>
-          <p>Ask before you pay anything. We answer in writing.</p>
-        </div>
-        <div style="display:flex;flex-wrap:wrap;gap:12px">
-          <a class="btn btn-outline" href="mailto:team@craneweave.com">Email us a question</a>
-          <button class="btn btn-primary" data-open-start="pricing-faq">Get started</button>
-        </div>
-      </div>
+  </div>
+</section>
+<section class="">
+  <div class="wrap asym">
+    <div class="lead">
+      <h2>Terms in plain language</h2>
     </div>
-  </section>
-
-  <!-- FOOTER CTA -->
-  <section class="footer-cta">
-    <div class="wrap">
-      <h2>Expert coaching made effortless.</h2>
-      <button class="btn btn-primary" data-open-start="pricing-footer">Get started</button>
-      <p class="microcopy">From $299/month · published pricing · cancel monthly</p>
+    <div class="body">
+      <p>Cancel monthly plans any time; you keep access through the paid month. Season Pass is one payment for the dated season. If a review misses its published turnaround, it's free. <a href="/terms/">Full terms →</a></p>
+      <p><strong>Buying for a team or a cohort?</strong> <a href="/organizations/">For organizations →</a> &nbsp; <a href="/programs/">Cohort programs →</a></p>
     </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer class="footer">
-    <div class="wrap">
-      <div class="footer-grid">
-        <div class="footer-brand">
-          <a class="footer-logo" href="/"><img src="/Craneweave_Logo_White.svg" alt="Craneweave" width="280" height="48" /></a>
-          <p>Expert coaching made effortless.</p>
-        </div>
-        <div class="footer-col">
-          <div class="footer-head mono">Goals</div>
-          <a href="/college/">College admissions</a>
-          <a href="/bsmd/">BS/MD programs</a>
-          <a href="/mba/">MBA admissions</a>
-          <a href="/law/">Law school</a>
-          <a href="/med/">Medical school</a>
-          <a href="/recruiting/">Banking &amp; consulting</a>
-        </div>
-        <div class="footer-col">
-          <div class="footer-head mono">Craneweave</div>
-          <a href="/students/">Students &amp; families</a>
-          <a href="/coaches/">Coaches</a>
-          <a href="/coaches/#apply">Apply to coach</a>
-          <a href="/programs/">Programs</a>
-          <a href="/#pricing">Pricing</a>
-        </div>
-        <div class="footer-col">
-          <div class="footer-head mono">Company</div>
-          <a href="/about/">About</a>
-          <a href="mailto:team@craneweave.com">Contact</a>
-          <a href="/privacy/">Privacy</a>
-          <a href="/terms/">Terms</a>
-        </div>
-      </div>
-      <div class="footer-base">© 2026 Craneweave</div>
+  </div>
+</section>
+<section class="cta-band">
+  <div class="wrap">
+    <h2>Expert judgment on your real work.</h2>
+    <div class="cta-actions">
+      <a class="btn" href="/#goal">Get started</a>
+      <span class="cta-meta">From $299/month · published pricing · cancel monthly</span>
     </div>
-  </footer>
-
-  <!-- GET STARTED / WAITLIST MODAL -->
-  <dialog class="start" id="start-modal">
-    <div class="start-inner">
-      <button class="start-close" data-close-start aria-label="Close">×</button>
-      <h3 id="start-title">Get started</h3>
-      <p class="start-sub" id="start-sub">Tell us where you're headed and we'll take it from there.</p>
-      <form id="start-form">
-        <div class="field">
-          <label for="s-goal">Goal</label>
-          <select id="s-goal" name="goal" required>
-            <option value="undergrad">College admissions</option>
-            <option value="bsmd">BS/MD programs</option>
-            <option value="mba">MBA admissions</option>
-            <option value="law">Law school admissions</option>
-            <option value="med">Medical school admissions</option>
-            <option value="recruiting">Banking &amp; consulting recruiting</option>
-          </select>
-        </div>
-        <div class="field">
-          <label for="s-when">Timeline</label>
-          <select id="s-when" name="timeline" required>
-            <option value="this-cycle">Applying this cycle</option>
-            <option value="next-cycle">Applying next cycle</option>
-            <option value="exploring">Still exploring</option>
-          </select>
-        </div>
-        <div class="field">
-          <label for="s-who">I am a</label>
-          <select id="s-who" name="role" required>
-            <option value="parent">Parent or guardian</option>
-            <option value="student">Student</option>
-          </select>
-        </div>
-        <div class="field">
-          <label for="s-name">Name</label>
-          <input id="s-name" name="name" type="text" autocomplete="name" required />
-        </div>
-        <div class="field">
-          <label for="s-email">Email</label>
-          <input id="s-email" name="email" type="email" autocomplete="email" required />
-        </div>
-        <button class="btn btn-primary btn-block" type="submit" id="start-submit">Continue</button>
-        <p class="start-foot" id="start-foot">Enrolling now. We'll email you to complete signup — no sales call.</p>
-      </form>
-      <p class="start-done" id="start-done" hidden>You're in. Check your email — we'll take it from there.</p>
-    </div>
-  </dialog>
-
-  <script src="/assets/craneweave.js" defer onerror="document.documentElement.classList.remove('js')"></script>
+    <p class="cta-coach">Been through one of these processes yourself? <a href="/coaches/">Coach on Craneweave →</a></p>
+  </div>
+</section>
+</main>
+<footer>
+  <div class="wrap foot">
+    <a class="wordmark" href="/">Craneweave</a>
+    <ul>
+      <li><a href="/#router">Students &amp; families</a></li>
+      <li><a href="/organizations/">For organizations</a></li>
+      <li><a href="/coaches/">Coaches</a></li>
+      <li><a href="/pricing/">Pricing</a></li>
+      <li><a href="/about/">About</a></li>
+      <li><a href="/privacy/">Privacy</a></li>
+      <li><a href="/terms/">Terms</a></li>
+    </ul>
+    <span class="copy">© 2026 Craneweave</span>
+  </div>
+</footer>
+<script src="/assets/cw.js" defer></script>
 </body>
 </html>

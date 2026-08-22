@@ -1,532 +1,151 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Become an admissions coach, paid per review | Craneweave</title>
-  <link rel="icon" type="image/png" href="/Favicon.png" />
-  <meta name="description" content="Coach applicants async and get paid per review at published rates — $45 an essay, $110 a full application. Accept what fits. No calendars, no calls." />
-  <link rel="canonical" href="https://craneweave.com/coaches/" />
-
-  <meta property="og:title" content="Become an admissions coach, paid per review" />
-  <meta property="og:description" content="Accept the reviews that fit you, return sharp written feedback, get paid per review at published rates. No calendars, no client acquisition." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://craneweave.com/coaches/" />
-  <meta property="og:site_name" content="Craneweave" />
-  <meta property="og:locale" content="en_US" />
-  <meta property="og:image" content="https://craneweave.com/og-default.png" />
-  <meta property="og:image:width" content="1200" />
-  <meta property="og:image:height" content="630" />
-  <meta property="og:image:alt" content="Craneweave — expert coaching made effortless" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Become an admissions coach, paid per review" />
-  <meta name="twitter:description" content="Accept the reviews that fit you, return sharp written feedback, get paid per review at published rates. No calendars, no client acquisition." />
-  <meta name="twitter:image" content="https://craneweave.com/og-default.png" />
-
-  <script>
-    /* Set before first paint so .reveal can start hidden without the page
-       flashing visible first. The timer is a failsafe: if the bundle never
-       runs, the flag is dropped and every .reveal falls back to visible
-       rather than staying permanently hidden. */
-    document.documentElement.classList.add('js');
-    setTimeout(function () {
-      if (!window.__cwReady) document.documentElement.classList.remove('js');
-    }, 2500);
-  </script>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500..700&family=DM+Sans:wght@400..600&family=Spline+Sans+Mono:wght@400..500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/assets/craneweave.css" />
-
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-          { "@type": "ListItem", "position": 1, "name": "Craneweave", "item": "https://craneweave.com/" },
-          { "@type": "ListItem", "position": 2, "name": "Coaches" }
-        ]
-      },
-      {
-        "@type": "FAQPage",
-        "mainEntity": [
-          {
-            "@type": "Question",
-            "name": "What does Craneweave pay per review?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Craneweave pays published per-review rates: $45 for an essay review, $30 for a school list, $110 for a full application, $20 for a check-in, and $25 on top for a 24-hour rush. The rates are the same for every coach, and you see the rate before you accept."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "How do you become a college admissions coach here?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "You become an admissions coach here by applying with what you've done: your school or program, your admissions history, your background. We read every application, verify it, and score a sample review against our standards. Once you're on, reviews arrive in a queue; you accept only what fits your expertise. No calendars, no unpaid intro calls."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "How much will I make?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "How much you make is your call: we publish what each review pays and nothing beyond that, because you decide how many you accept. Anyone quoting a monthly figure for work like this is guessing at your calendar. The rates are above; the arithmetic is yours."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Is there a minimum, or a schedule?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "There's no minimum and no schedule — no shift, no quota, and no consequence for a quiet week. Reviews sit in your queue with a deadline attached and you take the ones you want. If you take none, the queue routes elsewhere until you're back."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Do I have to talk to students or parents?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "You don't have to talk to students or parents; the work is written. A coordinator handles the relationship, the reminders, and anything administrative, so your side is the review itself. You're never asked to run an unpaid intro call or sell anything to a family."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "What does the platform draft, and what's left for me?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "The platform drafts the groundwork — what changed since the last draft, which prompt this answers, what comes next — and none of it goes out unread. The judgment is yours: what's working, what to cut, what's missing, what to do about it. Matching, reminders, and billing all happen before the file reaches you, so families pay expert prices only for your expert moments — that's how this costs $299, not $10,000."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Which goals can I coach?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "You can coach the goals you've been through: college admissions and BS/MD are enrolling now, so that's where reviews are today. MBA, law school, medical school, and banking and consulting recruiting open next as founding cohorts. Tell us on the application which you've actually done — we route by experience, not interest."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Am I expected to guarantee results?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "You're never asked to guarantee results. Admission isn't a purchasable outcome and we don't sell one — walk away from any platform that asks you to imply otherwise. What we promise families is the work: every essay, list, and application read by a named coach before it ships, on schedule. That's the only promise you keep."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "What happens to a student's work and data?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "A student's work and data are used only to coach that student, deleted within 90 days — sooner on request, and never sold. Parents consent before any student under 18 joins. That also means the work isn't yours to keep, reuse, or share once the review is returned. Full policy at craneweave.com/privacy."
-            }
-          }
-        ]
-      }
-    ]
-  }
-  </script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Coach on Craneweave</title>
+<meta name="description" content="On Craneweave, prepared work comes to you. You read it, review it, and get paid per review.">
+<link rel="canonical" href="https://craneweave.com/coaches/">
+<meta property="og:title" content="Coach on Craneweave">
+<meta property="og:description" content="On Craneweave, prepared work comes to you. You read it, review it, and get paid per review.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://craneweave.com/coaches/">
+<meta property="og:site_name" content="Craneweave">
+<meta property="og:image" content="https://craneweave.com/og-default.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" href="/Favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Courier+Prime&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/cw.css">
+<script>document.documentElement.classList.add('js')</script>
 </head>
-<body data-page="coaches">
-
-  <!-- NAV -->
-  <nav class="nav" aria-label="Main">
-    <div class="nav-inner">
-      <a class="nav-logo" href="/" aria-label="Craneweave home">
-        <img src="/Craneweave_Logo_White.svg" alt="Craneweave" width="280" height="48" />
-      </a>
-      <div class="nav-links" id="nav-links">
-        <div class="nav-drop">
-          <button class="nav-link nav-drop-btn" type="button" aria-expanded="false" aria-controls="nav-tracks">
-            Students &amp; families
-            <svg class="nav-caret" viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </button>
-          <div class="nav-drop-menu" id="nav-tracks">
-            <a href="/students/">How it works for families</a>
-            <div class="nav-drop-sep" role="separator"></div>
-            <a href="/college/">College admissions</a>
-            <a href="/bsmd/">BS/MD programs</a>
-            <a href="/mba/">MBA admissions</a>
-            <a href="/law/">Law school</a>
-            <a href="/med/">Medical school</a>
-            <a href="/recruiting/">Banking &amp; consulting</a>
-          </div>
-        </div>
-        <a class="nav-link" href="/coaches/" aria-current="page">Coaches</a>
-        <a class="nav-link" href="/programs/">Programs</a>
-        <a class="nav-link" href="/#pricing">Pricing</a>
-        <a class="nav-link" href="/about/">About</a>
-        <div class="nav-actions">
-          <a class="nav-link nav-link-quiet" href="#apply">Become a coach</a>
-          <a class="btn btn-primary btn-nav" href="#apply">Apply to coach</a>
-        </div>
-      </div>
-      <button class="nav-burger" id="nav-burger" aria-expanded="false" aria-controls="nav-links" aria-label="Menu">
-        <span></span><span></span>
-      </button>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<nav class="nav" aria-label="Primary">
+  <div class="wrap nav-inner">
+    <a class="wordmark" href="/">Craneweave</a>
+    <ul class="nav-links">
+      <li><a href="/#router">Students &amp; families</a></li>
+      <li><a href="/organizations/">For organizations</a></li>
+      <li><a href="/coaches/">Coaches</a></li>
+      <li><a href="/pricing/">Pricing</a></li>
+      <li><a class="cta" href="#apply">Apply to coach</a></li>
+    </ul>
+    <details class="nav-menu">
+      <summary>Menu</summary>
+      <ul>
+      <li><a href="/#router">Students &amp; families</a></li>
+      <li><a href="/organizations/">For organizations</a></li>
+      <li><a href="/coaches/">Coaches</a></li>
+      <li><a href="/pricing/">Pricing</a></li>
+        <li><a class="cta" href="#apply">Apply to coach</a></li>
+      </ul>
+    </details>
+  </div>
+</nav>
+<main id="main">
+<header class="hero-plain">
+  <div class="wrap hero-grid">
+    <h1>Get paid for your judgment. Not your logistics.</h1>
+    <div>
+      <p class="hero-sub">You've done the thing — the admit, the offer, the skill. Coaching it shouldn't mean scheduling calls, chasing drafts, and answering the same SAT-vs-ACT question forty times. On Craneweave, prepared work comes to you. You read it, review it, and get paid per review.</p>
+      <div class="btn-row"><a class="btn" href="#apply">Apply to coach</a></div>
     </div>
-  </nav>
-
-  <!-- HERO -->
-  <header class="page-hero">
-    <div class="wrap page-hero-grid">
-      <div class="hero-copy">
-        <nav class="crumb" aria-label="Breadcrumb"><a href="/">Craneweave</a> <span aria-hidden="true">/</span> <span aria-current="page">Coaches</span></nav>
-        <h1>Coach admissions. Get paid <span class="accent">per review.</span></h1>
-        <p class="hero-sub">Coach on your schedule. Reviews arrive prepared, with the rate attached. Take the ones that fit, answer in writing, sign your name.</p>
-        <a class="btn btn-primary" href="#apply">Apply to coach</a>
-      </div>
-
-      <div class="fragment">
-        <div class="fragment-head">
-          <span class="fragment-title">Open reviews</span>
-          <span class="fragment-meta mono">Sample · 3 open</span>
-        </div>
-        <div class="fragment-body">
-          <div class="queue-row"><span class="queue-type">Essay review · College</span><span class="queue-pay mono">$45</span><button class="queue-accept" tabindex="-1">Accept</button></div>
-          <div class="queue-row"><span class="queue-type">Full application · BS/MD</span><span class="queue-pay mono">$110</span><button class="queue-accept" tabindex="-1">Accept</button></div>
-          <div class="queue-row is-rush"><span class="queue-type">Essay review · 24h rush</span><span class="queue-pay mono">$45 + $25 rush</span><button class="queue-accept" tabindex="-1">Accept</button></div>
-          <p class="queue-note">Scope, deadline, and rate, all before you accept. Decline anything that isn't yours to judge; nobody follows up.</p>
-        </div>
-      </div>
+  </div>
+</header>
+<section class="">
+  <div class="wrap asym">
+    <div class="lead">
+      <h2>What the platform does / what you do</h2>
     </div>
-  </header>
-
-  <!-- PAY -->
-  <section class="section" id="pay">
-    <div class="wrap">
-      <div class="section-head">
-        <h2>What each review pays.</h2>
-        <p class="lede">Apply with what you've done, get vetted, and reviews arrive with the rate attached. No negotiating, no invoicing.</p>
-      </div>
-      <div class="fragment reveal">
-        <div class="fragment-head">
-          <span class="fragment-title">Published rates, per review</span>
-          <span class="fragment-meta mono">Shown before you accept</span>
-        </div>
-        <div class="fragment-body">
-          <table class="rate-table">
-            <thead>
-              <tr>
-                <th scope="col">Review</th>
-                <th scope="col">What you return</th>
-                <th scope="col">Pay</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Essay review</td>
-                <td>One draft, answered in writing</td>
-                <td class="mono">$45</td>
-              </tr>
-              <tr>
-                <td>School list</td>
-                <td>Reach, target, and likely, calibrated</td>
-                <td class="mono">$30</td>
-              </tr>
-              <tr>
-                <td>Full application</td>
-                <td>Every part, checked before it ships</td>
-                <td class="mono">$110</td>
-              </tr>
-              <tr>
-                <td>Check-in</td>
-                <td>Where the student stands</td>
-                <td class="mono">$20</td>
-              </tr>
-              <tr>
-                <td>24-hour rush</td>
-                <td>Any review, inside a day</td>
-                <td class="mono">+$25</td>
-              </tr>
-            </tbody>
-          </table>
-          <p class="queue-note">Same rates for every coach. Rush stacks on top.</p>
-        </div>
-      </div>
-      <div class="cta-band cta-band-close reveal">
-        <div>
-          <h3>These are the rates.</h3>
-        </div>
-        <a class="btn btn-primary" href="#apply">Apply to coach</a>
-      </div>
+    <div class="body">
+      <ul class="ruled">
+        <li><p><strong>The platform:</strong> matching, plans, deadline tracking, reminders, the modules that answer every repeatable question, all scheduling — there is none — and payment.</p></li>
+        <li><p><strong>You:</strong> read work that's already past the basics, and give the part only you can — an expert's point of view. Whether the essay works. Whether the list is right. What to change and why.</p></li>
+      </ul>
     </div>
-  </section>
-
-  <!-- HOW IT WORKS -->
-  <section class="section section-dark" id="how">
-    <div class="wrap">
-      <div class="section-head">
-        <h2>Accept, review, sign, get paid.</h2>
-      </div>
-      <div class="how-grid">
-        <div class="how-step reveal">
-          <div class="how-num mono">01</div>
-          <h3>Accept</h3>
-          <p>Reviews land in your queue with the work, the deadline, and the rate visible. Take the ones you're the right reader for.</p>
-        </div>
-        <div class="how-step reveal">
-          <div class="how-num mono">02</div>
-          <h3>Review and sign</h3>
-          <p>The file is already assembled. You supply the judgment: what to cut, what's missing, what happens next. Then your name goes on it.</p>
-        </div>
-        <div class="how-step reveal">
-          <div class="how-num mono">03</div>
-          <h3>Get paid</h3>
-          <p>Return it before the published turnaround and the rate you accepted is yours. No invoices, no timesheets.</p>
-        </div>
-      </div>
+  </div>
+</section>
+<section class="">
+  <div class="wrap asym">
+    <div class="lead">
+      <h2>How pay works</h2>
     </div>
-  </section>
-
-  <!-- THE WORK -->
-  <section class="section" id="work">
-    <div class="wrap split">
-      <div class="split-copy">
-        <h2>The judgment is yours.</h2>
-        <p>Everything that makes freelance coaching miserable happens somewhere else: finding the student, collecting the drafts, chasing the payment. The file arrives prepared.</p>
-        <p style="margin-top:18px">See <a class="text-link" href="/students/">what a student sees after a review</a>, or how <a class="text-link" href="/programs/">cohort and scholarship programs</a> work.</p>
-      </div>
-      <div class="split-visual">
-        <div class="fragment reveal">
-          <div class="fragment-head">
-            <span class="fragment-title">Prep brief</span>
-            <span class="fragment-meta mono">Ready for you</span>
-          </div>
-          <div class="fragment-body">
-            <div class="plan-row"><span class="plan-status done">Ready</span><span class="plan-task">Draft 3, changes marked</span></div>
-            <div class="plan-row"><span class="plan-status done">Ready</span><span class="plan-task">Plan, deadlines, past feedback</span></div>
-            <div class="plan-row"><span class="plan-status done">Ready</span><span class="plan-task">Groundwork drafted, waiting on a read</span></div>
-            <div class="plan-row is-now"><span class="plan-status now">You</span><span class="plan-task">What to cut, what's missing, what happens next</span></div>
-            <p class="queue-note">Nothing the platform drafts reaches a student unread. Your read is the review.</p>
-          </div>
-        </div>
-      </div>
+    <div class="body">
+      <p>Per review, at published rates, on a turnaround you commit to. No hourly haggling, no marketplace profile to maintain, no calls. [Rates shared on application.]</p>
     </div>
-  </section>
-
-  <!-- MISSION -->
-  <section class="mission-band">
-    <div class="wrap">
-      <p class="mission-line reveal">The families we coach can't spend $10,000 on an application. They pay expert prices only for expert moments — yours. That's how this costs $299, and why your rate buys judgment, not admin.</p>
-      <p class="mission-sign mono reveal">— The Craneweave team</p>
+  </div>
+</section>
+<section class="">
+  <div class="wrap asym">
+    <div class="lead">
+      <h2>The bar</h2>
     </div>
-  </section>
-
-  <!-- THE BAR -->
-  <section class="section" id="bar">
-    <div class="wrap">
-      <div class="section-head">
-        <h2>Coaches don't list themselves here.</h2>
-        <p class="lede">They apply, they're vetted against <a class="text-link" href="/about/">our review standards</a>, and they stay only if their reviews hold that bar.</p>
-      </div>
-      <div class="req-list">
-        <details>
-          <summary>Who can coach here</summary>
-          <div class="req-a"><p>You've been through the application you'd be reviewing, and you can show us where you landed. For college admissions that means an undergraduate program we can verify; for BS/MD, the double application itself. Past that: you write specifically, and you answer on time.</p></div>
-        </details>
-        <details>
-          <summary>How we vet</summary>
-          <div class="req-a"><p>We read every application ourselves. If it's a fit, we verify your program and your admissions history, then send you sample work to review, scored against the same standard student reviews are held to. That calibration step is the gate.</p></div>
-        </details>
-        <details>
-          <summary>What every review has to do</summary>
-          <div class="req-a"><p>Say something specific: what to cut, what's missing, what to do next. Land before the turnaround published on the review. Carry your name. Generic praise and line edits with no reasoning are how a review fails here, and a failed review gets re-reviewed at our cost, not the student's.</p></div>
-        </details>
-        <details>
-          <summary>What you commit to</summary>
-          <div class="req-a"><p>Nothing standing. You set your capacity one review at a time, and a week where you take none is a normal week. Routing is the only lever that moves: reviews go first to coaches whose work consistently holds the bar.</p></div>
-        </details>
-        <details>
-          <summary>What we ask you not to do</summary>
-          <div class="req-a"><p>Don't write the student's essay; coach it. Don't promise anyone an outcome. Don't take a family off-platform, because the consent, the protections, and the record of the student's file live here. If you have a personal stake in an applicant, flag it and we'll route the review elsewhere.</p></div>
-        </details>
-      </div>
-      <div class="cta-band cta-band-close reveal">
-        <div>
-          <h3>Meet the bar?</h3>
-        </div>
-        <a class="btn btn-primary" href="#apply">Apply with what you've done</a>
-      </div>
+    <div class="body">
+      <p>We vet, we don't list. Applying includes a graded sample review — the same standard we hold every coach to.</p>
     </div>
-  </section>
-
-  <!-- SIGNATURE -->
-  <section class="section section-dark" id="signature">
-    <div class="wrap split split-flip">
-      <div class="split-copy">
-        <h2>Every review goes out signed.</h2>
-        <p>A student knows who read their work, and what that person actually did. Nothing reaches a student under a machine's name, or ours.</p>
-        <a class="btn btn-outline" href="#apply">Apply to coach</a>
-      </div>
-      <div class="split-visual">
-        <div class="fragment reveal">
-          <div class="fragment-head">
-            <span class="fragment-title">Review — returned</span>
-            <span class="fragment-meta mono">Signed by you</span>
-          </div>
-          <div class="fragment-body">
-            <p class="essay-excerpt">…I told them I wanted to study water. <mark>What I meant was the culvert behind our building that flooded every March</mark>, and the summer I spent mapping where it went…</p>
-            <div class="coach-note"><strong>You.</strong> This is the paragraph. Open here, cut the two above it, and let the culvert carry the essay.</div>
-            <span class="chip">
-              <svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="8"/><path d="M4.6 8.3 7 10.7 11.4 5.7"/></svg>
-              Reviewed &amp; signed, by name
-            </span>
-          </div>
-        </div>
-      </div>
+  </div>
+</section>
+<section class="">
+  <div class="wrap asym">
+    <div class="lead">
+      <h2>Who we're looking for now</h2>
     </div>
-  </section>
-
-  <!-- FAQ -->
-  <section class="section" id="faq">
-    <div class="wrap">
-      <div class="section-head">
-        <h2>Questions coaches ask.</h2>
-      </div>
-      <div class="faq">
-        <details>
-          <summary>What does Craneweave pay per review?</summary>
-          <div class="faq-a"><p>Craneweave pays published per-review rates: $45 for an essay review, $30 for a school list, $110 for a full application, $20 for a check-in, and $25 on top for a 24-hour rush. The rates are the same for every coach, and you see the rate before you accept.</p></div>
-        </details>
-        <details>
-          <summary>How do you become a college admissions coach here?</summary>
-          <div class="faq-a"><p>You become an admissions coach here by applying with what you've done: your school or program, your admissions history, your background. We read every application, verify it, and score a sample review against our standards. Once you're on, reviews arrive in a queue; you accept only what fits your expertise. No calendars, no unpaid intro calls.</p></div>
-        </details>
-        <details>
-          <summary>How much will I make?</summary>
-          <div class="faq-a"><p>How much you make is your call: we publish what each review pays and nothing beyond that, because you decide how many you accept. Anyone quoting a monthly figure for work like this is guessing at your calendar. The rates are above; the arithmetic is yours.</p></div>
-        </details>
-        <details>
-          <summary>Is there a minimum, or a schedule?</summary>
-          <div class="faq-a"><p>There's no minimum and no schedule — no shift, no quota, and no consequence for a quiet week. Reviews sit in your queue with a deadline attached and you take the ones you want. If you take none, the queue routes elsewhere until you're back.</p></div>
-        </details>
-        <details>
-          <summary>Do I have to talk to students or parents?</summary>
-          <div class="faq-a"><p>You don't have to talk to students or parents; the work is written. A coordinator handles the relationship, the reminders, and anything administrative, so your side is the review itself. You're never asked to run an unpaid intro call or sell anything to a family.</p></div>
-        </details>
-        <details>
-          <summary>What does the platform draft, and what's left for me?</summary>
-          <div class="faq-a"><p>The platform drafts the groundwork — what changed since the last draft, which prompt this answers, what comes next — and none of it goes out unread. The judgment is yours: what's working, what to cut, what's missing, what to do about it. Matching, reminders, and billing all happen before the file reaches you, so families pay expert prices only for your expert moments — that's how this costs $299, not $10,000.</p></div>
-        </details>
-        <details>
-          <summary>Which goals can I coach?</summary>
-          <div class="faq-a"><p>You can coach the goals you've been through: <a href="/college/">college admissions</a> and <a href="/bsmd/">BS/MD</a> are enrolling now, so that's where reviews are today. <a href="/mba/">MBA</a>, <a href="/law/">law school</a>, <a href="/med/">medical school</a>, and <a href="/recruiting/">banking and consulting recruiting</a> open next as founding cohorts. Tell us on the application which you've actually done — we route by experience, not interest.</p></div>
-        </details>
-        <details>
-          <summary>Am I expected to guarantee results?</summary>
-          <div class="faq-a"><p>You're never asked to guarantee results. Admission isn't a purchasable outcome and we don't sell one — walk away from any platform that asks you to imply otherwise. What we promise families is the work: every essay, list, and application read by a named coach before it ships, on schedule. That's the only promise you keep.</p></div>
-        </details>
-        <details>
-          <summary>What happens to a student's work and data?</summary>
-          <div class="faq-a"><p>A student's work and data are used only to coach that student, deleted within 90 days — sooner on request, and never sold. Parents consent before any student under 18 joins. That also means the work isn't yours to keep, reuse, or share once the review is returned. Full policy at <a href="/privacy/">craneweave.com/privacy</a>.</p></div>
-        </details>
-      </div>
+    <div class="body">
+      <ul class="ruled">
+        <li><h3>College admissions (all cycles)</h3></li>
+        <li><h3>BS/MD</h3></li>
+        <li><h3>AI practitioners for team coaching</h3></li>
+        <li><h3>MBA, law, med school, and recruiting coaches for cohorts opening [months]</h3></li>
+      </ul>
     </div>
-  </section>
-
-  <!-- APPLY -->
-  <section class="section section-dark" id="apply">
-    <div class="wrap">
-      <div class="section-head">
-        <h2>Tell us what you've actually done.</h2>
-        <p class="lede">About five minutes. We read every application ourselves, and we reply either way.</p>
-      </div>
-      <div class="form-card reveal">
-        <form data-cw-form="coach_application" id="apply-form">
-          <div class="field">
-            <label for="c-goal">Which goal would you coach?</label>
-            <select id="c-goal" name="goal" required>
-              <option value="undergrad">College admissions</option>
-              <option value="bsmd">BS/MD programs</option>
-              <option value="mba">MBA admissions</option>
-              <option value="law">Law school admissions</option>
-              <option value="med">Medical school admissions</option>
-              <option value="recruiting">Banking &amp; consulting recruiting</option>
-              <option value="multiple">More than one</option>
-            </select>
-          </div>
-          <div class="field">
-            <label for="c-name">Name</label>
-            <input id="c-name" name="name" type="text" autocomplete="name" required />
-          </div>
-          <div class="field">
-            <label for="c-email">Email</label>
-            <input id="c-email" name="email" type="email" autocomplete="email" required />
-          </div>
-          <div class="field">
-            <label for="c-school">School / program &amp; year</label>
-            <input id="c-school" name="school" type="text" placeholder="School, program, and year" required />
-          </div>
-          <div class="field">
-            <label for="c-history">Admissions history</label>
-            <textarea id="c-history" name="history" rows="4" placeholder="Where you applied, where you got in, and anything that shaped your cycle" required></textarea>
-          </div>
-          <div class="field">
-            <label for="c-linkedin">LinkedIn</label>
-            <input id="c-linkedin" name="linkedin" type="url" placeholder="https://linkedin.com/in/…" />
-          </div>
-          <button class="btn btn-primary btn-block" type="submit">Apply to coach</button>
-          <p class="form-note" role="status">Application sent. We read every one, and reply by email.</p>
-        </form>
-      </div>
-      <p class="microcopy">We use what you send only to evaluate your application. We don't sell it.</p>
+  </div>
+</section>
+<section class="" id="apply">
+  <div class="wrap asym">
+    <div class="lead">
+      <h2>Apply to coach</h2>
+      <p>Tell us what you've done, and review one sample piece. Takes ~30 minutes. We reply in writing within a week.</p>
     </div>
-  </section>
-
-  <!-- FOOTER CTA -->
-  <section class="footer-cta">
-    <div class="wrap">
-      <h2>Coach on your schedule.</h2>
-      <a class="btn btn-primary" href="#apply">Apply to coach</a>
-      <p class="microcopy">$45 an essay, $110 a full application · decline anything · async, from anywhere</p>
+    <div class="body">
+      <form class="form" data-intake="apply" data-subject="Coach application" action="mailto:team@craneweave.com" method="post" enctype="text/plain">
+        <div class="field">
+      <label for="apply-name">Name</label>
+      <input class="input" type="text" id="apply-name" name="name" autocomplete="name" data-required aria-describedby="apply-name-error">
+      <p class="field-error" id="apply-name-error" aria-live="polite"></p>
     </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer class="footer">
-    <div class="wrap">
-      <div class="footer-grid">
-        <div class="footer-brand">
-          <a class="footer-logo" href="/"><img src="/Craneweave_Logo_White.svg" alt="Craneweave" width="280" height="48" /></a>
-          <p>Expert coaching made effortless.</p>
-        </div>
-        <div class="footer-col">
-          <div class="footer-head mono">Goals</div>
-          <a href="/college/">College admissions</a>
-          <a href="/bsmd/">BS/MD programs</a>
-          <a href="/mba/">MBA admissions</a>
-          <a href="/law/">Law school</a>
-          <a href="/med/">Medical school</a>
-          <a href="/recruiting/">Banking &amp; consulting</a>
-        </div>
-        <div class="footer-col">
-          <div class="footer-head mono">Craneweave</div>
-          <a href="/students/">Students &amp; families</a>
-          <a href="/coaches/">Coaches</a>
-          <a href="/coaches/#apply">Apply to coach</a>
-          <a href="/programs/">Programs</a>
-          <a href="/#pricing">Pricing</a>
-        </div>
-        <div class="footer-col">
-          <div class="footer-head mono">Company</div>
-          <a href="/about/">About</a>
-          <a href="mailto:team@craneweave.com">Contact</a>
-          <a href="/privacy/">Privacy</a>
-          <a href="/terms/">Terms</a>
-        </div>
-      </div>
-      <div class="footer-base">© 2026 Craneweave</div>
+        <div class="field">
+      <label for="apply-email">Email</label>
+      <input class="input" type="email" id="apply-email" name="email" autocomplete="email" data-required aria-describedby="apply-email-error">
+      <p class="field-error" id="apply-email-error" aria-live="polite"></p>
     </div>
-  </footer>
-
-  <!-- No start modal: this page has no `data-open-start` trigger. Coach
-       applicants convert through #apply (coach_application), not the student
-       signup — see site-spec.md sanctioned exceptions. -->
-
-  <script src="/assets/craneweave.js" defer onerror="document.documentElement.classList.remove('js')"></script>
+        <div class="field">
+      <label for="apply-done">What you've done</label>
+      <textarea class="input" id="apply-done" name="done" data-required aria-describedby="apply-done-error"></textarea>
+      <p class="field-error" id="apply-done-error" aria-live="polite"></p>
+    </div>
+        <div class="btn-row"><button class="btn" type="submit">Apply to coach</button></div>
+      </form>
+    </div>
+  </div>
+</section>
+</main>
+<footer>
+  <div class="wrap foot">
+    <a class="wordmark" href="/">Craneweave</a>
+    <ul>
+      <li><a href="/#router">Students &amp; families</a></li>
+      <li><a href="/organizations/">For organizations</a></li>
+      <li><a href="/coaches/">Coaches</a></li>
+      <li><a href="/pricing/">Pricing</a></li>
+      <li><a href="/about/">About</a></li>
+      <li><a href="/privacy/">Privacy</a></li>
+      <li><a href="/terms/">Terms</a></li>
+    </ul>
+    <span class="copy">© 2026 Craneweave</span>
+  </div>
+</footer>
+<script src="/assets/cw.js" defer></script>
 </body>
 </html>

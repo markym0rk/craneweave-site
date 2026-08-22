@@ -1,46 +1,51 @@
 # craneweave.com
 
-Founder-led college admissions coaching — undergrad program with a BS/MD special track.
-Static Jekyll site on GitHub Pages (custom domain via `CNAME`).
+Expert coaching made effortless — admissions, recruiting, and AI coaching for teams.
+Static site on GitHub Pages (Jekyll, custom domain via `CNAME`). Plain HTML; the only
+Jekyll feature in use is `jekyll-redirect-from` on `index.html`.
 
 ## Pages
 
-| Path | Purpose |
-|---|---|
-| `/` | Families conversion page (price-variant tested) |
-| `/bsmd/` | BS/MD track — premium price, no variants |
-| `/coaches/` | Coach supply page + application form |
-| `/privacy/`, `/terms/` | Minors' data policy · deposit/refund terms |
+`/` · `/college/` · `/bsmd/` · `/mba/` · `/law/` · `/med/` · `/recruiting/` ·
+`/organizations/` · `/programs/` · `/coaches/` · `/pricing/` · `/about/` ·
+`/privacy/` · `/terms/`
 
-Old B2B URLs (`/about/`, `/blog/…`) redirect to `/` via `jekyll-redirect-from`
-(front matter on `index.html`).
+Old `/students/` and `/blog/…` URLs redirect to `/`.
+
+## Design system
+
+`assets/cw.css` — tokens first (`:root`), then components. No hex literals below the
+tokens block; everything references custom properties.
+
+- **Teal means "a human reviewed this."** Coach annotations and their underlines,
+  signature chips, the primary CTA, coach-voice quotes. Nowhere else.
+- **Tracked uppercase means "a person's name or a document's label."** Bylines and
+  artifact-sheet labels only.
+- Type: Newsreader (display, sentence case) · Public Sans (body/UI) · Courier Prime
+  (only inside artifact sheets, for submitted work).
+- The one shadow is the paper lift on sheets; the only animations are the artifact
+  underline draw and ≤150ms hover transitions.
+
+`assets/cw.js` is the only script, and nothing depends on it to render: hero mark,
+artifact underline (IntersectionObserver, once), goal-picker routing, intake forms.
+
+Text in `[square brackets]` is a placeholder for a real fact — grep for `[` to find
+what still needs filling in.
+
+## Forms
+
+Every intake form (find your coach, hold my place, pilot proposal, cohort quote, coach
+application) validates client-side and then posts JSON to `CFG.FORM_ENDPOINT` in
+`assets/cw.js`. Until an endpoint is set, submission opens a pre-filled email to
+`team@craneweave.com`; without JavaScript the form itself falls back to `mailto:`.
 
 ## Checks
 
-`python3 scripts/check_head_tags.py` — asserts every page has exactly one
-`<title>`, meta description, canonical, and `og:url`; that `og:url` equals the
-canonical; that the canonical is the page's own URL; and that no two pages share
-a title or a description. Run it after any content pass. CI runs it on every
+`python3 scripts/check_head_tags.py` — asserts every page has exactly one `<title>`,
+meta description, canonical, and `og:url`; that canonical is the page's own URL and
+equals `og:url`; and that no two pages share a title or description. CI runs it on every
 push and PR (`.github/workflows/head-tags.yml`).
 
-## How the price test works
-
-`assets/site.js` assigns each first-time visitor one of **$199 / $299 / $449**
-(uniform random), persists it in `localStorage` + cookie (`cw_px_v`), and paints it
-into every `[data-price]` element. `[data-price-bsmd]` renders variant + $100.
-`/bsmd/` is priced flat at $399 in its HTML — it is the premium, no-variant test.
-Every analytics event is stamped with `{variant, page, src}`.
-
-## Before pushing traffic — fill these in
-
-In `assets/site.js` (`CFG` at the top):
-
-- `STRIPE_LINK` / `STRIPE_LINK_BSMD` — Stripe Payment Links for the $50 deposit.
-  Until set, the reserve form falls back to a mailto to `team@craneweave.com`.
-- `FORM_ENDPOINT` — endpoint (e.g. Formspree) for interest capture + coach applications.
-
-Also add an analytics script (Plausible or GA4) to each page's `<head>` —
-`site.js` auto-forwards events to `plausible()`/`gtag()` when present.
-
-And replace the founder admissions-history lines marked `TODO(founders)` in
-`index.html` and `bsmd/index.html` with the real one-liners.
+Local preview: `python3 -m http.server 8000` from the repo root (links are
+root-relative). The front matter on `index.html` shows as text locally; Jekyll strips it
+on deploy.

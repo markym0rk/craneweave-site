@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://craneweave.com/</loc></url>
-  <url><loc>https://craneweave.com/students/</loc></url>
-  <url><loc>https://craneweave.com/coaches/</loc></url>
-  <url><loc>https://craneweave.com/programs/</loc></url>
   <url><loc>https://craneweave.com/college/</loc></url>
   <url><loc>https://craneweave.com/bsmd/</loc></url>
   <url><loc>https://craneweave.com/mba/</loc></url>
   <url><loc>https://craneweave.com/law/</loc></url>
   <url><loc>https://craneweave.com/med/</loc></url>
   <url><loc>https://craneweave.com/recruiting/</loc></url>
-  <url><loc>https://craneweave.com/about/</loc></url>
+  <url><loc>https://craneweave.com/organizations/</loc></url>
+  <url><loc>https://craneweave.com/programs/</loc></url>
+  <url><loc>https://craneweave.com/coaches/</loc></url>
   <url><loc>https://craneweave.com/pricing/</loc></url>
+  <url><loc>https://craneweave.com/about/</loc></url>
   <url><loc>https://craneweave.com/privacy/</loc></url>
   <url><loc>https://craneweave.com/terms/</loc></url>
 </urlset>

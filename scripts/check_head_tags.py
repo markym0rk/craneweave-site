@@ -30,21 +30,21 @@ SITE = "https://craneweave.com"
 
 ROOT = Path(__file__).resolve().parent.parent
 
-# The twelve content pages plus the two legal pages. Every one of these must
+# The twelve content pages plus the two legal pages (the v3 sitemap). Every one of these must
 # exist; anything else matching */index.html is checked as well.
 REQUIRED = [
     "index.html",
-    "students/index.html",
-    "coaches/index.html",
-    "programs/index.html",
     "college/index.html",
     "bsmd/index.html",
     "mba/index.html",
     "law/index.html",
     "med/index.html",
     "recruiting/index.html",
-    "about/index.html",
+    "organizations/index.html",
+    "programs/index.html",
+    "coaches/index.html",
     "pricing/index.html",
+    "about/index.html",
     "privacy/index.html",
     "terms/index.html",
 ]
