@@ -2,10 +2,11 @@
    for content to render.
    1. Nav: scrolled state, mega-menus, mobile drawer.
    2. Pen marks, artifact underlines, season bars, ink drawings appear once in view.
-   3. Hero request widget: goal listbox → stage → live plan estimate → /start/.
+   3. Page pickers: goal → plan on /students/, stage on the vertical heroes,
+      audience on /professionals/, plan on /ai-coaching/.
    4. FAQ accordions.
    5. Pricing estimator.
-   6. /start/ intake: staged form, persisted, summarised, submitted.
+   6. /start/ reservation: staged form, persisted, summarised, submitted.
    7. Intake forms: validate, post to FORM_ENDPOINT — or hand off honestly to email.
    8. Mobile sticky CTA.
    Analytics: every funnel event calls track(); it is a no-op until a
@@ -18,70 +19,83 @@
     MAIL: 'team@craneweave.com'
   };
 
-  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var fine = window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  var mqReduce = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : null;
+  var mqFine = window.matchMedia ? window.matchMedia('(hover: hover) and (pointer: fine)') : null;
+  var reduce = !!(mqReduce && mqReduce.matches), fine = !!(mqFine && mqFine.matches);
+  if (mqReduce && mqReduce.addEventListener) { mqReduce.addEventListener('change', function (e) { reduce = e.matches; }); mqFine.addEventListener('change', function (e) { fine = e.matches; }); }
   var $ = function (s, c) { return (c || document).querySelector(s); };
   var $$ = function (s, c) { return Array.prototype.slice.call((c || document).querySelectorAll(s)); };
   function track(name, props) { try { if (typeof window.plausible === 'function') window.plausible(name, { props: props || {} }); } catch (e) {} }
 
-  /* ---------- shared: goals + plans ---------- */
-  var GOALS = {
-    college:    { label: 'College admissions',   href: '/college/',       cohort: false },
-    bsmd:       { label: 'BS/MD programs',       href: '/bsmd/',          cohort: false },
-    mba:        { label: 'MBA admissions',       href: '/mba/',           cohort: 'October 2026' },
-    law:        { label: 'Law school',           href: '/law/',           cohort: 'October 2026' },
-    med:        { label: 'Medical school',       href: '/med/',           cohort: 'January 2027' },
-    recruiting: { label: 'Banking & consulting', href: '/recruiting/',    cohort: 'October 2026' },
-    org:        { label: "My team's AI skills",  href: '/organizations/', cohort: false }
-  };
-  var STAGES = { now: 'Applying this cycle', next: 'Next cycle', exploring: 'Still exploring' };
+  /* ---------- shared: paths, goals, plans ---------- */
+  var PATHS = { student: 'A student or applicant', professional: 'Me, as a professional', team: 'My team', program: 'A program supporting students' };
+  var GOALS = { college: 'College admissions', bsmd: 'BS/MD programs', mba: 'MBA admissions', law: 'Law school', med: 'Medical school', recruiting: 'Banking and consulting', ai: 'Individual AI coaching' };
+  var STAGES = { now: 'Applying this cycle', next: 'Applying next cycle', exploring: 'Still exploring' };
+  var RSTAGES = { now: 'Recruiting this cycle', next: 'Recruiting next cycle', exploring: 'Still exploring' };
   var PLANS = {
-    core:     { name: 'Core',        price: '$299',     per: '/month',  meta: '4 reviews a month · 72-hour turnaround · cancel monthly' },
-    plus:     { name: 'Plus',        price: '$499',     per: '/month',  meta: '8 reviews a month · 48-hour turnaround · priority matching' },
-    season:   { name: 'Season Pass', price: '$1,999',   per: '/season', meta: 'Aug 1–Jan 15 · 24 reviews any time · priority access in the November crunch' },
-    alacarte: { name: 'One review',  price: 'From $49', per: '',        meta: 'A single essay, school list, full application, or check-in review · no subscription' }
+    core: { name: 'Core',            price: '$299',   per: '/month', meta: '4 reviews a month · 72-hour turnaround' },
+    plus: { name: 'Plus',            price: '$499',   per: '/month', meta: '7 reviews a month · 48-hour turnaround · priority coach matching' },
+    five: { name: 'Five-Month Plan', price: '$1,999', per: '',       meta: 'five months of coaching · 30 reviews to use any time · priority access around major deadlines' }
   };
-  /* The three shapes the funnel can take. */
+  function priceOf(k) { var p = PLANS[k]; return p ? p.price + p.per : ''; }
+  function reserveLabel(k) { var p = PLANS[k]; return p ? 'Reserve ' + (k === 'five' ? 'the ' : '') + p.name + ' — ' + priceOf(k) : 'Reserve your spot'; }
+  /* The three shapes a reservation can take. */
   var MODES = {
-    coach: { submit: 'Find your coach', h1: 'Where should we send your match?',
-             hint: 'We reply in writing with your coach match — or, if we can’t match your list, we tell you before you pay anything. Nothing is charged until you choose a plan.',
-             doneH1: 'Received. Your match is on its way.',
-             doneP: 'Check {email} for a reply from ' + CFG.MAIL + '. We answer in writing — and if we can’t match your list, we tell you before you pay anything.',
-             subject: 'Find my coach — {goal}', notes: 'Target schools, deadlines, what you’ve tried.' },
-    hold:  { submit: 'Hold my place', h1: 'Where should we reach you when the cohort opens?',
-             hint: 'Joining the list is free and holds your place. Published pricing from $299/month — nothing is charged until you choose a plan.',
-             doneH1: 'Received. Your place is held.',
-             doneP: 'We’ll email {email} the moment your coach match is ready. Nothing is charged until you choose a plan.',
-             subject: 'Hold my place — {goal}', notes: 'Target programs, rounds, whether you’re reapplying.' },
-    org:   { submit: 'Get a pilot proposal in writing', h1: 'Where should we send the pilot plan?',
-             hint: 'A written pilot plan within 24 hours. No sales call unless you want one.',
-             doneH1: 'Received. Your pilot proposal is on its way.',
-             doneP: 'A written pilot plan will reach {email} within 24 hours, from ' + CFG.MAIL + '. No sales call unless you want one.',
-             subject: 'Pilot proposal request', notes: 'Tools you have seats for, who’s in the pilot, what a good result looks like.' }
+    individual: { submit: null, /* reserveLabel(plan) */
+                  hint: 'We’ll reserve your coaching spot under the plan you chose. No payment today. You’ll review your coach match and expected start date before enrolling.',
+                  note: 'No payment today. You’ll review your coach match and expected start date before enrolling.',
+                  doneH1: 'Your coaching spot is reserved.',
+                  doneP: 'We’ve recorded {plan} at {price}. Nothing has been charged. We’ll email {email} with your coach match and expected start date before asking you to enroll.',
+                  notes: 'Deadlines, priorities, what you’ve tried, or anything else that will help us match you.' },
+    team:       { submit: 'Reserve a team pilot',
+                  hint: 'We’ll reserve a team pilot and send the complete scope and price in writing. No payment today.',
+                  note: 'Reserve a launch spot now. We’ll send the complete scope and price in writing before you commit.',
+                  doneH1: 'Your team pilot is reserved.',
+                  doneP: 'Nothing has been charged. We’ll send the complete pilot scope and price to {email} so you can review them before you commit.',
+                  notes: 'Tools you have seats for, who’s in the pilot, and what a good result looks like.' },
+    program:    { submit: 'Reserve a student cohort',
+                  hint: 'We’ll reserve a student cohort and send the complete program structure and price in writing. No payment today.',
+                  note: 'Reserve a launch spot now. We’ll send the complete program structure and price in writing before you commit.',
+                  doneH1: 'Your student cohort is reserved.',
+                  doneP: 'Nothing has been charged. We’ll send the complete program structure and price to {email} so you can review them before you commit.',
+                  notes: 'Student population, deadlines, funding requirements, or support you already provide.' }
   };
-  function modeFor(goal) { var g = GOALS[goal]; return goal === 'org' ? 'org' : (g && g.cohort) ? 'hold' : 'coach'; }
-
-  /* Which plan to suggest, and what to say about it. */
-  function estimate(goal, stage) {
-    var g = GOALS[goal] || GOALS.college;
-    if (goal === 'org') {
-      return { plan: 'Pilot proposal', price: 'In writing', per: '', meta: 'Answer three questions about your team. We send back a pilot plan within 24 hours.', key: 'org' };
-    }
-    if (g.cohort) {
-      return { plan: 'Founding cohort', price: 'From $299', per: '/month', meta: 'Opens ' + g.cohort + '. Joining the list is free and holds your place.', key: 'hold' };
-    }
-    var m = new Date().getMonth(); /* 0 = Jan */
-    var inSeason = m >= 7 || m === 0; /* Aug–Jan */
-    var p = PLANS.core, why;
-    if (stage === 'now' && inSeason) why = 'Start here — or take the whole senior season on the Season Pass, $1,999.';
-    else if (stage === 'now') why = 'Start here. Plus is $499 for 8 reviews at 48 hours.';
-    else if (stage === 'next') why = 'Start here. A season plan built around next cycle’s deadlines.';
-    else why = 'Start here. Or try one à la carte review from $49 first.';
-    return { plan: p.name, price: p.price, per: p.per, meta: why + ' ' + p.meta, key: 'core' };
-  }
+  function modeOf(path) { return path === 'team' ? 'team' : path === 'program' ? 'program' : 'individual'; }
+  function fill(s, map) { return s.replace(/\{(\w+)\}/g, function (m, k) { return map[k] != null ? map[k] : m; }); }
   function setLabel(btn, text) { /* keep the arrow span */
     var t = btn.firstChild;
     if (t && t.nodeType === 3) t.textContent = text + ' '; else btn.insertBefore(document.createTextNode(text + ' '), btn.firstChild);
+  }
+  var EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  function reveal(el, show) { /* show once with the entrance; hide instantly */
+    if (!el) return;
+    var was = !el.hidden;
+    el.hidden = !show;
+    if (show && !was) {
+      el.classList.remove('in'); void el.offsetWidth; el.classList.add('in');
+      el.addEventListener('animationend', function h() { el.classList.remove('in'); el.removeEventListener('animationend', h); }); /* the entrance plays once; later changes inside are their own motion */
+    }
+  }
+  /* A live value is written at once, then settles from a soft state. Only when it actually changed. */
+  var quiet = false; /* set while a value is being typed or restored: write, don't settle */
+  function jump(top) { /* an instant reposition, overriding scroll-behavior:smooth */
+    try { window.scrollTo({ top: top, left: 0, behavior: 'instant' }); }
+    catch (e) { var de = document.documentElement, prev = de.style.scrollBehavior; de.style.scrollBehavior = 'auto'; void getComputedStyle(de).scrollBehavior; window.scrollTo(0, top); de.style.scrollBehavior = prev; }
+  }
+  function settle(el) { /* bring a newly revealed panel into view at once, so its entrance is the only motion */
+    var top = el.getBoundingClientRect().top + window.scrollY - 100;
+    if (top < window.scrollY || el.getBoundingClientRect().bottom > window.innerHeight) jump(Math.max(0, top));
+    el.focus({ preventScroll: true });
+  }
+  function swap(el, html, isHtml) {
+    if (!el) return;
+    var cur = isHtml ? el.innerHTML : el.textContent;
+    if (cur === html) return;
+    if (quiet) { if (isHtml) el.innerHTML = html; else el.textContent = html; return; }
+    el.classList.add('swapping');
+    if (isHtml) el.innerHTML = html; else el.textContent = html;
+    void el.offsetWidth;
+    requestAnimationFrame(function () { el.classList.remove('swapping'); });
   }
 
   /* ---------- 1. nav ---------- */
@@ -167,7 +181,7 @@
       }, { threshold: 0.35, rootMargin: '0px 0px -6% 0px' });
       drawables.forEach(function (el) {
         /* Hero marks draw after the fonts settle; everything else on scroll. */
-        if (el.closest('.hero, .hero-v, .hero-plain, .cta-band') && el.classList.contains('pen')) {
+        if (el.closest('.hero, .hero-v, .hero-plain, .cta-band')) { /* a hero is complete at first paint: its mark and its sheet */
           var go = function () { requestAnimationFrame(function () { el.classList.add('drawn'); }); };
           (document.fonts && document.fonts.ready) ? document.fonts.ready.then(go) : window.addEventListener('load', go);
         } else io.observe(el);
@@ -182,7 +196,14 @@
   if (inked.length) {
     var draw = function (plate) {
       var img = plate.querySelector('img');
-      var done = function () { plate.classList.add('drawn'); };
+      var row = plate.closest('.system-grid, .strip, .path-grid, .people');
+      var done = function () {
+        if (row && !reduce) { /* siblings in a row arrive one after another, 60ms apart */
+          var i = $$('.plate[data-ink]', row).indexOf(plate);
+          if (i > 0) { plate.style.transitionDelay = (i * 60) + 'ms'; plate.addEventListener('transitionend', function () { plate.style.transitionDelay = ''; }, { once: true }); }
+        }
+        plate.classList.add('drawn');
+      };
       if (img && img.decode) img.decode().then(done, done); else done();
     };
     if (reduce || !('IntersectionObserver' in window)) {
@@ -213,106 +234,86 @@
     if (!hit) cells.forEach(function (m) { m.classList.remove('now'); });
   })();
 
-  /* ---------- 3. hero request widget ---------- */
-  var widget = $('#request');
-  if (widget) {
-    var lbBtn = $('.lb-btn', widget), lbList = $('.lb-list', widget), lbVal = $('.lb-value', widget);
-    var goalInput = document.createElement('input'); goalInput.type = 'hidden'; goalInput.name = 'goal'; goalInput.value = 'college';
-    lbBtn.parentNode.appendChild(goalInput);
-    var est = $('.estimate', widget), estPlan = $('.est-plan', est), estPrice = $('.est-price', est), estMeta = $('.est-meta', est);
-    var seg = $('.seg', widget), submitBtn = $('button[type="submit"]', widget);
-    var items = $$('li', lbList), active = -1;
-    if (!lbList.id) lbList.id = 'goal-list';
-    lbBtn.setAttribute('aria-controls', lbList.id);
-
-    /* Paint the new estimate at once, then let it settle from a soft
-       state — the text is never stale, rapid changes simply retarget. */
-    var render = function (instant) {
-      var goal = goalInput.value, stage = ($('input[name="stage"]:checked', widget) || {}).value || 'now';
-      var r = estimate(goal, stage), mode = modeFor(goal);
-      setLabel(submitBtn, MODES[mode].submit);
-      if (seg) { seg.setAttribute('data-muted', goal === 'org' ? 'true' : 'false'); $$('input', seg).forEach(function (i) { i.disabled = goal === 'org'; }); }
-      var changed = estPlan.textContent !== r.plan || estMeta.textContent !== r.meta;
-      estPlan.textContent = r.plan;
-      estPrice.innerHTML = r.price + (r.per ? '<small>' + r.per + '</small>' : '');
-      estMeta.textContent = r.meta;
-      if (instant === true || !changed) return;
-      est.classList.add('swap'); void est.offsetWidth; /* start from the soft state… */
-      est.classList.remove('swap');                   /* …and settle over --t-swap */
+  /* ---------- 3. page pickers ---------- */
+  /* /students/: choose a goal → the stage question appears → the plans unlock, carrying goal and stage into /start/. */
+  var picker = $('#goal-picker');
+  if (picker) {
+    var gate = $('[data-plans-gate]'), empty = $('[data-plans-empty]'), stageBlock = $('[data-stage-block]', picker), gStatus = $('[data-goal-status]', picker);
+    var planLinks = $$('[data-plan-link]');
+    var paintPicker = function (first) {
+      var goal = ($('input[name="goal"]:checked', picker) || {}).value || '';
+      var stage = ($('input[name="stage"]:checked', picker) || {}).value || '';
+      var labels = goal === 'recruiting' ? RSTAGES : STAGES;
+      $$('[data-stage-label]', picker).forEach(function (el) { el.textContent = labels[el.getAttribute('data-stage-label')]; });
+      var wasHidden = gate && gate.hidden;
+      reveal(stageBlock, !!goal);
+      if (gate) { if (first) gate.hidden = !goal; else reveal(gate, !!goal); }
+      if (empty) empty.hidden = !!goal;
+      if (gStatus) gStatus.textContent = goal ? GOALS[goal] + ' selected. Choose where you are in the process, then pick a plan below.' : '';
+      if (gate && wasHidden && goal && !first && gate.getBoundingClientRect().top > window.innerHeight) {
+        gate.classList.remove('in'); /* off-screen: nothing to animate — bring the unlocked plans into view instead */
+        gate.scrollIntoView({ block: 'nearest', behavior: reduce ? 'auto' : 'smooth' });
+      }
+      planLinks.forEach(function (a) {
+        var k = a.getAttribute('data-plan-link');
+        a.setAttribute('href', '/start/?path=student' + (goal ? '&goal=' + goal : '') + (stage ? '&stage=' + stage : '') + '&plan=' + k);
+      });
     };
-
-    var setGoal = function (li) {
-      items.forEach(function (x) { x.setAttribute('aria-selected', x === li ? 'true' : 'false'); });
-      goalInput.value = li.getAttribute('data-value');
-      lbVal.textContent = $('.lb-name', li).textContent;
-      render();
-    };
-    var openList = function () {
-      lbBtn.setAttribute('aria-expanded', 'true'); lbList.setAttribute('data-open', 'true');
-      active = items.findIndex(function (x) { return x.getAttribute('aria-selected') === 'true'; });
-      highlight(active); lbList.focus();
-    };
-    var closeList = function (refocus) {
-      lbBtn.setAttribute('aria-expanded', 'false'); lbList.setAttribute('data-open', 'false');
-      if (refocus) lbBtn.focus();
-    };
-    var highlight = function (i) {
-      items.forEach(function (x, k) { x.setAttribute('data-active', k === i ? 'true' : 'false'); });
-      if (i >= 0) { lbList.setAttribute('aria-activedescendant', items[i].id); if (items[i].scrollIntoView) items[i].scrollIntoView({ block: 'nearest' }); }
-    };
-    lbBtn.addEventListener('click', function () { lbBtn.getAttribute('aria-expanded') === 'true' ? closeList(true) : openList(); });
-    lbBtn.addEventListener('keydown', function (e) { if (e.key === 'ArrowDown' || e.key === 'ArrowUp') { e.preventDefault(); openList(); } });
-    items.forEach(function (li, i) {
-      li.addEventListener('click', function () { setGoal(li); closeList(true); });
-      li.addEventListener('pointermove', function () { if (active !== i) { active = i; highlight(i); } });
+    var qsG = new URLSearchParams(location.search).get('goal');
+    if (qsG && GOALS[qsG]) { var r0 = $('input[name="goal"][value="' + qsG + '"]', picker); if (r0) r0.checked = true; }
+    $$('input[name="goal"], input[name="stage"]', picker).forEach(function (r) {
+      r.addEventListener('change', function () { paintPicker(); if (r.name === 'goal') track('goal_pick', { goal: r.value }); });
     });
-    lbList.addEventListener('keydown', function (e) {
-      if (e.key === 'ArrowDown') { e.preventDefault(); active = Math.min(items.length - 1, active + 1); highlight(active); }
-      else if (e.key === 'ArrowUp') { e.preventDefault(); active = Math.max(0, active - 1); highlight(active); }
-      else if (e.key === 'Home') { e.preventDefault(); active = 0; highlight(active); }
-      else if (e.key === 'End') { e.preventDefault(); active = items.length - 1; highlight(active); }
-      else if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); if (active >= 0) setGoal(items[active]); closeList(true); }
-      else if (e.key === 'Escape') { e.preventDefault(); closeList(true); }
-      else if (e.key === 'Tab') closeList(false);
-    });
-    document.addEventListener('click', function (e) { if (!widget.contains(e.target)) closeList(false); });
-    $$('input[name="stage"]', widget).forEach(function (r) { r.addEventListener('change', render); });
-
-    /* Deep links: /?goal=mba, or a stored choice */
-    var pre = null;
-    try { pre = JSON.parse(localStorage.getItem('cw.start') || 'null'); } catch (e) {}
-    var qs = new URLSearchParams(location.search);
-    var g0 = qs.get('goal') || (pre && pre.goal);
-    if (g0 && GOALS[g0]) { var li0 = items.filter(function (x) { return x.getAttribute('data-value') === g0; })[0]; if (li0) setGoal(li0); }
-    if (pre && pre.stage) { var s0 = $('input[name="stage"][value="' + pre.stage + '"]', widget); if (s0) s0.checked = true; }
-    render(true);
-
-    widget.addEventListener('submit', function (ev) {
-      ev.preventDefault();
-      var goal = goalInput.value, stage = ($('input[name="stage"]:checked', widget) || {}).value || 'now';
-      try { localStorage.setItem('cw.start', JSON.stringify({ goal: goal, stage: stage, step: 1 })); } catch (e) {}
-      track('widget_submit', { goal: goal, stage: stage, mode: modeFor(goal) });
-      location.href = '/start/?goal=' + encodeURIComponent(goal) + (goal === 'org' ? '' : '&stage=' + encodeURIComponent(stage));
-    });
+    paintPicker(true);
   }
 
-  /* Vertical-page hero forms hand off into /start/ with what was typed. */
-  $$('form[data-handoff]').forEach(function (form) {
-    form.setAttribute('novalidate', '');
-    var em = $('input[type="email"]', form); if (em && !em.name) em.name = 'email';
-    form.addEventListener('submit', function (ev) {
-      ev.preventDefault();
-      var email = $('input[name="email"]', form), goal = form.getAttribute('data-handoff');
-      var stage = ($('input[name="stage"]:checked', form) || {}).value || '';
-      var bad = !EMAIL.test(email.value.trim());
-      email.setAttribute('aria-invalid', bad ? 'true' : 'false');
-      var err = document.getElementById(email.id + '-error'); if (err) err.textContent = bad ? 'Enter an email address we can reply to.' : '';
-      if (bad) { email.focus(); return; }
-      try { localStorage.setItem('cw.start', JSON.stringify({ goal: goal, stage: stage, email: email.value.trim(), step: 1 })); } catch (e) {}
-      track('hero_handoff', { goal: goal, stage: stage });
-      location.href = '/start/?goal=' + encodeURIComponent(goal) + (stage ? '&stage=' + encodeURIComponent(stage) : '');
+  /* Vertical heroes: the stage chosen up top rides along on every plan button below. */
+  var stagePick = $('#stage-pick');
+  if (stagePick) {
+    var paintStage = function () {
+      var stage = ($('input[name="stage"]:checked', stagePick) || {}).value || '';
+      $$('[data-plan-link]').forEach(function (a) {
+        var href = a.getAttribute('href').replace(/&(amp;)?stage=[^&]*/, '');
+        a.setAttribute('href', stage ? href + '&stage=' + stage : href);
+      });
+    };
+    $$('input[name="stage"]', stagePick).forEach(function (r) { r.addEventListener('change', paintStage); });
+    paintStage();
+  }
+
+  /* /professionals/: for me, or for my team. */
+  var aud = $('#audience');
+  if (aud) {
+    var audStatus = $('[data-aud-status]', aud), panels = $$('.aud-panel', aud), wrap = $('.aud-panels', aud);
+    var paintAud = function (first) {
+      var v = ($('input[name="audience"]:checked', aud) || {}).value || '';
+      if (first) wrap.hidden = !v; else reveal(wrap, !!v); /* the answer area appears once, then the two answers cross-fade */
+      panels.forEach(function (p) { p.setAttribute('data-on', p.getAttribute('data-aud') === v ? 'true' : 'false'); });
+      if (audStatus) audStatus.textContent = v === 'me' ? 'Showing individual AI coaching.' : v === 'team' ? 'Showing AI coaching for teams.' : 'Choose whether you are building AI skills for yourself or for a team.';
+    };
+    var qsF = new URLSearchParams(location.search).get('for');
+    if (qsF === 'me' || qsF === 'team') { var f0 = $('input[name="audience"][value="' + qsF + '"]', aud); if (f0) f0.checked = true; }
+    $$('input[name="audience"]', aud).forEach(function (r) { r.addEventListener('change', function () { paintAud(); track('audience_pick', { audience: r.value }); }); });
+    paintAud(true);
+  }
+
+  /* /ai-coaching/: the plan chosen in the pricing rows is the plan the form reserves. */
+  var aiForm = $('#ai-intake');
+  if (aiForm) {
+    var aiBtn = $('[data-plan-submit]', aiForm);
+    var paintAi = function () { var k = ($('input[name="plan"]:checked', aiForm) || {}).value; var t = reserveLabel(k); if (aiBtn.firstChild.textContent.trim() !== t) { aiBtn.classList.add('swapping'); setLabel(aiBtn, t); void aiBtn.offsetWidth; requestAnimationFrame(function () { aiBtn.classList.remove('swapping'); }); } };
+    var qsP = new URLSearchParams(location.search).get('plan');
+    if (qsP && PLANS[qsP]) { var p0 = $('input[name="plan"][value="' + qsP + '"]', aiForm); if (p0) p0.checked = true; }
+    $$('input[name="plan"]', aiForm).forEach(function (r) { r.addEventListener('change', paintAi); });
+    $$('[data-pick-plan]').forEach(function (a) {
+      a.addEventListener('click', function () {
+        var r = $('input[name="plan"][value="' + a.getAttribute('data-pick-plan') + '"]', aiForm);
+        if (r) { r.checked = true; paintAi(); }
+        track('plan_pick', { plan: a.getAttribute('data-pick-plan'), page: location.pathname });
+      });
     });
-  });
+    paintAi();
+  }
 
   /* ---------- 4. FAQ ---------- */
   $$('.faq').forEach(function (f) {
@@ -329,23 +330,29 @@
   /* ---------- 5. pricing estimator ---------- */
   var estr = $('#estimator');
   if (estr) {
-    var counts = { essays: 3, lists: 1, apps: 1 };
+    var counts = { drafts: 3, strategy: 1, checks: 1 };
     var out = $('.est-out', estr), oPlan = $('.o-plan', out), oPrice = $('.o-price', out), oMeta = $('.o-meta', out), oBtn = $('.btn', out);
     var paintEst = function () {
-      var total = counts.essays + counts.lists + counts.apps;
-      var k = total === 0 ? 'alacarte' : total <= 4 ? 'core' : total <= 8 ? 'plus' : 'season';
-      var p = PLANS[k];
-      var why = k === 'alacarte' ? 'Nothing to review yet? Try one à la carte review when you have a draft.' :
-                k === 'core' ? total + ' review' + (total === 1 ? '' : 's') + ' fit' + (total === 1 ? 's' : '') + ' in one month of Core.' :
-                k === 'plus' ? total + ' reviews in a month needs Plus.' :
-                total > 24 ? 'More than 24 reviews — email us and we’ll quote it in writing.' :
-                total + ' reviews is more than Plus covers in a month — the Season Pass pools 24 across Aug 1–Jan 15.';
-      oPlan.textContent = p.name; oPrice.innerHTML = p.price + (p.per ? '<small>' + p.per + '</small>' : ''); oMeta.textContent = why + ' ' + p.meta;
-      oBtn.setAttribute('href', '/start/?plan=' + k); setLabel(oBtn, k === 'alacarte' ? 'Try one review' : 'Get started');
+      var total = counts.drafts + counts.strategy + counts.checks;
+      var k = total <= 4 ? 'core' : total <= 7 ? 'plus' : 'five';
+      var p = PLANS[k], why;
+      if (total === 0) why = 'Nothing ready for review yet? Start with Core when you want your coach and plan in place.';
+      else if (k === 'core') why = total + ' review' + (total === 1 ? ' fits' : 's fit') + ' in one month of Core.';
+      else if (k === 'plus') why = total + ' reviews in a month fits Plus.';
+      else if (total > 30) why = 'More than 30 reviews — the Five-Month Plan is the largest individual option. Teams and student programs can reserve a separately scoped pilot or cohort.';
+      else why = total + ' reviews is more than Plus covers in a month—the Five-Month Plan pools 30 across five months.';
+      swap(oPlan, p.name); swap(oPrice, p.price + (p.per ? '<small>' + p.per + '</small>' : ''), true); swap(oMeta, why);
+      oBtn.setAttribute('href', '/start/?plan=' + k);
+      if (oBtn.firstChild.textContent.trim() !== reserveLabel(k)) { oBtn.classList.add('swapping'); setLabel(oBtn, reserveLabel(k)); void oBtn.offsetWidth; requestAnimationFrame(function () { oBtn.classList.remove('swapping'); }); }
     };
     $$('.stepper', estr).forEach(function (s) {
-      var key = s.getAttribute('data-key'), o = $('output', s);
-      var set = function (v) { counts[key] = Math.max(0, Math.min(12, v)); o.textContent = counts[key]; paintEst(); };
+      var key = s.getAttribute('data-key'), o = $('output', s), dec = $('.dec', s), inc = $('.inc', s);
+      var set = function (v) {
+        counts[key] = Math.max(0, Math.min(12, v)); o.textContent = counts[key];
+        dec.setAttribute('aria-disabled', counts[key] === 0 ? 'true' : 'false'); inc.setAttribute('aria-disabled', counts[key] === 12 ? 'true' : 'false');
+        paintEst();
+      };
+      set(counts[key]);
       $('.dec', s).addEventListener('click', function () { set(counts[key] - 1); });
       $('.inc', s).addEventListener('click', function () { set(counts[key] + 1); });
     });
@@ -353,112 +360,146 @@
     paintEst();
   }
 
-  /* ---------- 6. /start/ intake ---------- */
+  /* ---------- 6. /start/ reservation ---------- */
   var start = $('#start');
   if (start) {
-    var state = { goal: '', stage: '', who: '', name: '', email: '', notes: '', company: '', teamsize: '', tried: '', step: 1, plan: '', item: '' };
+    var TEXT = ['role', 'tools', 'task', 'company', 'teamsize', 'tried', 'result', 'organization', 'students', 'when', 'yourrole', 'name', 'email', 'notes'];
+    var RADIO = ['path', 'goal', 'stage', 'pgoal', 'rstage', 'focus', 'plan', 'goals', 'who'];
+    var state = { step: 1 };
+    TEXT.concat(RADIO).forEach(function (k) { state[k] = ''; });
     try { Object.assign(state, JSON.parse(localStorage.getItem('cw.start') || '{}')); } catch (e) {}
-    var q2 = new URLSearchParams(location.search);
-    if (q2.get('goal') && GOALS[q2.get('goal')]) state.goal = q2.get('goal');
-    if (q2.get('stage') && STAGES[q2.get('stage')]) state.stage = q2.get('stage');
-    if (q2.get('plan') && PLANS[q2.get('plan')]) state.plan = q2.get('plan');
-    if (q2.get('email') && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(q2.get('email'))) state.email = q2.get('email');
-    var linkGoal = q2.get('goal') && GOALS[q2.get('goal')];
-    if (linkGoal) state.step = (state.goal !== 'org' && q2.get('stage') && state.stage) ? 3 : 2;
-    else if (q2.get('goal') || q2.get('plan')) state.step = 1;
-    if (state.goal && modeFor(state.goal) !== 'coach') state.plan = '';
+    var q2 = new URLSearchParams(location.search), fromPricing = false;
+    var qPath = q2.get('path'), qGoal = q2.get('goal'), qStage = q2.get('stage'), qPlan = q2.get('plan');
+    if (qGoal && GOALS[qGoal] && !qPath) qPath = qGoal === 'ai' ? 'professional' : 'student';
+    if (qPath && PATHS[qPath]) {
+      if (qPath !== state.path) { RADIO.forEach(function (k) { if (k !== 'path') state[k] = ''; }); }
+      state.path = qPath;
+      if (qGoal && GOALS[qGoal]) { if (qPath === 'student' && qGoal !== 'ai') state.goal = qGoal; if (qPath === 'professional') state.pgoal = qGoal === 'ai' ? 'ai' : 'recruiting'; }
+      if (qStage && STAGES[qStage]) state.stage = qStage;
+    }
+    if (qPlan && PLANS[qPlan]) {
+      state.plan = qPlan;
+      if (!qPath) { fromPricing = true; if (modeOf(state.path) !== 'individual') { RADIO.forEach(function (k) { if (k !== 'plan') state[k] = ''; }); } } /* a plan from the pricing page is an individual plan */
+    }
+    if (q2.get('email') && EMAIL.test(q2.get('email'))) state.email = q2.get('email');
+    var needsStage = function () { return state.path === 'student' && state.goal && state.goal !== 'recruiting'; };
+    if (qPath && PATHS[qPath]) {
+      var complete = (qPath === 'student' && state.goal && state.plan && (!needsStage() || state.stage));
+      state.step = complete ? 3 : 2;
+    } else if (q2.toString()) state.step = 1;
     state.step = Math.max(1, Math.min(3, state.step || 1));
     if (q2.toString()) history.replaceState(null, '', '/start/'); /* keep choices out of the URL */
 
     var stages = $$('.stage', start), bars = $$('.progress i', start), stepLabel = $('.progress span', start);
-    var form = $('form', $('.stage[data-step="3"]', start)); form.setAttribute('novalidate', '');
+    var form = $('#start-form'); form.setAttribute('novalidate', '');
     var submitB = $('button[type="submit"]', form);
-    var sum = { goal: $('[data-sum="goal"]'), stage: $('[data-sum="stage"]'), who: $('[data-sum="who"]'), email: $('[data-sum="email"]'), plan: $('.sum-plan b'), price: $('.sum-plan span'), note: $('.sum-note') };
+    var sum = { path: $('[data-sum="path"]'), goal: $('[data-sum="goal"]'), stage: $('[data-sum="stage"]'), plan: $('[data-sum="plan"]'), price: $('[data-sum="price"]'), who: $('[data-sum="who"]'), email: $('[data-sum="email"]'), note: $('.sum-note') };
+    var whoRow = $$('[data-sum-row="who"], [data-sum="who"]');
+    var lbl = { goal: $('[data-sum-label="goal"]'), stage: $('[data-sum-label="stage"]'), plan: $('[data-sum-label="plan"]') };
     var save = function () { try { localStorage.setItem('cw.start', JSON.stringify(state)); } catch (e) {} };
-    var currentMode = function () { return state.goal ? modeFor(state.goal) : 'coach'; };
-    var isAlacarte = function () { var r = currentPlan(); return !!(r && r.key === 'alacarte'); };
+    var mode = function () { return modeOf(state.path); };
     var syncFromDom = function () {
-      ['company', 'teamsize', 'tried', 'name', 'email', 'notes'].forEach(function (k) { var el = $('[name="' + k + '"]', start); if (el) state[k] = el.value.trim(); });
-      var it = $('input[name="item"]:checked', start); state.item = it ? it.value : '';
+      TEXT.forEach(function (k) { var el = $('[name="' + k + '"]', start); if (el) state[k] = el.value.trim(); });
+      RADIO.forEach(function (k) { var r = $('input[name="' + k + '"]:checked', start); if (r) state[k] = r.value; });
     };
-    var currentPlan = function () {
-      var g = GOALS[state.goal];
-      if (!state.goal) return null;
-      if (state.plan && PLANS[state.plan] && state.goal !== 'org' && !(g && g.cohort)) { var p = PLANS[state.plan]; return { plan: p.name, price: p.price, per: p.per, meta: p.meta, key: state.plan }; }
-      return estimate(state.goal, state.stage || 'now');
+
+    /* Which questions show, given the path so far. */
+    var variantOn = function (v) {
+      var p = state.path;
+      switch (v) {
+        case 'individual': return p === 'student' || p === 'professional';
+        case 'student': return p === 'student';
+        case 'student-stage': return !!needsStage();
+        case 'professional': return p === 'professional';
+        case 'pro-ai': return p === 'professional' && state.pgoal === 'ai';
+        case 'pro-recruiting': return p === 'professional' && state.pgoal === 'recruiting';
+        case 'plan': return (p === 'student' && !!state.goal) || (p === 'professional' && !!state.pgoal);
+        case 'team': return p === 'team';
+        case 'program': return p === 'program';
+        case 'org': return p === 'team' || p === 'program';
+      }
+      return true;
+    };
+    var paintVariants = function (animate) {
+      $$('[data-variant]', start).forEach(function (v) {
+        var on = variantOn(v.getAttribute('data-variant'));
+        if (animate) reveal(v, on); else v.hidden = !on;
+      });
     };
 
     var paintSummary = function () {
-      var g = GOALS[state.goal];
-      var put = function (el, v) { if (!el) return; el.textContent = v || '—'; el.classList.toggle('empty', !v); };
-      put(sum.goal, g && g.label);
-      put(sum.stage, state.goal === 'org' ? (state.company || '') : STAGES[state.stage]);
-      put(sum.who, state.goal === 'org' ? (state.teamsize ? state.teamsize + ' people' : '') : state.who);
+      var put = function (el, v) { if (!el) return; swap(el, v || '—'); el.classList.toggle('empty', !v); };
+      var p = state.path, m = MODES[mode()];
+      whoRow.forEach(function (el) { el.hidden = p !== 'student'; }); put(sum.who, state.who);
+      put(sum.path, PATHS[p]);
+      if (p === 'team') { lbl.goal.textContent = 'Company'; put(sum.goal, state.company); lbl.stage.textContent = 'Team size'; put(sum.stage, state.teamsize ? state.teamsize + ' people' : ''); }
+      else if (p === 'program') { lbl.goal.textContent = 'Organization'; put(sum.goal, state.organization); lbl.stage.textContent = 'Number of students'; put(sum.stage, state.students); }
+      else {
+        lbl.goal.textContent = 'Goal'; lbl.stage.textContent = 'Stage or scope';
+        put(sum.goal, p === 'professional' ? (state.pgoal === 'ai' ? GOALS.ai : state.pgoal === 'recruiting' ? GOALS.recruiting : '') : GOALS[state.goal]);
+        put(sum.stage, p === 'professional' ? (state.pgoal === 'ai' ? state.role : RSTAGES[state.rstage]) : (state.goal === 'recruiting' ? RSTAGES[state.stage] : STAGES[state.stage]));
+      }
+      lbl.plan.textContent = 'Plan';
+      if (p === 'team') { put(sum.plan, 'Team pilot'); put(sum.price, 'In writing'); }
+      else if (p === 'program') { put(sum.plan, 'Student cohort'); put(sum.price, 'In writing'); }
+      else { put(sum.plan, state.plan && PLANS[state.plan] ? PLANS[state.plan].name : ''); put(sum.price, priceOf(state.plan)); }
       put(sum.email, state.email);
-      var card = $('.summary-card'); if (card) card.setAttribute('data-has', (state.goal || state.plan) ? 'true' : 'false');
-      var r = currentPlan();
-      if (!r && state.plan && PLANS[state.plan]) { var pp = PLANS[state.plan]; r = { plan: pp.name, price: pp.price, per: pp.per, meta: 'Chosen on the pricing page. Pick a goal to continue.' }; }
-      if (sum.plan) sum.plan.textContent = r ? r.plan : '—';
-      if (sum.price) sum.price.innerHTML = r ? r.price + (r.per ? '<small>' + r.per + '</small>' : '') : '';
-      if (sum.note) sum.note.textContent = r ? r.meta : 'Choose a goal to see the plan we’d suggest.';
-      var l2 = $('[data-sum-label="stage"]'), l3 = $('[data-sum-label="who"]');
-      if (l2) l2.textContent = state.goal === 'org' ? 'Company' : 'Where you are';
-      if (l3) l3.textContent = state.goal === 'org' ? 'Team size' : 'Filled out by';
-      /* step 3 and the done card speak in the funnel's current mode */
-      var m = MODES[currentMode()];
-      var h3 = $('.stage[data-step="3"] h1', start), hint3 = $('.stage[data-step="3"] .hint', start), notes = $('#s-notes', start);
-      if (h3) h3.textContent = m.h1;
+      var card = $('.summary-card'); if (card) card.setAttribute('data-has', (p || state.plan) ? 'true' : 'false');
+      if (sum.note) {
+        if (!p) sum.note.textContent = fromPricing && PLANS[state.plan] ? 'Selected on the pricing page: ' + PLANS[state.plan].name + ' at ' + priceOf(state.plan) + '.' : 'Choose a path to see what we’ll ask next.';
+        else if (mode() === 'individual') sum.note.textContent = state.plan ? (PLANS[state.plan].meta.charAt(0).toUpperCase() + PLANS[state.plan].meta.slice(1) + '. ' + m.note) : 'Choose a path and plan to continue.';
+        else sum.note.textContent = m.note;
+      }
+      /* step 3 and the done card speak in the reservation's current mode */
+      var hint3 = $('[data-hint3]', start), notes = $('#s-notes', start);
       if (hint3) hint3.textContent = m.hint;
       if (notes) notes.placeholder = m.notes;
-      setLabel(submitB, m.submit);
-      var ala = isAlacarte();
-      $$('[data-variant]', start).forEach(function (v) {
-        var k = v.getAttribute('data-variant');
-        v.hidden = k === 'org' ? state.goal !== 'org' : k === 'student' ? state.goal === 'org' : k === 'alacarte' ? !ala : false;
-      });
+      setLabel(submitB, m.submit || reserveLabel(state.plan));
     };
 
     var show = function (n, byUser) {
       var prev = state.step;
       state.step = n; save();
+      if (byUser) { /* reposition instantly, before the new stage paints — the stage entrance is then the only motion */
+        var top = start.getBoundingClientRect().top + window.scrollY - 100;
+        if (window.scrollY > top) jump(Math.max(0, top));
+      }
       start.setAttribute('data-step', String(n));
       if (byUser) start.setAttribute('data-nav', n < prev ? 'back' : 'fwd'); else start.removeAttribute('data-nav');
       stages.forEach(function (s) { s.setAttribute('data-active', s.getAttribute('data-step') === String(n) ? 'true' : 'false'); });
       bars.forEach(function (b, i) { b.className = i + 1 < n ? 'done' : i + 1 === n ? 'cur' : ''; });
       if (stepLabel) stepLabel.textContent = 'Step ' + n + ' of 3';
-      paintSummary();
-      var h = $('.stage[data-active="true"] h1', start);
-      if (h) { h.setAttribute('tabindex', '-1'); if (byUser) h.focus(); /* focus() scrolls only if the heading is off-screen; scroll-margin keeps it clear of the nav */ }
-      track('start_step', { step: n, goal: state.goal || 'none' });
+      paintVariants(false); paintSummary();
+      var h = $$('.stage[data-active="true"] h2.stage-h', start).filter(function (el) { return el.offsetParent !== null; })[0];
+      if (h) { h.setAttribute('tabindex', '-1'); if (byUser) h.focus({ preventScroll: true }); }
+      track('start_step', { step: n, path: state.path || 'none' });
     };
 
-    $$('input[name="goal"]', start).forEach(function (r) {
-      r.checked = r.value === state.goal;
-      r.addEventListener('change', function () { state.goal = r.value; if (modeFor(r.value) !== 'coach') state.plan = ''; paintSummary(); save(); });
+    RADIO.forEach(function (k) {
+      $$('input[name="' + k + '"]', start).forEach(function (r) {
+        r.checked = r.value === state[k];
+        r.addEventListener('change', function () {
+          state[k] = r.value;
+          if (k === 'path') { RADIO.forEach(function (x) { if (x !== 'path') state[x] = ''; }); $$('input[type="radio"]', start).forEach(function (x) { if (x.name !== 'path') x.checked = false; }); if (fromPricing && qPlan && modeOf(r.value) === 'individual') { state.plan = qPlan; var pr = $('input[name="plan"][value="' + qPlan + '"]', start); if (pr) pr.checked = true; } }
+          var err = document.getElementById(k + '-error'); if (err) err.textContent = '';
+          $$('input[name="' + k + '"]', start).forEach(function (x) { x.removeAttribute('aria-invalid'); });
+          paintVariants(true); paintSummary(); save();
+        });
+      });
     });
-    $$('input[name="item"]', start).forEach(function (r) {
-      r.checked = r.value === state.item;
-      r.addEventListener('change', function () { state.item = r.value; save(); });
-    });
-    $$('input[name="stage"]', start).forEach(function (r) {
-      r.checked = r.value === state.stage;
-      r.addEventListener('change', function () { state.stage = r.value; paintSummary(); save(); });
-    });
-    $$('input[name="who"]', start).forEach(function (r) {
-      r.checked = r.value === state.who;
-      r.addEventListener('change', function () { state.who = r.value; paintSummary(); save(); });
-    });
-    ['company', 'teamsize', 'tried', 'name', 'email', 'notes'].forEach(function (k) {
+    TEXT.forEach(function (k) {
       var el = $('[name="' + k + '"]', start); if (!el) return;
       el.value = state[k] || '';
-      el.addEventListener('input', function () { state[k] = el.value.trim(); paintSummary(); save(); });
+      el.addEventListener('input', function () { state[k] = el.value.trim(); if (el.value.trim() && el.getAttribute('aria-invalid') === 'true') invalid(el, ''); quiet = true; paintSummary(); quiet = false; save(); });
     });
     var reset = $('[data-reset]', start);
     if (reset) reset.addEventListener('click', function () {
       try { localStorage.removeItem('cw.start'); } catch (e) {}
       Object.keys(state).forEach(function (k) { state[k] = k === 'step' ? 1 : ''; });
+      fromPricing = false;
       $$('input[type="radio"]', start).forEach(function (r) { r.checked = false; });
       $$('input[type="text"],input[type="email"],textarea', start).forEach(function (i) { i.value = ''; });
+      $$('.field-error', start).forEach(function (e) { e.textContent = ''; });
       show(1, true);
     });
 
@@ -467,23 +508,34 @@
       input.setAttribute('aria-invalid', msg ? 'true' : 'false');
       if (err) err.textContent = msg || '';
     };
+    var radioErr = function (name, msg) {
+      var e = document.getElementById(name + '-error'), bad = !state[name];
+      $$('input[name="' + name + '"]', start).forEach(function (r) { r.setAttribute('aria-invalid', bad ? 'true' : 'false'); });
+      if (bad) { if (e) e.textContent = msg; return $('input[name="' + name + '"]', start); }
+      if (e) e.textContent = ''; return null;
+    };
+    var textErr = function (names) {
+      var first = null;
+      names.forEach(function (k) { var el = $('[name="' + k + '"]', start); if (!el) return; if (!el.value.trim()) { invalid(el, 'Required.'); if (!first) first = el; } else invalid(el, ''); });
+      return first;
+    };
     var validateStep = function (n) {
-      if (n === 1) {
-        var e1 = $('#goal-error', start);
-        if (!state.goal) { e1.textContent = 'Choose what you’re working toward.'; $('input[name="goal"]', start).focus(); return false; }
-        e1.textContent = ''; return true;
+      var bad = null, b;
+      if (n === 1) bad = radioErr('path', 'Choose who coaching is for.');
+      else if (n === 2) {
+        if (state.path === 'student') {
+          bad = radioErr('goal', 'Choose what you’re working toward.');
+          if (!bad && needsStage()) bad = radioErr('stage', 'Choose the option that is closest.');
+          if (!bad) bad = radioErr('plan', 'Choose a plan.');
+        } else if (state.path === 'professional') {
+          bad = radioErr('pgoal', 'Pick one.');
+          if (!bad && state.pgoal === 'ai') bad = textErr(['role', 'task']);
+          if (!bad && state.pgoal === 'recruiting') { bad = radioErr('rstage', 'Choose the option that is closest.'); if (!bad) bad = radioErr('focus', 'Pick one.'); }
+          if (!bad) bad = radioErr('plan', 'Choose a plan.');
+        } else if (state.path === 'team') bad = textErr(['company', 'teamsize', 'tried', 'result']);
+        else if (state.path === 'program') { bad = textErr(['organization', 'students']); if (!bad) bad = radioErr('goals', 'Pick one.'); if (!bad) bad = textErr(['when']); }
       }
-      if (n === 2) {
-        if (state.goal === 'org') {
-          var firstBad = null;
-          ['company', 'teamsize', 'tried'].forEach(function (k) { var el = $('[name="' + k + '"]', start); if (!el.value.trim()) { invalid(el, 'Required.'); if (!firstBad) firstBad = el; } else invalid(el, ''); });
-          if (firstBad) { firstBad.focus(); return false; }
-          return true;
-        }
-        var e2 = $('#stage-error', start);
-        if (!state.stage) { e2.textContent = 'Pick the one that’s closest.'; $('input[name="stage"]', start).focus(); return false; }
-        e2.textContent = ''; return true;
-      }
+      if (bad) { bad.focus(); return false; }
       return true;
     };
 
@@ -494,64 +546,77 @@
 
     form.addEventListener('submit', function (ev) {
       ev.preventDefault();
+      if (form.hasAttribute('data-sending')) return;
       syncFromDom();
-      var nameEl = $('[name="name"]', form), emailEl = $('[name="email"]', form), ok = true;
-      if (!nameEl.value.trim()) { invalid(nameEl, 'Required.'); ok = false; } else invalid(nameEl, '');
-      if (!EMAIL.test(emailEl.value.trim())) { invalid(emailEl, 'Enter an email address we can reply to.'); ok = false; } else invalid(emailEl, '');
-      var itemErr = $('#item-error', start);
-      if (isAlacarte() && !state.item) { if (itemErr) itemErr.textContent = 'Pick the piece you want reviewed first.'; ok = false; } else if (itemErr) itemErr.textContent = '';
-      if (!ok) { (nameEl.getAttribute('aria-invalid') === 'true' ? nameEl : emailEl.getAttribute('aria-invalid') === 'true' ? emailEl : $('input[name="item"]', start) || nameEl).focus(); return; }
-      var g = GOALS[state.goal] || {}, m = MODES[currentMode()], r = currentPlan();
+      var nameEl = $('[name="name"]', form), emailEl = $('[name="email"]', form), ok = true, firstBad = null;
+      if (!nameEl.value.trim()) { invalid(nameEl, 'Required.'); ok = false; firstBad = nameEl; } else invalid(nameEl, '');
+      if (!EMAIL.test(emailEl.value.trim())) { invalid(emailEl, 'Enter an email address we can reply to.'); ok = false; firstBad = firstBad || emailEl; } else invalid(emailEl, '');
+      if (variantOn('org')) { var rl = $('[name="yourrole"]', form); if (!rl.value.trim()) { invalid(rl, 'Required.'); ok = false; firstBad = firstBad || rl; } else invalid(rl, ''); }
+      if (!ok) { var bads = $$('[aria-invalid="true"]', form); (bads[0] || firstBad).focus(); return; }
+      var m = MODES[mode()], p = state.path;
+      var goalLabel = p === 'professional' ? (state.pgoal === 'ai' ? GOALS.ai : GOALS.recruiting) : GOALS[state.goal] || '';
       var data = {
-        goal: g.label || state.goal, stage: state.goal === 'org' ? '' : STAGES[state.stage] || '', who: state.who,
-        name: state.name, email: state.email, notes: state.notes,
-        company: state.company, teamsize: state.teamsize, tried: state.tried,
-        plan: r ? r.plan : '', item: isAlacarte() ? state.item : '', source: '/start/'
+        path: PATHS[p], goal: goalLabel,
+        stage: p === 'student' ? (state.goal === 'recruiting' ? RSTAGES[state.stage] : STAGES[state.stage]) || '' : p === 'professional' && state.pgoal === 'recruiting' ? RSTAGES[state.rstage] || '' : '',
+        focus: state.focus, plan: state.plan && PLANS[state.plan] ? PLANS[state.plan].name + ' — ' + priceOf(state.plan) : '',
+        role: state.role || state.yourrole, tools: state.tools, task: state.task,
+        company: state.company, teamsize: state.teamsize, tried: state.tried, result: state.result,
+        organization: state.organization, students: state.students, goals: state.goals, when: state.when,
+        who: state.who, name: state.name, email: state.email, notes: state.notes, source: '/start/'
       };
       Object.keys(data).forEach(function (k) { if (!data[k]) delete data[k]; });
-      var subject = m.subject.replace('{goal}', g.label || '');
-      if (isAlacarte() && state.item) subject = 'One review — ' + state.item + ' — ' + (g.label || '');
-      submitB.setAttribute('aria-busy', 'true');
+      var subject = mode() === 'individual' ? reserveLabel(state.plan) + ' — ' + goalLabel : m.submit + ' — ' + (state.company || state.organization);
+      submitB.setAttribute('aria-busy', 'true'); form.setAttribute('data-sending', '');
+      var map = { plan: state.plan && PLANS[state.plan] ? PLANS[state.plan].name : '', price: priceOf(state.plan), email: state.email };
       send(data, subject, function () {
         try { localStorage.removeItem('cw.start'); } catch (e) {}
         $('.start-flow', start).hidden = true;
         var done = $('.start-done', start); done.hidden = false;
-        var h = $('h1', done), first = m.doneH1.split(' ')[0], rest = m.doneH1.slice(first.length);
+        var h = $('h2', done), first = m.doneH1.split(' ')[0], rest = m.doneH1.slice(first.length);
         h.innerHTML = '';
         var mark = document.createElement('span'); mark.className = 'pen'; mark.textContent = first;
         mark.insertAdjacentHTML('beforeend', '<svg viewBox="0 0 100 9" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M1 5.5 Q 25 3.4, 50 5 T 99 4.4" pathLength="1"/></svg>');
         h.appendChild(mark); h.appendChild(document.createTextNode(rest));
-        $('[data-done-p]', done).textContent = m.doneP.replace('{email}', state.email);
-        h.setAttribute('tabindex', '-1'); h.focus();
+        $('[data-done-p]', done).textContent = fill(m.doneP, map);
+        h.setAttribute('tabindex', '-1'); settle(h);
         requestAnimationFrame(function () { requestAnimationFrame(function () { mark.classList.add('drawn'); }); }); /* the pen signs the one success moment */
-        track('start_done', { goal: state.goal, mode: currentMode() });
+        track('start_done', { path: state.path, mode: mode() });
       }, function () {
-        submitB.setAttribute('aria-busy', 'false');
+        submitB.setAttribute('aria-busy', 'false'); form.removeAttribute('data-sending');
         fallback(form, subject, data);
-        track('start_fallback', { goal: state.goal, mode: currentMode() });
+        track('start_fallback', { path: state.path, mode: mode() });
       });
     });
 
-    show(state.step);
+    start.setAttribute('data-restoring', '');
+    quiet = true; show(state.step); quiet = false;
+    requestAnimationFrame(function () { requestAnimationFrame(function () { start.removeAttribute('data-restoring'); }); });
   }
 
   /* ---------- 7. intake forms ---------- */
-  var EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   $$('form[data-intake]').forEach(function (form) {
     form.setAttribute('novalidate', '');
     form.addEventListener('submit', function (ev) {
       ev.preventDefault();
+      if (form.hasAttribute('data-sending')) return;
       var first = null;
       $$('[data-required]', form).forEach(function (input) {
         var value = input.value.trim();
         var bad = !value || (input.type === 'email' && !EMAIL.test(value));
         if (input.type === 'radio') { bad = !form.querySelector('input[name="' + input.name + '"]:checked'); }
         var err = document.getElementById(input.id + '-error');
-        input.setAttribute('aria-invalid', bad ? 'true' : 'false');
-        if (err) err.textContent = bad ? (input.type === 'email' ? 'Enter an email address we can reply to.' : input.type === 'radio' ? 'Pick one.' : 'Required.') : '';
+        (input.type === 'radio' ? $$('input[name="' + input.name + '"]', form) : [input]).forEach(function (i) { i.setAttribute('aria-invalid', bad ? 'true' : 'false'); });
+        var own = input.getAttribute('data-err');
+        if (err) err.textContent = bad ? (own && !(input.type === 'email' && value) ? own : input.type === 'email' ? (value ? 'Enter a valid email address.' : 'Enter an email address we can reply to.') : input.type === 'radio' ? 'Pick one.' : 'Required.') : '';
         if (bad && !first) first = input;
       });
-      if (first) { first.focus(); return; }
+      if (first) {
+        if (!form.hasAttribute('data-clearing')) { /* after the first failed submit, a corrected field clears its own error */
+          form.setAttribute('data-clearing', '');
+          form.addEventListener('input', clearOne); form.addEventListener('change', clearOne);
+        }
+        first.focus(); return;
+      }
 
       var data = {};
       Array.prototype.forEach.call(form.elements, function (el) {
@@ -561,12 +626,19 @@
       });
       data.source = window.location.pathname;
       var subject = form.getAttribute('data-subject') || 'Craneweave';
-      var btn = $('button[type="submit"]', form); if (btn) btn.setAttribute('aria-busy', 'true');
+      var btn = $('button[type="submit"]', form); if (btn) btn.setAttribute('aria-busy', 'true'); form.setAttribute('data-sending', '');
       send(data, subject, function () { done(form); track('form_done', { form: form.getAttribute('data-intake') }); },
-                          function () { if (btn) btn.setAttribute('aria-busy', 'false'); fallback(form, subject, data); track('form_fallback', { form: form.getAttribute('data-intake') }); });
+                          function () { if (btn) btn.setAttribute('aria-busy', 'false'); form.removeAttribute('data-sending'); fallback(form, subject, data); track('form_fallback', { form: form.getAttribute('data-intake') }); });
     });
   });
 
+  function clearOne(e) {
+    var input = e.target; if (!input || !input.name) return;
+    var value = (input.value || '').trim(), good = input.type === 'radio' ? input.checked : input.type === 'email' ? EMAIL.test(value) : !!value;
+    if (!good) return;
+    var group = input.type === 'radio' ? $$('input[name="' + input.name + '"]', input.form) : [input];
+    group.forEach(function (i) { i.setAttribute('aria-invalid', 'false'); var err = document.getElementById(i.id + '-error'); if (err) err.textContent = ''; });
+  }
   function send(data, subject, ok, fail) {
     data.subject = subject;
     if (CFG.FORM_ENDPOINT && window.fetch) {
@@ -587,7 +659,7 @@
     var body = bodyOf(data);
     var href = 'mailto:' + CFG.MAIL + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
     var box = document.createElement('div'); box.className = 'fallback'; box.setAttribute('tabindex', '-1');
-    box.innerHTML = '<p><strong>We couldn’t send this from the page.</strong> Your email app should open with the request pre-filled — press Send there. If nothing opened, copy this and email it to <a href="mailto:' + CFG.MAIL + '">' + CFG.MAIL + '</a>:</p>' +
+    box.innerHTML = '<p><strong>Your request wasn’t sent from this page.</strong> Your email app should open with a pre-filled message—press Send there. If it didn’t open, copy the request below and email it to <a href="mailto:' + CFG.MAIL + '">' + CFG.MAIL + '</a>:</p>' +
       '<textarea class="input" readonly aria-label="Your request"></textarea>' +
       '<div class="btn-row"><a class="btn sm" href="' + href + '">Open my email app</a><button class="btn ghost sm" type="button" data-copy>Copy the request</button></div>';
     $('textarea', box).value = 'To: ' + CFG.MAIL + '\nSubject: ' + subject + '\n\n' + body;
@@ -598,7 +670,7 @@
       else { t.select(); try { document.execCommand('copy'); okc(); } catch (e) {} }
     });
     form.parentNode.insertBefore(box, form.nextSibling);
-    box.focus();
+    settle(box);
     setTimeout(function () { window.location.href = href; }, 150);
   }
   function done(form) {
@@ -606,11 +678,14 @@
     p.className = 'form-done';
     if (form.id) p.id = form.id;
     p.innerHTML = '<span></span><small></small>';
-    p.firstChild.textContent = form.getAttribute('data-done') || 'Received. We answer in writing.';
-    p.lastChild.textContent = form.getAttribute('data-done-sub') || 'Check your inbox for a reply from ' + CFG.MAIL + '.';
+    var pr = $('input[name="plan"]:checked', form), map = { plan: pr ? pr.getAttribute('data-name') : 'your plan', price: pr ? pr.getAttribute('data-price') : '' };
+    p.firstChild.textContent = fill(form.getAttribute('data-done') || 'Received. We’ll reply in writing.', map);
+    p.lastChild.textContent = fill(form.getAttribute('data-done-sub') || 'Check your inbox for a reply from ' + CFG.MAIL + '.', map);
     p.setAttribute('tabindex', '-1');
+    var link = form.getAttribute('data-done-link');
+    if (link) { var a = document.createElement('a'); a.className = 'arrowlink'; a.href = link; a.textContent = form.getAttribute('data-done-link-label') || 'Continue →'; p.appendChild(a); }
     form.parentNode.replaceChild(p, form);
-    p.focus();
+    settle(p);
   }
 
   /* ---------- 8. mobile sticky CTA ---------- */
