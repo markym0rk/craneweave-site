@@ -20,4 +20,4 @@ jobs:
       - name: Build Jekyll site
         run: bundle exec jekyll build --strict_front_matter
       - name: Check rendered navigation and structure
-        run: ruby scripts/check_rendered_site.rb
+        run: bundle exec ruby scripts/check_rendered_site.rb
