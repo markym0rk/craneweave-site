@@ -13,10 +13,11 @@
 <meta property="og:site_name" content="Craneweave">
 <meta property="og:image" content="https://craneweave.com/og-default.png">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#FFFFFF">
 <link rel="icon" type="image/png" href="/Favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Courier+Prime&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Courier+Prime&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Public+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/cw.css">
 <script>document.documentElement.classList.add('js')</script>
 </head>
@@ -24,180 +25,252 @@
 <a class="skip" href="#main">Skip to content</a>
 <nav class="nav" aria-label="Primary">
   <div class="wrap nav-inner">
-    <a class="logo" href="/" aria-label="Craneweave home"><img src="/Craneweave_Logo_White.png" alt="Craneweave" width="333" height="64"></a>
-    <ul class="nav-links">
-      <li><a href="/#router">Students &amp; families</a></li>
-      <li><a href="/organizations/">For organizations</a></li>
-      <li><a href="/coaches/">Coaches</a></li>
-      <li><a href="/pricing/">Pricing</a></li>
-      <li><a class="cta" href="#find">Find your coach</a></li>
-    </ul>
-    <details class="nav-menu">
-      <summary>Menu</summary>
-      <ul>
-      <li><a href="/#router">Students &amp; families</a></li>
-      <li><a href="/organizations/">For organizations</a></li>
-      <li><a href="/coaches/">Coaches</a></li>
-      <li><a href="/pricing/">Pricing</a></li>
-        <li><a class="cta" href="#find">Find your coach</a></li>
+    <div class="nav-left">
+      <a class="logo" href="/" aria-label="Craneweave home"><img src="/assets/logo-ink.svg" alt="Craneweave" width="175" height="30"></a>
+      <ul class="nav-links">
+        <li class="has-menu">
+          <button class="menu-btn" type="button" aria-expanded="false">Students &amp; families <svg class="chev" viewBox="0 0 12 12" aria-hidden="true" focusable="false"><path d="M2 4l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <div class="menu wide" data-open="false">
+            <a href="/college/"><span class="ic" aria-hidden="true"><img src="/assets/img/icon-college.webp" alt="" width="640" height="640" loading="lazy"></span>College admissions<small>Match with a coach who got in to your dream school.</small></a><a href="/bsmd/"><span class="ic" aria-hidden="true"><img src="/assets/img/icon-bsmd.webp" alt="" width="640" height="640" loading="lazy"></span>BS/MD programs<small>Two applications, one coach who survived both.</small></a><a href="/mba/"><span class="ic" aria-hidden="true"><img src="/assets/img/icon-mba.webp" alt="" width="640" height="640" loading="lazy"></span>MBA admissions<small>Your story, pressure-tested by someone who got in.</small></a><a href="/law/"><span class="ic" aria-hidden="true"><img src="/assets/img/icon-law.webp" alt="" width="640" height="640" loading="lazy"></span>Law school<small>Personal statements on rolling-admissions time.</small></a><a href="/med/"><span class="ic" aria-hidden="true"><img src="/assets/img/icon-med.webp" alt="" width="640" height="640" loading="lazy"></span>Medical school<small>Plan ahead of nine months of deadlines.</small></a><a href="/recruiting/"><span class="ic" aria-hidden="true"><img src="/assets/img/icon-recruiting.webp" alt="" width="640" height="640" loading="lazy"></span>Banking &amp; consulting<small>Your answers, judged by someone who got the offer.</small></a>
+            <p class="menu-foot">Not sure which? <a href="/#router">See every track</a> · <a href="/pricing/">Pricing</a></p>
+          </div>
+        </li>
+        <li class="has-menu">
+          <button class="menu-btn" type="button" aria-expanded="false">Organizations <svg class="chev" viewBox="0 0 12 12" aria-hidden="true" focusable="false"><path d="M2 4l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <div class="menu" data-open="false">
+            <a href="/organizations/">AI coaching for teams<small>Every employee paired with a named coach.</small></a>
+            <a href="/programs/">Cohort programs<small>Access organizations, districts, and scholarship programs.</small></a>
+          </div>
+        </li>
+        <li><a href="/coaches/">Coaches</a></li>
+        <li><a href="/pricing/">Pricing</a></li>
       </ul>
-    </details>
+    </div>
+    <div class="nav-right">
+      <a class="help" href="/#faq">Help</a>
+      <a class="btn sm" href="#find">Find your coach</a>
+      <button class="burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="drawer">
+        <svg viewBox="0 0 22 22" aria-hidden="true" focusable="false"><path d="M2 6h18M2 11h18M2 16h18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      </button>
+    </div>
   </div>
 </nav>
+<div class="drawer" id="drawer" data-open="false" role="dialog" aria-modal="true" aria-label="Menu">
+  <div class="scrim"></div>
+  <div class="panel">
+    <div class="drawer-head">
+      <img src="/assets/logo-ink.svg" alt="Craneweave" width="146" height="25" style="height:25px;width:auto">
+      <button class="close" type="button" aria-label="Close menu"><svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M4 4l12 12M16 4L4 16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button>
+    </div>
+    <div class="group">
+      <p class="label">Students &amp; families</p>
+      <a class="item" href="/college/">College admissions</a><a class="item" href="/bsmd/">BS/MD programs</a><a class="item" href="/mba/">MBA admissions</a><a class="item" href="/law/">Law school</a><a class="item" href="/med/">Medical school</a><a class="item" href="/recruiting/">Banking &amp; consulting</a>
+    </div>
+    <div class="group">
+      <p class="label">Organizations</p>
+      <a class="item" href="/organizations/">AI coaching for teams</a>
+      <a class="item" href="/programs/">Cohort programs</a>
+    </div>
+    <div class="group">
+      <p class="label">Craneweave</p>
+      <a class="item" href="/coaches/">Coach on Craneweave</a>
+      <a class="item" href="/pricing/">Pricing</a>
+      <a class="item" href="/about/">About</a>
+      <a class="item" href="/#faq">Help <small>team@craneweave.com</small></a>
+    </div>
+    <div class="drawer-cta">
+      <a class="btn pen-btn" href="#find">Find your coach</a>
+    </div>
+  </div>
+</div>
 <main id="main">
 <header class="hero-v">
-  <div class="stage">
+  <div class="wrap hero-stage">
     <div class="hero-copy">
-      <h1>Never wonder if you're behind.</h1>
+      <h1>Never wonder if you’re <span class="pen">behind.<svg viewBox="0 0 100 9" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M1 5.5 Q 25 3.4, 50 5 T 99 4.4" pathLength="1"/></svg></span></h1>
       <p class="hero-sub">One plan for the whole application. A coach who got in, checking your real work. Everything in one place.</p>
       <p class="hero-anchor">Private college consultants charge $10,000+ for one cycle. Craneweave starts at <strong>$299/month</strong>.</p>
-      <div class="form-block"><form class="form" id="find" data-intake="find" data-subject="Find my coach — College admissions" action="mailto:team@craneweave.com" method="post" enctype="text/plain">
-    <div class="form-row">
-      <div class="field">
+      <div class="form-block"><form class="form" id="find" data-handoff="college" action="/start/" method="get">
+  <input type="hidden" name="goal" value="college">
+  <div class="form-row">
+    <div class="field">
       <label for="find-email">Email</label>
-      <input class="input" type="email" id="find-email" name="email" autocomplete="email" data-required aria-describedby="find-email-error">
+      <input class="input" type="email" id="find-email" autocomplete="email" placeholder="you@example.com" required aria-describedby="find-email-error">
       <p class="field-error" id="find-email-error" aria-live="polite"></p>
     </div>
-      <button class="btn" type="submit">Find your coach</button>
+    <button class="btn pen-btn" type="submit">Find your coach</button>
+  </div>
+  <fieldset class="options"><legend class="vh">Where you are in the process</legend><label class="opt"><input type="radio" name="stage" value="now" checked><span>Applying this cycle</span></label><label class="opt"><input type="radio" name="stage" value="next"><span>Next cycle</span></label><label class="opt"><input type="radio" name="stage" value="exploring"><span>Still exploring</span></label></fieldset>
+</form></div>
     </div>
-    <fieldset class="options">
-      <legend class="vh">Where you are in the process</legend>
-      <label class="opt"><input type="radio" name="timing" value="Applying this cycle" checked><span>Applying this cycle</span></label>
-      <label class="opt"><input type="radio" name="timing" value="Next cycle"><span>Next cycle</span></label>
-      <label class="opt"><input type="radio" name="timing" value="Still exploring"><span>Still exploring</span></label>
-    </fieldset>
-  </form></div>
-    </div>
-    <div class="sheet-wrap">
+    <div class="plate hero-plate">
       <figure class="sheet" data-artifact>
-        <figcaption class="sheet-label"><span>Personal statement — Draft 2</span></figcaption>
-        <div class="sheet-body">
-          <div class="sheet-excerpt"><p>The first time I tried to fix the dishwasher, I flooded the kitchen. The second time, I read the manual. By the fourth, I had stopped needing it, and my mother had stopped asking whether I was sure.</p>
-<p><span class="judged">I have always been a person who learns by breaking things</span>, and this is the quality I would bring to your campus.</p></div>
-          <p class="sheet-note">The dishwasher already says this. Stating it is the essay explaining its own joke — cut the sentence and end on your mother.</p>
-        </div>
-        <div class="sheet-sign">
-          <span class="chip" aria-hidden="true">SC</span>
-          <div><p class="byline">[Coach 1]</p><p class="byline-cred">[School, year]</p></div>
-        </div>
-      </figure>
+  <figcaption class="sheet-label"><span class="sheet-tag">Sample</span><span class="turn">72-hour turnaround</span><span class="sheet-title">Personal statement — Draft 2</span></figcaption>
+  <div class="sheet-body">
+    <div class="sheet-excerpt"><p>The first time I tried to fix the dishwasher, I flooded the kitchen. The second time, I read the manual. By the fourth, I had stopped needing it, and my mother had stopped asking whether I was sure.</p><p><span class="judged">I have always been a person who learns by breaking things</span>, and this is the quality I would bring to your campus.</p></div>
+    <p class="sheet-note">The dishwasher already says this. Stating it is the essay explaining its own joke — cut the sentence and end on your mother.</p>
+  </div>
+  <div class="sheet-sign">
+    <span class="chip" aria-hidden="true"><img src="/Mark_Kim.jpg" alt=""></span>
+    <div><p class="byline">Mark Kim</p><p class="byline-cred">Princeton · College admissions</p></div>
+  </div>
+</figure>
     </div>
   </div>
 </header>
-<section class="">
+<section class="rule">
   <div class="wrap asym">
-    <div class="lead">
+    <div class="lead sticky-lead">
       <h2>Matched to where your student is trying to go.</h2>
-      <p>Your student is paired with a coach who's been through this exact process. They review your essays, your list, and your application as you build them. Nothing goes out unchecked, and you're never behind.</p>
+      <p>Your student is paired with a coach who’s been through this exact process. They review your essays, your list, and your application as you build them. Nothing goes out unchecked, and you’re never behind.</p>
     </div>
-    <div class="body">
-      <div class="coach-list">
-      <div class="coach">
-        <div class="photo" aria-hidden="true">SC</div>
-        <h4>[Coach 1]</h4>
-        <p class="cred">[School, year]</p>
-        <q>[What I look for in a Common App essay.]</q>
-      </div>
-      <div class="coach">
-        <div class="photo" aria-hidden="true">DK</div>
-        <h4>[Coach 2]</h4>
-        <p class="cred">[School, year]</p>
-        <q>[One line.]</q>
-      </div>
-      <div class="coach">
-        <div class="photo" aria-hidden="true">JL</div>
-        <h4>[Coach 3]</h4>
-        <p class="cred">[School, year]</p>
-        <q>[One line.]</q>
-      </div>
-      </div>
+    <div class="people">
+      <div class="person"><div class="photo"><img src="/Mark_Kim.jpg" alt="Mark Kim" width="1080" height="720" loading="lazy" decoding="async"></div><h3>Mark Kim</h3><p class="cred">Princeton. Coached applicants independently, one family at a time.</p></div>
+      <div class="person"><div class="photo"><img src="/Michael_Lai.jpg" alt="Michael Lai" width="1080" height="720" loading="lazy" decoding="async"></div><h3>Michael Lai</h3><p class="cred">Hofstra BS/MD. Ran the double application and coached BS/MD applicants professionally.</p></div>
+      <div class="person apply"><h3>Your coach could be here</h3><p>Coaches apply and are vetted against our review standard. If we can’t match your list, we tell you before you pay.</p><a class="arrowlink" href="/coaches/">Coach on Craneweave <span class="arr" aria-hidden="true">→</span></a></div>
     </div>
   </div>
 </section>
-<section class="">
+<section class="shade">
   <div class="wrap asym">
-    <div class="lead">
-      <h2>What gets reviewed</h2>
-      <p class="ink">Spend monthly reviews where they matter most:</p>
-    </div>
-    <div class="body">
-      <ul class="ruled">
-        <li><h3>The school list</h3><p>reach/match/safety calibrated to the actual story your application tells.</p></li>
-        <li><h3>Essay drafts</h3><p>the Common App essay and every supplemental, judged draft by draft.</p></li>
-        <li><h3>The full application</h3><p>one final expert pass before submit.</p></li>
-      </ul>
-      <p class="ruled-close">Our coaches have done this before, and they see what you can't. The right advice, right when you need it.</p>
-    </div>
+    <div class="lead sticky-lead"><h2>What gets reviewed</h2><p class="ink">Spend monthly reviews where they matter most:</p></div>
+    <div><ul class="doclist">
+<li class="docrow">
+  <p class="doc-tag"><span class="pen-ic" aria-hidden="true">✓</span><span>School list</span></p>
+  <div><h3>The school list</h3><p>Reach/match/safety calibrated to the actual story your application tells.</p></div>
+</li>
+<li class="docrow">
+  <p class="doc-tag"><span class="pen-ic" aria-hidden="true">✓</span><span>Essays · every draft</span></p>
+  <div><h3>Essay drafts</h3><p>The Common App essay and every supplemental, judged draft by draft.</p></div>
+</li>
+<li class="docrow">
+  <p class="doc-tag"><span class="pen-ic" aria-hidden="true">✓</span><span>Before submit</span></p>
+  <div><h3>The full application</h3><p>One final expert pass before submit.</p></div>
+</li>
+</ul><p class="ruled-close">Our coaches have done this before, and they see what you can’t. The right advice, right when you need it.</p></div>
   </div>
 </section>
-<section class="">
-  <div class="wrap asym">
-    <div class="lead">
-      <h2>Pricing</h2>
-    </div>
-    <div class="body">
-      <div class="table-wrap">
-      <table class="broadsheet">
-        <thead><tr><th scope="col">Plan</th><th scope="col">Price</th><th scope="col">What you get</th></tr></thead>
-        <tbody>
-          <tr><td class="plan">Core</td><td><span class="price">$299<small>/mo</small></span></td><td>4 reviews, 72h turnaround, coach match + season plan.</td></tr>
-          <tr><td class="plan">Plus</td><td><span class="price">$499<small>/mo</small></span></td><td>8 reviews, 48h turnaround, priority matching.</td></tr>
-          <tr><td class="plan">Season Pass</td><td><span class="price">$1,999</span></td><td>Aug 1–Jan 15, 24 reviews any time, priority access in the November crunch.</td></tr>
-        </tbody>
-      </table>
-      </div>
-      <div class="btn-row"><a class="btn" href="#find">Get started</a></div>
-    </div>
+<section class="rule"><div class="wrap"><div class="sec-head"><div><p class="kicker">The season</p><h2>One plan, Aug&nbsp;1–Jan&nbsp;15.</h2></div><p>The Season Pass covers all of it — 24 reviews, any time, with priority access in the November crunch.</p></div><div class="season"><div class="season-track">
+<div class="season-m now"><p class="mo">Aug</p><p class="ev">Season opens Aug 1</p><p class="ev">The school list</p></div>
+<div class="season-m"><p class="mo">Sep</p><p class="ev">Essay drafts</p></div>
+<div class="season-m"><p class="mo">Oct</p><p class="ev">Every supplemental, draft by draft</p></div>
+<div class="season-m"><p class="mo">Nov</p><p class="ev hot">The November crunch</p><p class="ev">Priority access on Season Pass</p></div>
+<div class="season-m"><p class="mo">Dec</p><p class="ev">The full application</p></div>
+<div class="season-m"><p class="mo">Jan</p><p class="ev">One final expert pass before submit</p><p class="ev">Season ends Jan 15</p></div>
+<div class="season-bar" aria-hidden="true"></div></div>
+<div class="season-foot"><span class="k"><i></i> Season Pass, Aug 1–Jan 15</span><span>Core and Plus run month to month.</span></div>
+</div></div></section>
+<section class="rule"><div class="wrap"><div class="sec-head"><div><h2>Pricing</h2></div><p>The price is on the page. Cancel monthly, no contracts.</p></div><div class="plans mini">
+  <div class="planrow">
+    <div><p class="plan-name">Core</p><span class="tag">Start here</span><p class="tagline">Cancel monthly.</p></div>
+    <p class="price">$299<small>/month</small></p>
+    <ul><li>4 reviews a month</li><li>coach match + structured plan</li><li>guided modules for every milestone</li><li>72-hour review turnaround</li><li>cancel monthly</li></ul>
+    <a class="btn pen-btn" href="/start/?goal=college&plan=core">Get started</a>
   </div>
-</section>
-<section class="">
+  <div class="planrow">
+    <div><p class="plan-name">Plus</p><p class="tagline">For the crunch.</p></div>
+    <p class="price">$499<small>/month</small></p>
+    <ul><li>8 reviews a month</li><li>48-hour turnaround</li><li>priority coach matching</li><li>everything in Core</li></ul>
+    <a class="btn ghost" href="/start/?goal=college&plan=plus">Get started</a>
+  </div>
+  <div class="planrow">
+    <div><p class="plan-name">Season Pass</p><p class="tagline">The whole senior push, one price.</p></div>
+    <p class="price">$1,999<small>/season</small></p>
+    <ul><li>The whole senior push, Aug 1–Jan 15</li><li>24 reviews to use any time</li><li>priority access in the November crunch</li><li>one price</li></ul>
+    <a class="btn ghost" href="/start/?goal=college&plan=season">Get started</a>
+  </div>
+  <div class="planrow lite">
+    <div><p class="plan-name">One review</p><p class="tagline">Try one before you subscribe.</p></div>
+    <p class="price">From $49</p>
+    <ul><li>essay review $99 · school list $69 · full application $249 · check-in $49</li><li>24-hour rush +$50</li><li>no subscription</li></ul>
+    <a class="btn ghost" href="/start/?goal=college&plan=alacarte">Try one review</a>
+  </div>
+</div></div></section>
+<section class="rule">
   <div class="wrap asym">
-    <div class="lead">
-      <h2>College FAQ</h2>
-    </div>
-    <div class="body">
-      <div class="faq-list">
-      <details class="faq" open>
-        <summary>Can my student really get matched to someone from their target school?</summary>
-        <p class="answer">We match you to a coach who was admitted to a school on your list whenever our bench allows - and always to a coach who's run this exact process. If we can't match your list, we tell you before you pay.</p>
-      </details>
-      <details class="faq">
-        <summary>What if we want calls?</summary>
-        <p class="answer">We provide asynchronous feedback over calls to allow our coaches to give advice when it provides the most impact.</p>
-      </details>
-      <details class="faq">
-        <summary>Do you guarantee admission?</summary>
-        <p class="answer">No, and walk away from anyone who does.</p>
-      </details>
-      </div>
-    </div>
+    <div class="lead sticky-lead"><h2>College FAQ</h2><p class="faq-still">Ask before you pay anything. We answer in writing. <a href="mailto:team@craneweave.com">team@craneweave.com</a></p></div>
+    <div><div class="faq-list">
+<div class="faq">
+  <h3 class="faq-h"><button class="faq-q" type="button" aria-expanded="true" aria-controls="faq-0">Can my student really get matched to someone from their target school?<span class="plus" aria-hidden="true"></span></button></h3>
+  <div class="faq-a" id="faq-0" data-open="true"><div><p class="answer">We match you to a coach who was admitted to a school on your list whenever our bench allows — and always to a coach who’s run this exact process. If we can’t match your list, we tell you before you pay.</p></div></div>
+</div>
+<div class="faq">
+  <h3 class="faq-h"><button class="faq-q" type="button" aria-expanded="false" aria-controls="faq-1">What if we want calls?<span class="plus" aria-hidden="true"></span></button></h3>
+  <div class="faq-a" id="faq-1" data-open="false"><div><p class="answer">We provide asynchronous feedback over calls to allow our coaches to give advice when it provides the most impact.</p></div></div>
+</div>
+<div class="faq">
+  <h3 class="faq-h"><button class="faq-q" type="button" aria-expanded="false" aria-controls="faq-2">Do you guarantee admission?<span class="plus" aria-hidden="true"></span></button></h3>
+  <div class="faq-a" id="faq-2" data-open="false"><div><p class="answer">No, and walk away from anyone who does.</p></div></div>
+</div>
+</div></div>
   </div>
 </section>
 <section class="cta-band">
-  <div class="wrap">
-    <h2>Expert judgment on your real work.</h2>
-    <div class="cta-actions">
-      <a class="btn" href="#find">Get started</a>
+  <div class="wrap cta-grid">
+    <div>
+      <h2>Expert judgment on your real work.</h2>
+      <div class="cta-actions">
+        <a class="btn lg" href="/start/?goal=college">Get started <span class="arr" aria-hidden="true">→</span></a>
+        <span class="cta-meta">From $299/month · published pricing · cancel monthly</span>
+      </div>
+      <p class="cta-coach">Been through one of these processes yourself? <a href="/coaches/">Coach on Craneweave →</a></p>
     </div>
-    <p class="cta-coach">Been through one of these processes yourself? <a href="/coaches/">Coach on Craneweave →</a></p>
+    <div class="plate sq"><img src="/assets/img/icon-college.webp" alt="A paper-craft graduation cap with a teal tassel." width="640" height="640" loading="lazy" decoding="async"></div>
   </div>
 </section>
 </main>
 <footer>
-  <div class="wrap foot">
-    <a class="wordmark" href="/">Craneweave</a>
-    <ul>
-      <li><a href="/#router">Students &amp; families</a></li>
-      <li><a href="/organizations/">For organizations</a></li>
-      <li><a href="/coaches/">Coaches</a></li>
-      <li><a href="/pricing/">Pricing</a></li>
-      <li><a href="/about/">About</a></li>
-      <li><a href="/privacy/">Privacy</a></li>
-      <li><a href="/terms/">Terms</a></li>
-    </ul>
-    <span class="copy">© 2026 Craneweave</span>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a class="logo" href="/" aria-label="Craneweave home"><img src="/assets/logo-ink.svg" alt="Craneweave" width="163" height="28"></a>
+        <p>Expert coaching made effortless. Admissions, recruiting, and AI coaching for teams.</p>
+        <a class="mail" href="mailto:team@craneweave.com">team@craneweave.com</a>
+      </div>
+      <div class="foot-col">
+        <p class="foot-h">Students &amp; families</p>
+        <ul>
+          <li><a href="/college/">College admissions</a></li>
+          <li><a href="/bsmd/">BS/MD programs</a></li>
+          <li><a href="/mba/">MBA admissions</a></li>
+          <li><a href="/law/">Law school</a></li>
+          <li><a href="/med/">Medical school</a></li>
+          <li><a href="/recruiting/">Banking &amp; consulting</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <p class="foot-h">Organizations</p>
+        <ul>
+          <li><a href="/organizations/">AI coaching for teams</a></li>
+          <li><a href="/programs/">Cohort programs</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <p class="foot-h">Craneweave</p>
+        <ul>
+          <li><a href="/start/">Get started</a></li>
+          <li><a href="/pricing/">Pricing</a></li>
+          <li><a href="/coaches/">Coach on Craneweave</a></li>
+          <li><a href="/about/">About</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <p class="foot-h">Help</p>
+        <ul>
+          <li><a href="/#faq">Questions</a></li>
+          <li><a href="mailto:team@craneweave.com">Email the team</a></li>
+          <li><a href="/privacy/">Privacy</a></li>
+          <li><a href="/terms/">Terms</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Craneweave. No guarantees, ever — walk away from anyone who offers one.</span>
+      <ul><li><a href="/privacy/">Privacy</a></li><li><a href="/terms/">Terms</a></li><li><a href="mailto:team@craneweave.com">team@craneweave.com</a></li></ul>
+    </div>
   </div>
 </footer>
-<script src="/assets/cw.js" defer></script>
+<div class="sticky-bar" data-show="false"><a class="btn pen-btn" href="#find">Find your coach</a></div>
+<script src="/assets/cw.js" defer onerror="document.documentElement.classList.remove('js')"></script>
 </body>
 </html>

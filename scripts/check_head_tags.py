@@ -47,6 +47,7 @@ REQUIRED = [
     "about/index.html",
     "privacy/index.html",
     "terms/index.html",
+    "start/index.html",
 ]
 
 SKIP_DIRS = {"node_modules", "vendor", "_site", ".git", ".github", "assets", "scripts"}
